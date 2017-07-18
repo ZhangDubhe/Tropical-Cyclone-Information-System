@@ -1,0 +1,124 @@
+body {
+    font: 10px sans-serif;
+    margin: 0;
+    background-color: lightgrey;
+    padding: 30px
+}
+
+.map {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    margin: auto;
+}
+
+.table-view-bg {
+    background-color: #000;
+    z-index: 10;
+    opacity: 0.85;
+    width: 98%;
+    height: 98%;
+    display: block;
+    position: absolute;
+    top: 1%;
+    left: 1%;
+}
+
+.table-view {
+
+    z-index: 100;
+    width: 98%;
+    height: 98%;
+    display: block;
+    position: absolute;
+    top: 1%;
+    left: 1%;
+
+    color: #ffffff;
+}
+
+.head {
+    width: 100%;
+    height: 10%;
+    display: block;
+
+    font-size: 36px;
+
+}
+
+.chart-bg {
+    width: 100%;
+    height: 90%;
+    display: block;
+
+}
+
+.chart-container {
+    display: block;
+    float: left;
+
+}
+
+.chart-up {
+    height: 80%;
+    overflow: auto;
+}
+
+.chart-down {
+    height: 20%;
+}
+
+#year-area-view {
+    width: 88%;
+    height: 100%;
+}
+
+#all-bar-view {
+    width: 10%;
+    height: 100%;
+
+}
+
+#chart-control {
+    height: 20%;
+}
+
+#all-line-view {
+    width: 100%;
+    height: 80%;
+}
+
+.line {
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.5px;
+}
+
+.area {
+    fill: #fff;
+    opacity: 0.2;
+}
+
+.flow {
+
+}
+
+.remove-name {
+    fill: #E73F5C;
+!important;
+}
+
+.svg-control {
+
+    /*padding-top: 10px;*/
+
+}
+
+.chart-inner {
+    fill: #ffffff;
+}
+
+.bar-text {
+    font-size: 10px
+}
