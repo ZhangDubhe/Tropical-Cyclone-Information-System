@@ -1,0 +1,23 @@
+{
+  "name": "d3-plugin-density",
+  "homepage": "https://github.com/densitydesign/d3-plugin-density",
+  "authors": [
+    "mikima <mikimauri@gmail.com>"
+  ],
+  "description": "A set of modified D3 plugins for RAW",
+  "main": "",
+  "keywords": [
+    "densitydesign",
+    "RAW",
+    "D3.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.0.1"
+}
