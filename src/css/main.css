@@ -1,0 +1,681 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+*{
+    font-size: 62.5%;
+}
+html {
+    color: #222;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+body {
+    font-size: 1.5rem;
+    padding: 0;
+    background-color: lightgrey;
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+/*
+ * Remove padding and margin from bootstrap
+
+ *
+ */
+.container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+    padding: 0;
+    margin: 0;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+:root{
+    --main-color: #2B79B1;
+    --sub-color: #327CD0;
+    --head-color:#1f69b0;
+    --active-color:#29a4e8;
+    --dent: 1rem;
+}
+html,body{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    overflow: hidden;
+}
+.icon{
+    width: 2rem;
+    height: 2rem;
+    display: block;
+
+
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center center;
+}
+
+.main::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: rgba(0,0,0,.4);
+}
+.main{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.main>div{
+    width: 94%;
+    height: 90%;
+}
+header{
+    width: 100%;
+    max-height: 5%;
+    font-size: 1rem;
+    text-align: center;
+    overflow: hidden;
+}
+/*主要布局*/
+.map-view {
+    display: block;
+    z-index: 1;
+    position: fixed;
+    top: 5%;
+    left: 3%;
+
+}
+
+.table-view {
+    display: block;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 50;
+    position: fixed;
+    top: 5%;
+    left: 3%;
+    color: #ffffff;
+}
+/*地图*/
+#map{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/*兼有控件*/
+/*侧边打开栏*/
+.main>nav{
+    width: 9vw;
+    height: 100vh;
+
+    z-index: 100;
+
+    background-color: white;
+    position: fixed;
+    top: 0;
+    color: #777777;
+
+    transition-duration: 0.3s;
+}
+.nav-close{
+    left: -5.5vw;
+}
+.nav-open{
+    left: 0;
+    box-shadow: 1px 1px 5px #777;
+}
+.toggle-btn, .open-btn{
+    width:40%;
+    /**
+     * 居中 */
+    height: 10rem;
+    position: relative;
+    top: 50%;
+    margin-top: -5.5rem;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    float: left;
+    margin-left:10%;
+}
+.open-btn>span{
+    margin-top: 2.5rem;
+}
+.toggle-btn>li{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+ul, li{
+    list-style: none;
+}
+nav {
+    background-color: transparent;
+}
+
+
+/*地图页控件*/
+
+.map-control-container{
+    position: fixed;
+    top:2rem;
+    left: 50%;
+    margin-left: -22.5rem;
+    width: 45rem;
+
+    z-index: 10;
+    text-align: center;
+    line-break: normal;
+}
+.map-control-container ul{
+    display: block;
+    float: left;
+}
+.control-group li{
+    float: left;
+}
+
+/*生命史图控件*/
+
+
+
+
+
+
+/* helper */
+
+@media only screen and (min-width: 768px) {
+    .control-group .icon{
+        width: 1rem;
+        height: 1rem;
+    }
+    .icon-menu{
+        background-image: url("../img/icon/icon_menuOpen.png");
+        transform: rotate(90deg);
+        transition-duration: 0.3s;
+    }
+    .active .icon-menu{
+        background-image: url("../img/icon/icon_menuOpen.png") ;
+        transform: rotate(180deg);
+    }
+    .icon-map{
+        background-image: url("../img/icon/icon_map.png") ;
+    }
+    .active .icon-map{
+        background-image: url("../img/icon/icon_mapActive.png");
+    }
+    .icon-table{
+        background-image: url("../img/icon/icon_table.png") ;
+    }
+    .active .icon-table{
+        background-image: url("../img/icon/icon_tableActive.png");
+    }
+
+
+    .icon-contactChina{
+        background-image: url("../img/icon/icon_tc_contactChina.png");
+    }
+    .icon-download{
+        background-image: url("../img/icon/icon_tc_download.png");
+    }
+    .icon-earth{
+        background-image: url("../img/icon/icon_tc_earth.png");
+    }
+    .icon-group2-4{
+        background-image: url("../img/icon/icon_tc_group2-4.png");
+    }
+    .icon-satellite{
+        background-image: url("../img/icon/icon_tc_satellite.png");
+    }
+    .icon-layer{
+        background-image: url("../img/icon/icon_tc_layer.png");
+    }
+    .icon-rainDrop{
+        background-image: url("../img/icon/icon_tc_rainDrop.png");
+    }
+    .icon-wind{
+        background-image: url("../img/icon/icon_tc_wind.png");
+    }
+    .icon-removeName{
+        background-image: url("../img/icon/icon_tc_removeName.png");
+    }
+    .icon-path{
+        background-image: url("../img/icon/icon_tc_path.png");
+    }
+    .icon-playPath{
+        background-image: url("../img/icon/icon_tc_playPath.png");
+    }
+    .icon-screenShot{
+        background-image: url("../img/icon/icon_tc_screenShot.png");
+    }
+    .icon-share{
+        background-image: url("../img/icon/icon_tc_share.png");
+    }
+    .icon-zoomIn{
+        background-image: url("../img/icon/icon_tc_zoomIn.png");
+    }
+
+    .icon-zoomOut{
+        background-image: url("../img/icon/icon_tc_zoomOut.png");
+    }
+
+    /* active */
+
+    .active .icon-contactChina{
+        background-image: url("../img/icon/icon_tc_contactChinaActive.png");
+    }
+    .active .icon-download{
+        background-image: url("../img/icon/icon_tc_downloadActive.png");
+    }
+    .active .icon-earth{
+        background-image: url("../img/icon/icon_tc_earthActive.png");
+    }
+    .active .icon-group2-4{
+        background-image: url("../img/icon/icon_tc_group2-4Active.png");
+    }
+    .active .icon-satellite{
+        background-image: url("../img/icon/icon_tc_satelliteActive.png");
+    }
+    .active .icon-layer{
+        background-image: url("../img/icon/icon_tc_layerActive.png");
+    }
+    .active .icon-rainDrop{
+        background-image: url("../img/icon/icon_tc_rainDropActive.png");
+    }
+    .active .icon-wind{
+        background-image: url("../img/icon/icon_tc_windActive.png");
+    }
+    .active .icon-removeName{
+        background-image: url("../img/icon/icon_tc_removeNameActive.png");
+    }
+    .active .icon-path{
+        background-image: url("../img/icon/icon_tc_pathActive.png");
+    }
+    .active .icon-playPath{
+        background-image: url("../img/icon/icon_tc_playPathActive.png");
+    }
+    .active .icon-screenShot{
+        background-image: url("../img/icon/icon_tc_screenShotActive.png");
+    }
+    .active .icon-share{
+        background-image: url("../img/icon/icon_tc_shareActive.png");
+    }
+    .icon-zoomIn{
+        background-image: url("../img/icon/icon_tc_zoomIn.png");
+    }
+
+    .icon-zoomOut{
+        background-image: url("../img/icon/icon_tc_zoomOut.png");
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .control-group .icon{
+        width: 2rem;
+        height: 2rem;
+    }
+    .icon-menu{
+        background-image: url("../img/icon/icon_menuOpen@2x.png");
+        transform: rotate(90deg);
+        transition-duration: 0.3s;
+    }
+    .active .icon-menu{
+        background-image: url("../img/icon/icon_menuOpen@2x.png") ;
+        transform: rotate(180deg);
+    }
+    .icon-map{
+        background-image: url("../img/icon/icon_map@2x.png") ;
+    }
+    .active .icon-map{
+        background-image: url("../img/icon/icon_mapActive@2x.png");
+    }
+    .icon-table{
+        background-image: url("../img/icon/icon_table@2x.png") ;
+    }
+    .active .icon-table{
+        background-image: url("../img/icon/icon_tableActive@2x.png");
+    }
+
+
+    .icon-contactChina{
+        background-image: url("../img/icon/icon_tc_contactChina@2x.png");
+    }
+    .icon-download{
+        background-image: url("../img/icon/icon_tc_download@2x.png");
+    }
+    .icon-earth{
+        background-image: url("../img/icon/icon_tc_earth@2x.png");
+    }
+    .icon-group2-4{
+        background-image: url("../img/icon/icon_tc_group2-4@2x.png");
+    }
+    .icon-satellite{
+        background-image: url("../img/icon/icon_tc_satellite@2x.png");
+    }
+    .icon-layer{
+        background-image: url("../img/icon/icon_tc_layer@2x.png");
+    }
+    .icon-rainDrop{
+        background-image: url("../img/icon/icon_tc_rainDrop@2x.png");
+    }
+    .icon-wind{
+        background-image: url("../img/icon/icon_tc_wind@2x.png");
+    }
+    .icon-removeName{
+        background-image: url("../img/icon/icon_tc_removeName@2x.png");
+    }
+    .icon-path{
+        background-image: url("../img/icon/icon_tc_path@2x.png");
+    }
+    .icon-playPath{
+        background-image: url("../img/icon/icon_tc_playPath@2x.png");
+    }
+    .icon-screenShot{
+        background-image: url("../img/icon/icon_tc_screenShot@2x.png");
+    }
+    .icon-share{
+        background-image: url("../img/icon/icon_tc_share@2x.png");
+    }
+    .icon-zoomIn{
+        background-image: url("../img/icon/icon_tc_zoomIn@2x.png");
+    }
+
+    .icon-zoomOut{
+        background-image: url("../img/icon/icon_tc_zoomOut@2x.png");
+    }
+
+    /* active */
+
+    .active .icon-contactChina{
+        background-image: url("../img/icon/icon_tc_contactChinaActive@2x.png");
+    }
+    .active .icon-download{
+        background-image: url("../img/icon/icon_tc_downloadActive@2x.png");
+    }
+    .active .icon-earth{
+        background-image: url("../img/icon/icon_tc_earthActive@2x.png");
+    }
+    .active .icon-group2-4{
+        background-image: url("../img/icon/icon_tc_group2-4Active@2x.png");
+    }
+    .active .icon-satellite{
+        background-image: url("../img/icon/icon_tc_satelliteActive@2x.png");
+    }
+    .active .icon-layer{
+        background-image: url("../img/icon/icon_tc_layerActive@2x.png");
+    }
+    .active .icon-rainDrop{
+        background-image: url("../img/icon/icon_tc_rainDropActive@2x.png");
+    }
+    .active .icon-wind{
+        background-image: url("../img/icon/icon_tc_windActive@2x.png");
+    }
+    .active .icon-removeName{
+        background-image: url("../img/icon/icon_tc_removeNameActive@2x.png");
+    }
+    .active .icon-path{
+        background-image: url("../img/icon/icon_tc_pathActive@2x.png");
+    }
+    .active .icon-playPath{
+        background-image: url("../img/icon/icon_tc_playPathActive@2x.png");
+    }
+    .active .icon-screenShot{
+        background-image: url("../img/icon/icon_tc_screenShotActive@2x.png");
+    }
+    .active .icon-share{
+        background-image: url("../img/icon/icon_tc_shareActive@2x.png");
+    }
+}
+
+
+
+
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

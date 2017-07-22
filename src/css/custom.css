@@ -2,38 +2,39 @@ body {
     font: 10px sans-serif;
     margin: 0;
     background-color: lightgrey;
-    padding: 30px
+    padding: 30px;
 }
 
-.map {
+html,body{
+    width: 100vw;
+    height: 100vh;
+}
+.main{
+    width: 100%;
+    height: 100%;
+}
+.map-view {
     width: 100%;
     height: 100%;
     display: block;
 
     margin: auto;
 }
-
-.table-view-bg {
-    background-color: #000;
-    z-index: 10;
-    opacity: 0.85;
-    width: 98%;
-    height: 98%;
-    display: block;
-    position: absolute;
-    top: 1%;
-    left: 1%;
+#map{
+    width: 100%;
+    height: 100%;
 }
 
-.table-view {
 
+.table-view {
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 100;
     width: 98%;
     height: 98%;
     display: block;
-    position: absolute;
-    top: 1%;
-    left: 1%;
+
+    float: left;
+    margin:auto;
 
     color: #ffffff;
 }

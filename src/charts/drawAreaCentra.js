@@ -192,17 +192,6 @@ function CenterArea() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 function example() {
     var x = d3.time.scale()
         .range([0, width]);
