@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>热带气旋生命史</title>
+
     <link rel="stylesheet" href="components/leaflet/leaflet.css" />
     <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
-
+    <link href="src/css/Leaflet.Coordinates-0.1.5.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="src/css/normalize.css"/>
     <link rel="stylesheet" href="src/css/main.css"/>
 </head>
@@ -89,7 +90,7 @@
             </div>
             <div class="chart-down">
                 <div id="chart-control" class="chart-control">
-                    <button></button>
+                    <span class="icon icon-search"> </span>
                     <select >   </select>
                     <select >   </select>
                     <span title="test" >
@@ -130,9 +131,8 @@
 </div>
 
 </body>
-<!--map-->
-<script src="components/leaflet/leaflet-src.js"></script>
-<script src="components/esri-leaflet/dist/esri-leaflet-src.js"></script>
+<!--map--><!--
+<script src="components/esri-leaflet/dist/esri-leaflet-src.js"></script>-->
 <!-- jquery -->
 <script type="text/javascript" src="components/jquery/dist/jquery.js"></script>
 <!--<script type="text/javascript" src="components/jquery-ui/jquery-ui.min.js"></script>-->
@@ -147,9 +147,13 @@
 <script type="text/javascript" src="components/d3-plugins-density/horizon.js"></script>
 <script type="text/javascript" src="components/d3-plugins/box/box.js"></script>
 <script type="text/javascript" src="components/layer/layer.js"></script>
+
+<script src="components/leaflet/leaflet-src.js"></script>
+<script src="src/js/Leaflet.Coordinates-0.1.5.min.js"></script>
 <!--own-->
 <script src="src/charts/drawAreaCentra.js"></script>
 <script src="src/js/initMap.js"></script>
+<!--<script src="src/js/typhoon.js"></script>-->
 <script src="src/js/scripts.js"></script>
 
 

@@ -80,3 +80,29 @@ var flag = 1;
     })
 
 }));
+var $yearAll = $("#year-area-view");
+var divWidth = $yearAll.width(),
+    divheight = $yearAll.height()
+var totalYear = 30;
+for(var row=0;row<=totalYear;row++){
+    $yearAll.append("<td>");
+    for(var col=0;col<12;col++){
+        $yearAll.append("<tl row='"+row+"' col='"+col+"' class='tiny-div' ></tl>")
+    }
+    $yearAll.append("</td>");
+}
+$(".tiny-div").css({
+    "width":divWidth/12 - 1,
+    "height":30
+}).hover(function () {
+    $(this).addClass("hover");
+    var _row = $(this).attr("row"),
+        _col = $(this).attr("col");
+    $(this).siblings().addClass("hover");
+}).mouseout(function () {
+    $(this).removeClass("hover");
+    var _row = $(this).attr("row"),
+        _col = $(this).attr("col");
+    $(this).siblings().removeClass("hover");
+    console.log($(this).attr("row"),$(".tiny-class[row='"+_row+"']").attr("row"))
+})

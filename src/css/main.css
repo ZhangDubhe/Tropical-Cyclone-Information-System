@@ -192,7 +192,56 @@ header{
     height: 100%;
     z-index: 1;
 }
+/*表格*/
 
+.chart-bg{
+    width: 100%;
+    height: 100%;
+}
+
+.chart-up{
+    height: 80%;
+    width: 100%;
+    float: left;
+}
+.chart-down{
+    height: 20%;
+    width: 100%;
+    float: left;
+}
+#year-area-view{
+    width: 80%;
+    height: 100%;
+    float: left;
+    /*background-color: #999;*/    overflow: auto;
+}
+#all-bar-view{
+    width: 20%;
+    height: 100%;
+    float: left;
+    background-color: #575757;
+    overflow: auto;
+}
+#chart-control{
+    width: 100%;
+    height: 5%;
+    background-color: #e1e1e1;
+}
+#all-line-view{
+    width: 100%;
+    height: 95%;
+    background-color: #454545;
+}
+.tiny-div{
+    width: auto;
+    height:auto;
+    background-color:transparent;
+    border: 0.5px #575757 solid;
+    float:left;
+}
+.tiny-div.hover{
+    background-color: rgba(200, 40, 41, 0.3);
+}
 /*兼有控件*/
 
 /*侧边打开栏*/
@@ -280,46 +329,10 @@ nav {
 .control-group li{
     float: left;
 }
-
+.active img{
+    border:1px #ff3853;
+}
 /*生命史图控件*/
-.chart-bg{
-    width: 100%;
-    height: 100%;
-}
-
-.chart-up{
-    height: 80%;
-    width: 100%;
-    float: left;
-}
-.chart-down{
-    height: 20%;
-    width: 100%;
-    float: left;
-}
-#year-area-view{
-    width: 80%;
-    height: 100%;
-    float: left;
-    background-color: #999;
-}
-#all-bar-view{
-    width: 20%;
-    height: 100%;
-    float: left;
-    background-color: #575757;
-    overflow: auto;
-}
-#chart-control{
-    width: 100%;
-    height: 5%;
-    background-color: #e1e1e1;
-}
-#all-line-view{
-    width: 100%;
-    height: 95%;
-    background-color: #454545;
-}
 .chart-container::-webkit-scrollbar-thumb {
     border-radius: 0;
     background-color: rgba(0,0,0,.4);
@@ -452,6 +465,21 @@ nav {
     .icon-zoomOut{
         background-image: url("../img/icon/icon_tc_zoomOut.png");
     }
+}
+.icon-search{
+    background-image: url("../img/icon/icon_search@2x.png");
+}
+.active .icon-search{
+    background-image: url("../img/icon/icon_searchActive@2x.png");
+}
+.table-tools-container{
+
+}
+.icon-setting{
+    background-image: url("../img/icon/icon_setting@2x.png");
+}
+.icon-setting{
+    background-image: url("../img/icon/icon_@2x.png");
 }
 
 @media only screen and (min-width: 1024px) {
