@@ -148,23 +148,26 @@ html,body{
     background-position: center center;
 }
 
-.main::-webkit-scrollbar-thumb {
-    border-radius: 0;
-    background-color: rgba(0,0,0,.4);
-}
+
 .main{
+    margin-top:-2rem;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
 }
 .main>div{
-    width: 94%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
 }
 header{
     width: 100%;
-    max-height: 5%;
+    height: 2rem;
     font-size: 1rem;
+    line-height: 2rem;
     text-align: center;
     overflow: hidden;
 }
@@ -172,10 +175,6 @@ header{
 .map-view {
     display: block;
     z-index: 1;
-    position: fixed;
-    top: 5%;
-    left: 3%;
-
 }
 
 .table-view {
@@ -183,9 +182,8 @@ header{
 
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 50;
-    position: fixed;
-    top: 5%;
-    left: 3%;
+    position: relative;
+    top:-100%;
     color: #ffffff;
 }
 /*地图*/
@@ -196,9 +194,10 @@ header{
 }
 
 /*兼有控件*/
+
 /*侧边打开栏*/
 .main>nav{
-    width: 9vw;
+    width: 5rem;
     height: 100vh;
 
     z-index: 100;
@@ -211,7 +210,7 @@ header{
     transition-duration: 0.3s;
 }
 .nav-close{
-    left: -5.5vw;
+    left: -4.5em;
 }
 .nav-open{
     left: 0;
@@ -253,25 +252,78 @@ nav {
     position: fixed;
     top:2rem;
     left: 50%;
-    margin-left: -22.5rem;
-    width: 45rem;
+    margin-left: -15rem;
+    width: 32rem;
 
     z-index: 10;
     text-align: center;
     line-break: normal;
 }
+.map-control-box{
+
+    height:5rem;
+
+    background-color:rgba(0, 0, 0, 0.8);
+
+    margin-top:2rem;
+    margin-right: 0.5rem;
+
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+}
 .map-control-container ul{
     display: block;
     float: left;
+    padding:0;
+    margin-right:0.5rem;
 }
 .control-group li{
     float: left;
 }
 
 /*生命史图控件*/
+.chart-bg{
+    width: 100%;
+    height: 100%;
+}
 
-
-
+.chart-up{
+    height: 80%;
+    width: 100%;
+    float: left;
+}
+.chart-down{
+    height: 20%;
+    width: 100%;
+    float: left;
+}
+#year-area-view{
+    width: 80%;
+    height: 100%;
+    float: left;
+    background-color: #999;
+}
+#all-bar-view{
+    width: 20%;
+    height: 100%;
+    float: left;
+    background-color: #575757;
+    overflow: auto;
+}
+#chart-control{
+    width: 100%;
+    height: 5%;
+    background-color: #e1e1e1;
+}
+#all-line-view{
+    width: 100%;
+    height: 95%;
+    background-color: #454545;
+}
+.chart-container::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: rgba(0,0,0,.4);
+}
 
 
 

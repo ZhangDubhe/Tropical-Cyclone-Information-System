@@ -60,19 +60,23 @@ var flag = 1;
         else {
             if($(this).parent().hasClass("active") ){
                 $(this).parent().removeClass("active");
+                $(".map-control-box").hide()
             }else{
                 $(this).parent().addClass("active");
                 $(this).parent().siblings().removeClass("active");
+                $(".map-control-box").show()
             }
         }
     })
     $(".icon-map").click(function () {
         $(".table-view").hide();
         $(".map-control-container").show()
+
     })
     $(".icon-table").click(function () {
         $(".table-view").show();
         $(".map-control-container").hide()
+
     })
 
 }));
