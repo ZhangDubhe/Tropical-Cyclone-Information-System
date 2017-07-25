@@ -203,6 +203,7 @@ header{
     height: 80%;
     width: 100%;
     float: left;
+    overflow: auto;
 }
 .chart-down{
     height: 20%;
@@ -213,14 +214,14 @@ header{
     width: 80%;
     height: 100%;
     float: left;
-    /*background-color: #999;*/    overflow: auto;
+    /*background-color: #999;*/
 }
 #all-bar-view{
     width: 20%;
     height: 100%;
     float: left;
-    background-color: #575757;
-    overflow: auto;
+    background-color: rgba(87, 87, 87, 0.18);
+
 }
 #chart-control{
     width: 100%;
@@ -231,6 +232,10 @@ header{
     width: 100%;
     height: 95%;
     background-color: #454545;
+}
+.svg-container{
+    width:100%;
+    height:100%;
 }
 .tiny-div{
     width: auto;
@@ -308,7 +313,19 @@ nav {
     text-align: center;
     line-break: normal;
 }
+.map-control-container ul{
+    display: block;
+    float: left;
+    padding:0;
+    margin-right:0.5rem;
+}
+
+.control-group li{
+    float: left;
+}
+/* 活动开窗 */
 .map-control-box{
+    display: none;
 
     height:5rem;
 
@@ -317,27 +334,48 @@ nav {
     margin-top:2rem;
     margin-right: 0.5rem;
 
-    padding-top:0.5rem;
-    padding-bottom:0.5rem;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    color:white;
+    /*font-size: ;*/
 }
-.map-control-container ul{
-    display: block;
+.map-control-box div{
     float: left;
-    padding:0;
-    margin-right:0.5rem;
+    text-align: left;
+    margin-left:0.5rem;
 }
-.control-group li{
-    float: left;
+.map-control-box>div>img{
+    border:1px inset rgba(0, 0, 0, 0.16);
+    width: 3.5rem;
+    padding-bottom: 0.2rem;
 }
-.active img{
-    border:1px #ff3853;
+.map-control-box>div>img.active{
+    border:1px inset #ff3853;
 }
+.map-control-box>div>p.small{
+    font-size: 0.8rem;
+}
+/*切换底图*/
+
+
+
 /*生命史图控件*/
+
+.chart-container::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
 .chart-container::-webkit-scrollbar-thumb {
-    border-radius: 0;
+    border-radius: 10px;
     background-color: rgba(0,0,0,.4);
 }
-
+.chart-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
 
 
 /* helper */
@@ -379,7 +417,7 @@ nav {
     .icon-earth{
         background-image: url("../img/icon/icon_tc_earth.png");
     }
-    .icon-group2-4{
+    .icon-radar{
         background-image: url("../img/icon/icon_tc_group2-4.png");
     }
     .icon-satellite{
@@ -428,7 +466,7 @@ nav {
     .active .icon-earth{
         background-image: url("../img/icon/icon_tc_earthActive.png");
     }
-    .active .icon-group2-4{
+    .active .icon-radar{
         background-image: url("../img/icon/icon_tc_group2-4Active.png");
     }
     .active .icon-satellite{
@@ -479,7 +517,7 @@ nav {
     background-image: url("../img/icon/icon_setting@2x.png");
 }
 .icon-setting{
-    background-image: url("../img/icon/icon_@2x.png");
+    background-image: url("../img/icon/icon_setting@2x.png");
 }
 
 @media only screen and (min-width: 1024px) {
@@ -519,7 +557,7 @@ nav {
     .icon-earth{
         background-image: url("../img/icon/icon_tc_earth@2x.png");
     }
-    .icon-group2-4{
+    .icon-radar{
         background-image: url("../img/icon/icon_tc_group2-4@2x.png");
     }
     .icon-satellite{
@@ -568,7 +606,7 @@ nav {
     .active .icon-earth{
         background-image: url("../img/icon/icon_tc_earthActive@2x.png");
     }
-    .active .icon-group2-4{
+    .active .icon-radar{
         background-image: url("../img/icon/icon_tc_group2-4Active@2x.png");
     }
     .active .icon-satellite{

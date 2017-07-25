@@ -34,12 +34,12 @@ var labelLayer =L.tileLayer("http://t{s}.tianditu.cn/DataServer?T=cia_w&X={x}&Y=
 var sea_cener = [30, 123],
     init_china_zoom = 4,
     defLatLon = L.latLng(30, 123);
-var basemapLayer = vecLayer;
+var customBaselayer = vecLayer;
 // init map
 var map = L.map('map',{
     center:sea_cener,
     zoom:init_china_zoom,
-    layers:basemapLayer
+    layers:customBaselayer
 });/*
 map = L.map('mapid', {
     zoomControl: false,
@@ -47,27 +47,15 @@ map = L.map('mapid', {
     zoom:init_china_zoom,
     layers:vecLayer
 }).setView(defLatLon, 6);*/
-var ss = L.Control.coordinates({
+/*var ss = L.Control.coordinates({
     decimals: 4,
     decimalSeperator: ",",
     labelTemplateLat: "纬度: {y}",
     labelTemplateLng: "经度: {x}",
     enableUserInput: false
-}).addTo(map);
+}).addTo(map);*/
 ($(function () {
-    $(".icon-layer").click(function () {
-        console.log("2")
-        $("#map-control-box").show().html(
-            "<img id='verLayer' class='active mapLayer' src='img/verLayer.png'/>"+
-            "<p role='laber' for='verLayer'>行政区划</p>"+
-            "<img id='imgLayer' class='mapLayer' src='img/imgLayer.png'/>"+
-        "<p role='laber' for='imgLayer'>影像</p>"+
-            "<img id='terLayer' class='mapLayer' src='img/terLayer.png'/>"+
-            "<p role='laber' for='terLayer'>地形</p>"+
-            "<img id='newLayer' class='mapLayer' src='img/newLayer.png'/>"
-        )
-    })
-    $('img .mapLayer').click(function () {
+    $("img.mapLayer").click(function () {
         $(this).addClass("active")
             .siblings().removeClass("active");
         var mapid = $(this).attr("id");

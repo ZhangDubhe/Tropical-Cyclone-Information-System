@@ -21,16 +21,16 @@
         <div id="map-control-container" hidden class="map-control-container">
             <ul class="control-group">
                 <li>
-                    <a class="icon icon-zoomOut" href="#" title="缩小"></a>
+                    <a class="icon icon-zoomOut" href="#" title="地图缩小"></a>
                 </li>
                 <li>
-                    <a class="icon icon-zoomIn" href="#" title="放大"></a>
+                    <a class="icon icon-zoomIn" href="#" title="地图放大"></a>
                 </li>
                 <li>
-                    <a class="icon icon-earth" href="#" title="全球视角"></a>
+                    <a class="icon icon-earth" href="#" title="原始视角"></a>
                 </li>
                 <li>
-                    <a class="icon icon-layer" href="#" title="切换底图"></a>
+                    <a class="icon icon-layer" href="#" title="选择底图"></a>
                 </li>
             </ul>
             <ul class="control-group">
@@ -41,24 +41,24 @@
                     <a class="icon icon-wind" href="#" title="大风"></a>
                 </li>
                 <li>
-                    <a class="icon icon-satellite" href="#" title="卫星图"></a>
+                    <a class="icon icon-satellite" href="#" title="卫星云图"></a>
                 </li>
                 <li>
-                    <a class="icon icon-group2-4" href="#" title="不知道干嘛的"></a>
+                    <a class="icon icon-radar" href="#" title="雷达影像"></a>
                 </li>
             </ul>
             <ul class="control-group">
                 <li>
-                    <a class="icon icon-path" href="#" title="路径控制"></a>
+                    <a class="icon icon-path" href="#" title="路径详情"></a>
                 </li>
                 <li>
                     <a class="icon icon-contactChina" href="#" title="影响中国"></a>
                 </li>
                 <li>
-                    <a class="icon icon-playPath" href="#" title="播放路径"></a>
+                    <a class="icon icon-playPath" href="#" title="路径播放"></a>
                 </li>
                 <li>
-                    <a class="icon icon-removeName" href="#" title="除名的台风"></a>
+                    <a class="icon icon-removeName" href="#" title="清除路径"></a>
                 </li>
             </ul>
             <ul class="control-group">
@@ -69,23 +69,50 @@
                     <a class="icon icon-share" href="#" title="分享"></a>
                 </li>
                 <li>
-                    <a class="icon icon-download" href="#" title="下载数据"></a>
+                    <a class="icon icon-download" href="#" title="下载"></a>
                 </li>
             </ul>
-            <div id="map-control-box" hidden class="map-control-box">
-        </div>
+            <div id="map-layer-box" class="map-control-box">
+                <div>
+                    <img id="verLayer" class="active mapLayer" src="src/img/TC/verLayer.png">
+                    <p role="laber" for="verLayer">行政区划</p></div>
+                <div>
+                    <img id="imgLayer" class="mapLayer" src="src/img/TC/imgLayer.png">
+                    <p role="laber" for="imgLayer">影像</p></div>
+                <div>
+                    <img id="terLayer" class="mapLayer" src="src/img/TC/terLayer.png">
+                    <p role="laber" for="terLayer">地形</p></div>
+                <div>
+                    <img id="newLayer" class="mapLayer" src="src/img/TC/newLayer.png">
+                </div>
+            </div>
+            <div id="map-rain-box" class="map-control-box"></div>
+            <div id="map-wind-box" class="map-control-box"></div>
+            <div id="map-satellite-box" class="map-control-box"></div>
+            <div id="map-radar-box" class="map-control-box"></div>
+            <div id="map-china-box"  class="map-control-box">
+                <div>
+                    <img id="influenceChina" class="contactChina" src="src/img/influenceChina.png">
+                    <p role="laber" for="influenceChina">影响中国</p></div>
+                <div>
+                    <img id="landingChina" class="contactChina" src="src/img/landingChina.png">
+                    <p role="laber" for="landingChina">登陆中国</p></div>
+                <div><input type="checkbox">多选 </div>
+            </div>
 
         </div>
     </div>
 
     <div class="table-view">
         <div id="chart-container" class="chart-bg ">
-            <div class="chart-up">
-                <div id="year-area-view" class="chart-container">
-
+            <div class="chart-up chart-container" >
+                <div id="year-area-view" >
+                    <table></table>
+                    <div class="svg-container"></div>
                 </div>
-                <div id="all-bar-view" class="chart-container">
-
+                <div id="all-bar-view" >
+                    <table></table>
+                    <div class="svg-container"></div>
                 </div>
             </div>
             <div class="chart-down">

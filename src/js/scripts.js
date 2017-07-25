@@ -57,16 +57,6 @@ var flag = 1;
             $(this).parent().siblings().removeClass("active");
             return;
         }
-        else {
-            if($(this).parent().hasClass("active") ){
-                $(this).parent().removeClass("active");
-                $(".map-control-box").hide()
-            }else{
-                $(this).parent().addClass("active");
-                $(this).parent().siblings().removeClass("active");
-                $(".map-control-box").show()
-            }
-        }
     })
     $(".icon-map").click(function () {
         $(".table-view").hide();
@@ -78,31 +68,60 @@ var flag = 1;
         $(".map-control-container").hide()
 
     })
+    
+    //地图控件
+    $('.map-control-container').find(".icon").click(function () {
+
+    })
+    $(".icon-layer").click(function () {
+        $(".map-control-box").hide()
+        $("#map-layer-box").show()
+    })
+    $(".icon-playPath").click(function () {
+        $(".map-control-box").hide()
+        $("#map-play-box").show()
+    })
+    $(".icon-contactChina").click(function () {
+        $(".map-control-box").hide()
+        $("#map-china-box").show()
+    })
 
 }));
 var $yearAll = $("#year-area-view");
+var $barAll = $("#all-bar-view");
 var divWidth = $yearAll.width(),
     divheight = $yearAll.height()
 var totalYear = 30;
 for(var row=0;row<=totalYear;row++){
-    $yearAll.append("<td>");
+    var tableRow = "<tr>";
+
     for(var col=0;col<12;col++){
-        $yearAll.append("<tl row='"+row+"' col='"+col+"' class='tiny-div' ></tl>")
+        tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' >"+row+","+col+"</td>"
+
     }
-    $yearAll.append("</td>");
+    tableRow += "</tr>";
+    var tableRow_right ="<tr><td row='"+row+"'  class='tiny-div' >"+row+"</td></tr>"
+    $yearAll.children("table").append(tableRow)
+    $barAll.children("table").append(tableRow_right)
+
 }
+var singleWidth = divWidth/12 - 0.5;
 $(".tiny-div").css({
-    "width":divWidth/12 - 1,
-    "height":30
+    "width":singleWidth,
+    "height":60,
+    "color":"#fff"
 }).hover(function () {
     $(this).addClass("hover");
     var _row = $(this).attr("row"),
         _col = $(this).attr("col");
     $(this).siblings().addClass("hover");
+    $barAll.find("td[row='"+_row+"']").addClass("hover");
+    $("td[col='"+_col+"']").addClass("hover")
 }).mouseout(function () {
     $(this).removeClass("hover");
     var _row = $(this).attr("row"),
         _col = $(this).attr("col");
     $(this).siblings().removeClass("hover");
-    console.log($(this).attr("row"),$(".tiny-class[row='"+_row+"']").attr("row"))
+    $barAll.find("td[row='"+_row+"']").removeClass("hover");
+    $("td[col='"+_col+"']").removeClass("hover")
 })
