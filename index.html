@@ -92,17 +92,17 @@
             <div id="map-radar-box" class="map-control-box"></div>
             <div id="map-contactChina-box"  class="map-control-box">
                 <div>
-                    <img id="influenceChina" class="contactChina" src="src/img/influenceChina.png">
+                    <img id="influenceChina" class="contactChina" src="src/img/TC/influenceChina.png">
                     <p role="laber" for="influenceChina">影响中国</p></div>
                 <div>
-                    <img id="landingChina" class="contactChina" src="src/img/landingChina.png">
+                    <img id="landingChina" class="contactChina" src="src/img/TC/landingChina.png">
                     <p role="laber" for="landingChina">登陆中国</p></div>
                 <div><input type="checkbox">多选 </div>
-                <div>
-                    <p>测站在所统计的区域内，有一站满足以下三个条件之一：</p>
-                    <p> 1 一站出现过程降水量 ≥50mm；</p>
-                    <p> 2 有一站出现 ≥7级的平均风，或 ≥ 8级的阵风；</p>
-                    <p> 3 有一站出现过程降水量≥30 mm，且出现 ≥6级的平均风或≥7级的阵风。</p>
+                <div >
+                    <p class="small">测站在所统计的区域内，有一站满足以下三个条件之一：</p>
+                    <p class="small"> 1 一站出现过程降水量 ≥50mm；</p>
+                    <p class="small"> 2 有一站出现 ≥7级的平均风，或 ≥ 8级的阵风；</p>
+                    <p class="small"> 3 有一站出现过程降水量≥30 mm，且出现 ≥6级的平均风或≥7级的阵风。</p>
                 </div>
                 <hr>
                 <div class="month-span-container"></div>
@@ -113,9 +113,33 @@
                 </div>
                 <div>
                     <svg id="small-player-line">
-                        <path d="line" ></path>
+                        <g>
+                            <path M="line" ></path>
+                        </g>
                     </svg>
-                    <p class="small">起始点，变形点，消失点</p>
+                    <p class="small" >起始点，变形点，消失点</p>
+                </div>
+                <div>
+                    <input title="remove path" type="checkbox"> 隐藏路径
+                    <input title="multi class points" type="checkbox"> 显示多类点数据
+                </div>
+                <hr style="background-color: #ffffff">
+                <div class="month-span-container">
+
+                </div>
+
+            </div>
+            <div id="map-path-box"  class="map-control-box">
+                <div>
+                    <img id="westType" class="pathDirect" src="src/img/TC/direct_west.png">
+                    <p role="laber" for="westType" >西进型<span class="icon-small icon-tips float-right"></span></p></div>
+                <div>
+                    <img id="landingType" class="pathDirect" src="src/img/TC/direct_landing.png">
+                    <p role="laber" for="landingType" >登陆型<span class="icon-small icon-tips float-right"></span></p>
+                </div>
+                <div>
+                    <img id="parabolaType" class="pathDirect" src="src/img/TC/direct_parabola.png">
+                    <p role="laber" for="parabolaType" >抛物线型<span class="icon-small icon-tips float-right"></span></p>
                 </div>
                 <div>
                     <input title="remove path" type="checkbox"> 隐藏路径

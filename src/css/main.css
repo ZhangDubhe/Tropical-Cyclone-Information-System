@@ -147,8 +147,23 @@ html,body{
     background-color: transparent;
     background-position: center center;
 }
+.icon-small{
+    width: 1rem;
+    height: 1rem;
+    display: block;
 
 
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center center;
+}
+.float-right{
+    float: right;
+}
+.float-left{
+    float: left;
+}
 .main{
     margin-top:-2rem;
     width: 100%;
@@ -327,7 +342,7 @@ nav {
 .map-control-box{
     display: none;
 
-    height:5rem;
+    height: 5rem;
 
     background-color:rgba(0, 0, 0, 0.8);
 
@@ -342,21 +357,32 @@ nav {
     color:white;
     /*font-size: ;*/
 }
+.box-add-height{
+    height: 7rem;
+}
 .map-control-box div{
     float: left;
     text-align: left;
     margin-left:0.5rem;
+    height: auto;
 }
 .map-control-box>div>img{
-    border:1px inset rgba(0, 0, 0, 0.16);
+    border:1px solid rgba(0, 0, 0, 0.16);
     width: 3.5rem;
-    padding-bottom: 0.2rem;
+    padding: 0;
+    margin-bottom: 0.2rem;
 }
 .map-control-box>div>img.active{
-    border:1px inset #ff3853;
+    border:1px solid #ff3853;
 }
-.map-control-box>div>p.small{
-    font-size: 0.8rem;
+.small{
+    font-size: 0.2rem;!important;
+    line-height: 1;
+}
+.map-control-box hr{
+    width: 100%;
+    float: left;
+    margin: 0;
 }
 svg#small-player-line{
     height: 1rem;
@@ -406,7 +432,10 @@ svg#small-player-line{
 .icon-play{
     background-image: url("../img/icon/icon_littlePlay@2x.png");
 }
-
+.icon-tips{
+    /*!!!!!! not 2x*/
+    background-image: url("../img/TC/icon_tips.png");
+}
 /* helper */
 
 @media only screen and (min-width: 768px) {

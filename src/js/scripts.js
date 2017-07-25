@@ -108,10 +108,12 @@ var flag = 1;
                 // TODO: radar image
                 break;
             case "path":
-                openThisBox(toggle_class);
+                $box = openThisBox(toggle_class);
+                $box.addClass("box-add-height")
                 break;
             case "contactChina":
-                openThisBox(toggle_class);
+                $box = openThisBox(toggle_class);
+                $box.addClass("box-add-height")
                 break;
             case "playPath":
                 openThisBox(toggle_class);
@@ -188,6 +190,7 @@ function openThisBox(toggleClass) {
     $(".map-control-box").hide()
     if(toggleClass === null){return}
     $("#map-"+toggleClass+"-box").show()
+    return $("#map-"+toggleClass+"-box")
 }
 function zoomToOrigin() {
     setTimeout(layer.msg("恢复原有比例"),2000)
