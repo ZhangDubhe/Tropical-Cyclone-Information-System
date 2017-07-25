@@ -71,20 +71,74 @@ var flag = 1;
     
     //地图控件
     $('.map-control-container').find(".icon").click(function () {
+        console.log("if active:",$(this).parent().hasClass("active") )
+
+        if($(this).parent().hasClass("active") ){
+            $(this).parent().removeClass("active");
+            $(".map-control-box").hide()
+            return
+        }
+        else{
+            $('.map-control-container').find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        }
+
+        console.log($(this).attr("class") )
+        var toggle_class = $(this).attr("class").split('-')[1]
+        switch (toggle_class){
+            case "earth":
+                zoomToOrigin();
+                $('.map-control-container').find(".icon").removeClass("active");
+                break;
+            case "layer":
+                openThisBox(toggle_class);
+                break;
+            case "rainDrop":
+                openThisBox(toggle_class);
+                break;
+            case "wind":
+                openThisBox(toggle_class);
+                break;
+            case "satellite":
+                openThisBox();
+                // TODO: satellite image
+                break;
+            case "radar":
+                openThisBox()
+                // TODO: radar image
+                break;
+            case "path":
+                openThisBox(toggle_class);
+                break;
+            case "contactChina":
+                openThisBox(toggle_class);
+                break;
+            case "playPath":
+                openThisBox(toggle_class);
+                break;
+            case "removeName":
+                clearPath()
+                // TODO: make it useful
+                break;
+            case "screenShot":
+                screenShot()
+                // TODO: make it useful
+                break;
+            case "share":
+                share()
+                // TODO: make it useful
+                break;
+            case "download":
+                download()
+                // TODO: make it useful
+                break;
+            default:
+                openThisBox()
+
+        }
 
     })
-    $(".icon-layer").click(function () {
-        $(".map-control-box").hide()
-        $("#map-layer-box").show()
-    })
-    $(".icon-playPath").click(function () {
-        $(".map-control-box").hide()
-        $("#map-play-box").show()
-    })
-    $(".icon-contactChina").click(function () {
-        $(".map-control-box").hide()
-        $("#map-china-box").show()
-    })
+
 
 }));
 var $yearAll = $("#year-area-view");
@@ -125,3 +179,28 @@ $(".tiny-div").css({
     $barAll.find("td[row='"+_row+"']").removeClass("hover");
     $("td[col='"+_col+"']").removeClass("hover")
 })
+var $monSpan = $(".month-span-container")
+for(var m =0;m<12;m++){
+    $monSpan.append("<span class='month-span'>"+(m+1)+"月</span>")
+}
+
+function openThisBox(toggleClass) {
+    $(".map-control-box").hide()
+    if(toggleClass === null){return}
+    $("#map-"+toggleClass+"-box").show()
+}
+function zoomToOrigin() {
+    setTimeout(layer.msg("恢复原有比例"),2000)
+}
+function clearPath() {
+    setTimeout(layer.msg("清除路径"),2000)
+}
+function screenShot() {
+    
+}
+function share() {
+    
+}
+function download() {
+
+}

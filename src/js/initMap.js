@@ -1,9 +1,9 @@
 /**
  * Created by Zhang on 2017/7/18.
  */
+//http://t{s}.tianditu.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z};http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}
 
-
-var terLayer = L.tileLayer("http://t{s}.tianditu.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z};http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}",{
+var terLayer = L.tileLayer("http://t{s}.tianditu.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z}",{
         minZoom: 1,
         maxZoom: 19,
         subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
@@ -56,8 +56,9 @@ map = L.map('mapid', {
 }).addTo(map);*/
 ($(function () {
     $("img.mapLayer").click(function () {
+        $("img.mapLayer").removeClass("active");
         $(this).addClass("active")
-            .siblings().removeClass("active");
+
         var mapid = $(this).attr("id");
         if(customBaselayer){
             map.removeLayer(customBaselayer);
@@ -73,8 +74,9 @@ map = L.map('mapid', {
             customBaselayer= terLayer;
             map.addLayer(customBaselayer);
         }
-        else if(mapid=="terLayer"){
-            layer.msg("此功能未开通")
+        else if(mapid=="newLayer"){
+            layer.msg("此功能未开通");
+            map.addLayer(customBaselayer);
         }
     })
 }))

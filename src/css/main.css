@@ -358,6 +358,20 @@ nav {
 .map-control-box>div>p.small{
     font-size: 0.8rem;
 }
+svg#small-player-line{
+    height: 1rem;
+}
+.month-span{
+    width: 2rem;
+    height: 1.4rem;
+    display: block;
+    float: left;
+    line-height: 1.4rem;
+    text-align: center;
+}
+.month-span:hover, .month-span.active{
+    background-color: #ff3853;
+}
 /*切换底图*/
 
 
@@ -377,6 +391,21 @@ nav {
     background-color: #F5F5F5;
 }
 
+.icon-search{
+    background-image: url("../img/icon/icon_search@2x.png");
+}
+.active .icon-search{
+    background-image: url("../img/icon/icon_searchActive@2x.png");
+}
+.table-tools-container{
+
+}
+.icon-setting{
+    background-image: url("../img/icon/icon_setting@2x.png");
+}
+.icon-play{
+    background-image: url("../img/icon/icon_littlePlay@2x.png");
+}
 
 /* helper */
 
@@ -504,21 +533,7 @@ nav {
         background-image: url("../img/icon/icon_tc_zoomOut.png");
     }
 }
-.icon-search{
-    background-image: url("../img/icon/icon_search@2x.png");
-}
-.active .icon-search{
-    background-image: url("../img/icon/icon_searchActive@2x.png");
-}
-.table-tools-container{
 
-}
-.icon-setting{
-    background-image: url("../img/icon/icon_setting@2x.png");
-}
-.icon-setting{
-    background-image: url("../img/icon/icon_setting@2x.png");
-}
 
 @media only screen and (min-width: 1024px) {
     .control-group .icon{
