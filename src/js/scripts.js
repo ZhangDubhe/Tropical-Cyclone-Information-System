@@ -143,47 +143,90 @@ var flag = 1;
 
 
 }));
+var totalYear = 30;
+var singleHeight = 30;
+
 var $yearAll = $("#year-area-view");
 var $barAll = $("#all-bar-view");
-var divWidth = $yearAll.width(),
-    divheight = $yearAll.height()
-var totalYear = 30;
-for(var row=0;row<=totalYear;row++){
-    var tableRow = "<tr>";
+var $lineDay = $("#all-line-view");
+var $yearScroll = $(".year-scrollbar");
+var $monthScroll = $(".month-scrollbar");
+initTable()
 
-    for(var col=0;col<12;col++){
-        tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' >"+row+","+col+"</td>"
-
-    }
-    tableRow += "</tr>";
-    var tableRow_right ="<tr><td row='"+row+"'  class='tiny-div' >"+row+"</td></tr>"
-    $yearAll.children("table").append(tableRow)
-    $barAll.children("table").append(tableRow_right)
-
-}
-var singleWidth = divWidth/12 - 0.5;
-$(".tiny-div").css({
-    "width":singleWidth,
-    "height":60,
-    "color":"#fff"
-}).hover(function () {
-    $(this).addClass("hover");
+$(".tiny-div").hover(function () {
+    $(this).addClass("hover-deep");
     var _row = $(this).attr("row"),
         _col = $(this).attr("col");
     $(this).siblings().addClass("hover");
-    $barAll.find("td[row='"+_row+"']").addClass("hover");
-    $("td[col='"+_col+"']").addClass("hover")
+    $(".tiny-div[row='"+_row+"']").addClass("hover");
+    $(".tiny-div[col='"+_col+"']").addClass("hover");
+
 }).mouseout(function () {
-    $(this).removeClass("hover");
+    $(this).removeClass("hover-deep");
     var _row = $(this).attr("row"),
         _col = $(this).attr("col");
     $(this).siblings().removeClass("hover");
-    $barAll.find("td[row='"+_row+"']").removeClass("hover");
-    $("td[col='"+_col+"']").removeClass("hover")
+    $(".tiny-div[row='"+_row+"']").removeClass("hover");
+    $(".tiny-div[col='"+_col+"']").removeClass("hover")
 })
-var $monSpan = $(".month-span-container")
-for(var m =0;m<12;m++){
-    $monSpan.append("<span class='month-span'>"+(m+1)+"月</span>")
+
+function initTable() {
+    for(var row=0;row < totalYear;row++){
+        var tableRow = "<tr>";
+        var tableCol_down = "<tr>"
+        var monthColBar = ""
+        for(var col=0;col<12;col++){
+            tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' >"+row+","+col+"</td>"
+            tableCol_down += "<td  col='"+col+"' class='tiny-div' >"+col+"</td>";
+            monthColBar += "<div  col='"+col+"' class='tiny-div' ></div>";
+        }
+        tableRow += "</tr>";
+        tableCol_down += "</tr>"
+        var tableRow_right ="<tr><td row='"+row+"'  class='tiny-div' >"+row+"</td></tr>"
+        var yearRowBar = "<div row='"+row+"' class='tiny-div'></div>"
+        $yearAll.children("table").append(tableRow)
+        $barAll.children("table").append(tableRow_right)
+        $yearScroll.append(yearRowBar)
+    }
+    $monthScroll.append(monthColBar)
+    $lineDay.children("table").append(tableCol_down)
+
+    var divWidth = $yearAll.width(),
+        divheight = $yearAll.height(),
+        singleBarHeight = divheight/totalYear,
+        singleWidth = divWidth/12 ;
+    $("#year-area-view").find(".tiny-div").css({
+        "width":singleWidth,
+        "height":singleHeight
+    })
+    $("#all-bar-view").find(".tiny-div").css({
+        "height":singleHeight
+    })
+
+    $("#all-line-view").find(".tiny-div").css({
+        "width":singleWidth
+    })
+    $("#year-area-view").find(".svg-container").css({
+        "height":(singleHeight-2)*totalYear + singleHeight
+    })
+    $("#all-bar-view").find(".svg-container").css({
+        "height":(singleHeight-2)*totalYear + singleHeight
+    })
+
+    $yearScroll.find(".tiny-div").css({
+        "height":singleBarHeight
+    })
+    $monthScroll.find(".tiny-div").css({
+        "width":singleWidth
+    })
+}
+
+
+function initMonthSpan(){
+    var $monSpan = $(".month-span-container")
+    for(var m =0;m<12;m++){
+        $monSpan.append("<span class='month-span'>"+(m+1)+"月</span>")
+    }
 }
 
 function openThisBox(toggleClass) {

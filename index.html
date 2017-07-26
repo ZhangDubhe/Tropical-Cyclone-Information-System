@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
     <link href="src/css/Leaflet.Coordinates-0.1.5.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="src/css/normalize.css"/>
+    <link rel="stylesheet" href="src/css/icon.css"/>
     <link rel="stylesheet" href="src/css/main.css"/>
+    <!--<link rel="stylesheet/less" type="text/css" href="src/css/styles.less" />
+    <script>
+        less = {
+            env: "development",
+            async: true,
+            fileAsync: true,
+            poll: 1000,
+            functions: {},
+            dumpLineNumbers: "comments",
+            relativeUrls: true,
+            rootpath: "/localhost/"
+        };
+    </script>
+    <script src="src/js/less.js" type="text/javascript"></script>
+    <script>less.watch();</script>-->
 </head>
 <body class="container">
 <header class="header">
@@ -166,21 +182,22 @@
                     <table></table>
                     <div class="svg-container"></div>
                 </div>
+
             </div>
             <div class="chart-down">
                 <div id="chart-control" class="chart-control">
                     <span class="icon icon-search"> </span>
-                    <select >   </select>
-                    <select >   </select>
-                    <span title="test" >
-                        <input id="check" type="checkbox" name="simple-chart" title="select chart model">是否为对称型
-                        <input id="drawYearFreq" class="btn " type="button" name="draw" value="yearFrequence" required placeholder="绘制年频度图" >
-                    </span>
+
                 </div>
 
                 <div id="all-line-view" class="chart-container">
+                    <table>
+                    </table>
+                    <div class="svg-container"></div>
 
                 </div>
+                <label for="all-line-view" class="small">30年逐日频次</label>
+
             </div>
             <!--year - width = all-line - width
                 year - height = all-bar - height
@@ -208,7 +225,12 @@
         </div>
     </nav>
 </div>
-
+<div class="wrap-div-right">
+    <div class="scrollbar year-scrollbar"></div>
+</div>
+<div class="wrap-div-down">
+    <div class="scrollbar month-scrollbar"></div>
+</div>
 </body>
 <!--map--><!--
 <script src="components/esri-leaflet/dist/esri-leaflet-src.js"></script>-->
@@ -234,6 +256,7 @@
 <script src="src/js/initMap.js"></script>
 <!--<script src="src/js/typhoon.js"></script>-->
 <script src="src/js/scripts.js"></script>
+
 
 
 </html>

@@ -1,0 +1,342 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+*{
+  font-size: 62.5%;
+}
+html {
+  color: #222;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+body {
+  font-size: 1.5rem;
+  padding: 0;
+  background-color: lightgrey;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+/*
+ * Remove padding and margin from bootstrap
+
+ *
+ */
+.container {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+:root{
+  --main-color: #2B79B1;
+  --sub-color: #327CD0;
+  --head-color:#1f69b0;
+  --active-color:#29a4e8;
+  --dent: 1rem;
+}
+html,body{
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  overflow: hidden;
+}
+.icon{
+  width: 2rem;
+  height: 2rem;
+  display: block;
+
+
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+}
+.icon-small{
+  width: 1rem;
+  height: 1rem;
+  display: block;
+
+
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+}
+.float-right{
+  float: right;
+}
+.float-left{
+  float: left;
+}
+.main{
+  margin-top:-2rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+}
+.main>div{
+  width: 100%;
+  height: 100%;
+}
+header{
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+/*主要布局*/
+.map-view {
+  display: block;
+  z-index: 1;
+}
+
+.table-view {
+  display: block;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 50;
+  position: relative;
+  top:-100%;
+  color: #ffffff;
+}
+/*地图*/
+#map{
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+/*表格*/
+
+.chart-bg{
+  width: 100%;
+  height: 100%;
+}
+
+.chart-up{
+  height: 80%;
+  width: 100%;
+  float: left;
+  overflow: auto;
+}
+.chart-down{
+  height: 20%;
+  width: 100%;
+  float: left;
+}
+#year-area-view{
+  width: 80%;
+  height: 100%;
+  float: left;
+  /*background-color: #999;*/
+}
+#all-bar-view{
+  width: 20%;
+  height: 100%;
+  float: left;
+  background-color: rgba(87, 87, 87, 0.18);
+
+}
+#chart-control{
+  width: 100%;
+  height: 5%;
+  background-color: #e1e1e1;
+}
+#all-line-view{
+  width: 100%;
+  height: 95%;
+  background-color: #454545;
+}
+.svg-container{
+  width:100%;
+  height:100%;
+}
+.tiny-div{
+  background-color:transparent;
+  border: 0.5px #575757 solid;
+  float:left;
+}
+
+.tiny-div.hover{
+  background-color: rgba(200, 40, 41, 0.3);
+}
+/*兼有控件*/
+
+/*侧边打开栏*/
+.main>nav{
+  width: 5rem;
+  height: 100vh;
+
+  z-index: 100;
+
+  background-color: white;
+  position: fixed;
+  top: 0;
+  color: #777777;
+
+  transition-duration: 0.3s;
+}
+.nav-close{
+  left: -4.5em;
+}
+.nav-open{
+  left: 0;
+  box-shadow: 1px 1px 5px #777;
+}
+.toggle-btn, .open-btn{
+  width:40%;
+  /**
+   * 居中 */
+  height: 10rem;
+  position: relative;
+  top: 50%;
+  margin-top: -5.5rem;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0;
+  float: left;
+  margin-left:10%;
+}
+.open-btn>span{
+  margin-top: 2.5rem;
+}
+.toggle-btn>li{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+ul, li{
+  list-style: none;
+}
+nav {
+  background-color: transparent;
+}
+
+
+/*地图页控件*/
+
+.map-control-container{
+  position: fixed;
+  top:2rem;
+  left: 50%;
+  margin-left: -15rem;
+  width: 32rem;
+
+  z-index: 10;
+  text-align: center;
+  line-break: normal;
+}
+.map-control-container ul{
+  display: block;
+  float: left;
+  padding:0;
+  margin-right:0.5rem;
+}
+
+.control-group li{
+  float: left;
+}
+/* 活动开窗 */
+.map-control-box{
+  display: none;
+
+  height: 5rem;
+
+  background-color:rgba(0, 0, 0, 0.8);
+
+  margin-top:2rem;
+  margin-right: 0.5rem;
+
+  padding-top:1rem;
+  padding-bottom:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  color:white;
+  /*font-size: ;*/
+}
+.box-add-height{
+  height: 7rem;
+}
+.map-control-box div{
+  float: left;
+  text-align: left;
+  margin-left:0.5rem;
+  height: auto;
+}
+.map-control-box>div>img{
+  border:1px solid rgba(0, 0, 0, 0.16);
+  width: 3.5rem;
+  padding: 0;
+  margin-bottom: 0.2rem;
+}
+.map-control-box>div>img.active{
+  border:1px solid #ff3853;
+}
+.small{
+  font-size: 0.2rem;
+  line-height: 1;
+}
+.map-control-box hr{
+  width: 100%;
+  float: left;
+  margin: 0;
+}
+svg#small-player-line{
+  height: 1rem;
+}
+.month-span{
+  width: 2rem;
+  height: 1.4rem;
+  display: block;
+  float: left;
+  line-height: 1.4rem;
+  text-align: center;
+}
+.month-span:hover, .month-span.active{
+  background-color: #ff3853;
+}
+/*切换底图*/
+
+
+
+/*生命史图控件*/
+
+.chart-container::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F5F5F5;
+}
+.chart-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0,0,0,.4);
+}
+.chart-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+
