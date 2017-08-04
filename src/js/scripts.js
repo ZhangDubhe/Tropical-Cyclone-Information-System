@@ -58,6 +58,14 @@ var flag = 1;
             return;
         }
     })
+    $(".dropdown-menu").find(".li-right").click(function () {
+        if($(this).parent().hasClass("active")){
+            $(this).parent().removeClass("active");
+         }
+        else {
+            $(this).parent().addClass("active");
+        }
+    })
     $(".icon-map").click(function () {
         $(".table-view").hide();
         $(".map-control-container").show()

@@ -21,6 +21,7 @@
     background-color: transparent;
     background-position: center center;
 }
+
 .icon-search{
     background-image: url("../img/icon/icon_search@2x.png");
 }
@@ -33,6 +34,27 @@
 .icon-setting{
     background-image: url("../img/icon/icon_setting@2x.png");
 }
+.active .icon-setting{
+    background-image: url("../img/icon/icon_settingActive@2x.png");
+}
+.icon-stop-Bottom{
+    background-image: url("../img/icon/icon_stop@2x.png");
+}
+.icon-zoomIn-Bottom{
+    background-image: url("../img/icon/icon_plus@2x.png");
+}
+.icon-zoomOut-Bottom{
+    background-image: url("../img/icon/icon_minus@2x.png");
+}
+.active .icon-stop-Bottom{
+    background-image: url("../img/icon/icon_stopActive@2x.png");
+}
+.active .icon-zoomIn-Bottom{
+    background-image: url("../img/icon/icon_plusActive@2x.png");
+}
+.active .icon-zoomOut-Bottom{
+    background-image: url("../img/icon/icon_minusActive@2x.png");
+}
 .icon-play{
     background-image: url("../img/icon/icon_littlePlay@2x.png");
 }
@@ -40,7 +62,21 @@
     /*!!!!!! not 2x*/
     background-image: url("../img/TC/icon_tips.png");
 }
-
+.icon-check-circle{
+    background-image: url("../img/icon/icon_check-circle.png");
+}
+.icon-check-bg{
+    background-image: url("../img/icon/icon_check-bg.png");
+}
+.icon-check-tick{
+    background-image: url("../img/icon/icon_check-ya.png");
+}
+.active .icon-check-bg{
+    background-image: url("../img/icon/icon_check-bgActive.png");
+}
+.active .icon-check-tick{
+    background-image: url("../img/icon/icon_check-yaActive.png");
+}
 @media only screen and (min-width: 600px) {
     .control-group .icon{
         width: 1rem;

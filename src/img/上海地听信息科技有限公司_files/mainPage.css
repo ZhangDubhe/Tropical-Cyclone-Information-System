@@ -1,0 +1,489 @@
+﻿@media screen and (max-width: 768px) {
+    html,body
+    {
+        overflow-y:auto;
+        overflow-x:hidden;
+        background-color: #888888;
+        width:100vw;
+    }
+    div,body
+    {
+        margin:0;
+        padding:0;
+        width:100%;
+        text-align:center;
+        font-family:微软雅黑;
+    }
+    p,b
+    {
+        font-family:微软雅黑;
+        color:White;
+        margin:0;
+        padding:0;
+        cursor:default;
+    }
+    .divWebPage
+    {
+        background-color: #b6b6b6;
+        width: 100%;
+    }
+    .divHomeNorth
+    {
+        width: 100%;
+        height:95px;
+        position:fixed;
+        left:0;
+        background-color:#ECF2F3;
+        top: 0;
+        z-index: 99;
+        border-bottom: 1px #7a7a7a solid;
+    }
+    .divHomeNorthBack
+    {
+        height:95px;
+        text-align:center;
+        background-color:#ECF2F3;
+    }
+    #divNCenter
+    {
+        width:100%;
+        height:65px;
+        margin:0 auto;
+        background-color:#ECF2F3;
+
+    }
+    #divLogo
+    {
+        width:90%;
+        height:55px;
+        background-image:url(images/logo.png);
+        background-repeat:no-repeat;
+        background-position: 10%;
+        background-size: 70%;
+        margin-top:10px;
+        float:left;
+        opacity: 1;
+    }
+    #headMenuForMobile{
+        position: fixed;
+        right: 10px;
+        top:20px;
+        display: block;
+        height: 40px;
+        width: 40px;
+        background: url(images/menu.png) no-repeat center center;
+        -webkit-background-size: 40%;
+        background-size: 40%;
+        transform: rotate(90deg);
+        z-index: 1000;
+        cursor:pointer;
+        border-radius: 5px;
+    }
+    #headMenuForMobile:hover{
+        background-color: rgba(156, 156, 156, 0.2);
+    }
+    .divMenu
+    {
+        float: right;
+        cursor:pointer;
+        line-height:50px;
+        position: relative;
+        transition-duration: 0.3s;
+    }
+    .divMenu a
+    {
+        display: none;
+    }
+    .divMenu p
+    {
+        border-top: 1px rgba(255, 255, 255, 0.31) solid;
+        height:24px;
+        width:100%;
+        margin-top:5px;
+        line-height: 24px;
+        font-size: 14px;
+        top:-24px;
+        color:rgb(137, 150, 156);
+        background-color: #f1f6f9;
+    }
+
+    #divMenu01
+    {
+        width:14%;
+    }
+
+    #divMenu02
+    {
+        width:20%;
+    }
+
+    #divMenu03
+    {
+        width:20%;
+    }
+
+    #divMenu04
+    {
+        width:16%;
+    }
+
+    #divMenu05
+    {
+        width:12%;
+    }
+
+    #divMenu06
+    {
+        width:18%;
+    }
+
+    .divPageContent
+    {
+        width:100%;
+
+        margin:0 auto;
+        overflow:hidden;
+        overflow-x:scroll;
+    }
+
+}
+@media screen and (min-width: 769px) {
+    body
+    {
+        overflow:auto;
+        background-color:#003174;
+    }
+    div,body
+    {
+        margin:0;
+        padding:0;
+        width:100%;
+        text-align:center;
+        font-family:微软雅黑;
+    }
+    p,b
+    {
+        font-family:微软雅黑;
+        color:White;
+        margin:0;
+        padding:0;
+        cursor:default;
+    }
+    .divWebPage
+    {
+        background-color:#35AAE3;
+    }
+    .divHomeNorth
+    {
+        height:100px;
+        position:fixed;
+        left:0;
+        background-color:#ECF2F3;
+        top: 0px;
+        left: 0px;
+        z-index: 99;
+    }
+    .divHomeNorthBack
+    {
+        height:100px;
+        text-align:center;
+        background-color:#ECF2F3;
+    }
+    #divNCenter
+    {
+        width:1158px;
+        height:100px;
+        margin:0 auto;
+        background-color:#ECF2F3;
+    }
+    #divLogo
+    {
+        width:408px;
+        height:85px;
+        background-image:url(images/logo.png);
+        background-repeat:no-repeat;
+        margin-top:10px;
+        float:left;
+    }
+
+    #headMenuForMobile{
+        display: none;
+    }
+    .divMenu
+    {
+        float:right;
+        height:64px;
+        margin-right:30px;
+        margin-top:20px;
+        cursor:pointer;
+    }
+    .divMenu a
+    {
+        height:36px;
+        float:right;
+        background-repeat:no-repeat;
+        width:100%;
+    }
+    .divMenu p
+    {
+        height:24px;
+        width:100%;
+        margin-top:5px;
+        color:#89969C;
+        font-size:18px;
+        cursor:pointer;
+        text-align:center;
+    }
+    #pIconTxtA
+    {
+        margin-right:0;
+    }
+    #divMenu01
+    {
+        width:54px;
+    }
+    #aIcon01
+    {
+        background-image:url(images/01_n.png);
+    }
+    #aIcon01Hover
+    {
+        background-image:url(images/01_v.png);
+    }
+    #divMenu02
+    {
+        width:79px;
+    }
+    #aIcon02
+    {
+        background-image:url(images/02_n.png);
+    }
+    #aIcon02Hover
+    {
+        background-image:url(images/02_v.png);
+    }
+    #divMenu03
+    {
+        width:77px;
+    }
+    #aIcon03
+    {
+        background-image:url(images/03_n.png);
+    }
+    #aIcon03Hover
+    {
+        background-image:url(images/03_v.png);
+    }
+    #divMenu04
+    {
+        width:61px;
+    }
+    #aIcon04
+    {
+        background-image:url(images/04_n.png);
+    }
+    #aIcon04Hover
+    {
+        background-image:url(images/04_v.png);
+    }
+    #divMenu05
+    {
+        width:49px;
+    }
+    #aIcon05
+    {
+        background-image:url(images/05_n.png);
+    }
+    #aIcon05Hover
+    {
+        background-image:url(images/05_v.png);
+    }
+    #divMenu06
+    {
+        width:72px;
+        margin-right:0;
+    }
+    #aIcon06
+    {
+        background-image:url(images/06_n.png);
+    }
+    #aIcon06Hover
+    {
+        background-image:url(images/06_v.png);
+    }
+    .divPageContent
+    {
+        width:1158px;
+        height:100%;
+        margin:0 auto;
+        overflow:hidden;
+    }
+}
+@media screen and (min-width: 1420px) {
+    body
+    {
+        overflow:auto;
+        background-color:#003174;
+    }
+    div,body
+    {
+        margin:0;
+        padding:0;
+        width:100%;
+        text-align:center;
+        font-family:微软雅黑;
+    }
+    p,b
+    {
+        font-family:微软雅黑;
+        color:White;
+        margin:0;
+        padding:0;
+        cursor:default;
+    }
+    .divWebPage
+    {
+        background-color:#35AAE3;
+    }
+    .divHomeNorth
+    {
+        height:100px;
+        position:fixed;
+        left:0;
+        background-color:#ECF2F3;
+        top: 0px;
+        left: 0px;
+        z-index: 99;
+    }
+    .divHomeNorthBack
+    {
+        height:100px;
+        text-align:center;
+        background-color:#ECF2F3;
+    }
+    #divNCenter
+    {
+        width:1158px;
+        height:100px;
+        margin:0 auto;
+        background-color:#ECF2F3;
+    }
+    #divLogo
+    {
+        width:408px;
+        height:85px;
+        background-image:url(images/logo.png);
+        background-repeat:no-repeat;
+        margin-top:10px;
+        float:left;
+    }
+    .divMenu
+    {
+        float:right;
+        height:64px;
+        margin-right:30px;
+        margin-top:20px;
+        cursor:pointer;
+    }
+    .divMenu a
+    {
+        height:36px;
+        float:right;
+        background-repeat:no-repeat;
+        width:100%;
+    }
+    .divMenu p
+    {
+        height:24px;
+        width:100%;
+        margin-top:5px;
+        color:#89969C;
+        font-size:18px;
+        cursor:pointer;
+        text-align:center;
+    }
+    #pIconTxtA
+    {
+        margin-right:0;
+    }
+    #divMenu01
+    {
+        width:54px;
+    }
+    #aIcon01
+    {
+        background-image:url(images/01_n.png);
+    }
+    #aIcon01Hover
+    {
+        background-image:url(images/01_v.png);
+    }
+    #divMenu02
+    {
+        width:79px;
+    }
+    #aIcon02
+    {
+        background-image:url(images/02_n.png);
+    }
+    #aIcon02Hover
+    {
+        background-image:url(images/02_v.png);
+    }
+    #divMenu03
+    {
+        width:77px;
+    }
+    #aIcon03
+    {
+        background-image:url(images/03_n.png);
+    }
+    #aIcon03Hover
+    {
+        background-image:url(images/03_v.png);
+    }
+    #divMenu04
+    {
+        width:61px;
+    }
+    #aIcon04
+    {
+        background-image:url(images/04_n.png);
+    }
+    #aIcon04Hover
+    {
+        background-image:url(images/04_v.png);
+    }
+    #divMenu05
+    {
+        width:49px;
+    }
+    #aIcon05
+    {
+        background-image:url(images/05_n.png);
+    }
+    #aIcon05Hover
+    {
+        background-image:url(images/05_v.png);
+    }
+    #divMenu06
+    {
+        width:72px;
+        margin-right:0;
+    }
+    #aIcon06
+    {
+        background-image:url(images/06_n.png);
+    }
+    #aIcon06Hover
+    {
+        background-image:url(images/06_v.png);
+    }
+    .divPageContent
+    {
+        width:1158px;
+        height:100%;
+        margin:0 auto;
+        overflow:hidden;
+    }
+}
