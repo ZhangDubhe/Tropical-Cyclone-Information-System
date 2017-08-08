@@ -28,6 +28,14 @@ body {
 
  *
  */
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
+    background-color: transparent;!important;
+    outline:none;!important;
+    color:#fff;!important;
+    border-bottom: 1px solid;!important;
+}
+
 .container {
     padding-right: 0;
     padding-left: 0;
@@ -225,30 +233,28 @@ header{
 }
 
 .chart-up{
-    height: 80%;
+    height: 90%;
     width: 100%;
     float: left;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 50;
-
 }
 .chart-down{
-    height: 20%;
+    height: 13%;
     width: 100%;
     float: left;
     z-index: 60;
     position: relative;
-
 }
 #year-area-view{
-    width: 80%;
+    width: 94%;
     height: 100%;
     float: left;
     /*background-color: #999;*/
 }
 #all-bar-view{
-    width: 20%;
+    width: 6%;
     height: 100%;
     float: left;
 }
@@ -272,12 +278,14 @@ header{
     width:100%;
     height: 100%;
     position: absolute;
-    top:0;
+    /* top:0; */
+    z-index: 20;
 }
 .chart-container .svg-container{
     width:100%;
     height:100%;
     top:0;
+    z-index: 100;
 }
 /* 背景网格 */
 
@@ -316,14 +324,13 @@ td.hover-deep{
     background-color: rgb(61, 61, 61);
 }
 .year-scrollbar{
-    height: 80%;
+    height: 89%;
     width: 0.25rem;
     margin-left: 1.2rem;
-
 }
 .month-scrollbar{
     height: 0.25rem;
-    width:80%;
+    width: 94%;
     bottom:0;
     margin-top:0.9rem;
 }
@@ -473,7 +480,7 @@ svg#small-player-line{
 }
 .chart-container::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+    background-color: #333;
 }
 .control-group-bottom {
     width: 8rem;
@@ -561,7 +568,6 @@ button.dropdown-bottomControl:hover,button.dropdown-bottomControl:focus,button:a
     outline: none;
     border-bottom: 1px solid;
 }
-
 
 span.icon-small.icon-check-circle {
     display: inline-block;
@@ -751,3 +757,9 @@ span.icon-small.icon-check-circle {
 
 
 
+
+
+text.bar-text {
+    font-size: 0.54rem;
+    fill: white;
+}
