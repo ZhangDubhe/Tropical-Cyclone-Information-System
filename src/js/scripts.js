@@ -33,7 +33,7 @@ var flag = 1;
 
     });
     // 点击事件
-    $("input[type='button']").on("click",getData);
+
     //针对所有的图标
     $('.chart-container').delegate('path[class="area"]','click',function(){
         console.log("path",$(this).length);
@@ -76,11 +76,14 @@ var flag = 1;
         $(".map-control-container").hide()
 
     })
-    
+    $("#chart-control").find(".icon").mousedown(function () {
+        $(this).addClass("active");
+    }).mouseup(function () {
+        $(this).removeClass("active");
+    })
     //地图控件
     $('.map-control-container').find(".icon").click(function () {
         console.log("if active:",$(this).parent().hasClass("active") )
-
         if($(this).parent().hasClass("active") ){
             $(this).parent().removeClass("active");
             $(".map-control-box").hide()

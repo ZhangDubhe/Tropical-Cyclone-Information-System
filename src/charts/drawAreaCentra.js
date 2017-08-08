@@ -4,30 +4,47 @@ var margin = {top: 8, right: 0, bottom: 2, left: 0},
     height = 70 - margin.top - margin.bottom,
     padding = -10;
 
-function getData() {
-    $.getJSON("src/php/query.php",{draw:'yearFrequence'}, test)
+//获取系统提交的URL的格式
+function getUrl(provider, assembly, method) {
+    return "http://www.readearth.com/publictyphoon/PatrolHandler.ashx?provider=" + provider + "&assembly=" + assembly + "&method=" + method;
 }
-function test(result) {
-    var array = [],
-        data = [];
-    for(var i = 0;i< result.length;i++){
-        var temp = {year : result.year[i], value : result.count[i]};
-        array.push(temp)
-    }
-    data = array;
-    console.log('\r',data);
-    draw(data);
 
+function getData() {
+    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
+    $.getJSON("src/php/queryYear.php",{url:url,queryYear:true},
+        function(result) {
+            console.log("query!")
+            $rows = $("#all-bar-view").find("td")
+            var length = result.totalYear
+            var array = [],
+                data = [],
+                year = 1981;
+            for(var i=0; i<length;i++){
+
+                $($rows[i]).html("")
+                var temp = {year : year, value : result.count[year]};
+                array.push(temp)
+                year = year + 1;
+
+            }
+
+            data = array;
+            console.log('\r',data);
+            drawYearBar(data);
+        }
+    );
 }
-function draw(data) {
-    var width = 150;
-    var each_height = 40;
-    var height = 700;
+
+function drawYearBar(data) {
+    var width = $("#all-bar-view").width();
+    var each_height = 10;
+    var height = $("#all-bar-view table").height();
     // #length*height;
-    var margin = {top:3,left:5,right:5,bottom:3};
+    var margin = {top:10,left:0,right:5,bottom:10};
+    // TODO: PADDING OF EACHOTHER
     var xScale = d3.scale.linear().range([0,(width- margin.left - margin.right)/2]);    //X轴和Y轴
-    var yScale = d3.scale.ordinal().rangeRoundBands([0,height - margin.top - margin.bottom],0.1);   //
-    var svg = d3.select("#all-bar-view")
+    var yScale = d3.scale.ordinal().rangeRoundBands([0,height],0);   //
+    var svg = d3.select("#all-bar-view .svg-container")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -39,7 +56,7 @@ function draw(data) {
     yScale.domain(data.map(function(d){return d.year}));
     bar1 = svg.append("g")
         .attr("class","bar")
-        .attr("transform","translate("+ width/2 +"," + margin.top +")");
+        .attr("transform","translate("+ 0 +"," + margin.top +")");
     bar1.selectAll("rect").data(data).enter()
         .append("rect")
         .attr("x", function (d) {
@@ -51,40 +68,56 @@ function draw(data) {
         .attr("width", function (d) {
             return xScale(d.value);
         })
-        .attr("height", function () {
-            return yScale.rangeBand();
-        })
+        .attr("height", each_height)
         .attr("fill","#fff");
     bar1.selectAll("text").data(data).enter()
         .append("text")
         .attr("x", function (d) {
-            return 0;
+            return xScale(d.value)+5;
         })
         .attr("y", function (d) {
-            return yScale(d.year)+yScale.rangeBand();
+            return yScale(d.year)+10;
         })
         .attr("class","bar-text")
         .text(function (d) {
-            return d.year + ':' +d.value;
+            return d.value;
         })
-
 }
-function CenterArea() {
+function queryEachYear() {
+    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
+    var data = [];
+    $.getJSON("src/php/queryEachYearDetails.php",{url:url,queryYear:true},
+        function(result) {
+            $rows = $("#all-bar-view").find("td")
+            var length = result.totalYear,
+                data = [],
+                year = 1981;
 
-//data.tsv takes a file path and a callback function
-//     data_path = 'resource/data/data.tsv';
-    // d3.tsv(data_path, type, createChart);
-    data_path = ""
+
+            data = array;
+        });
+    return data;
+}
+
+function CenterArea(data) {
+    var width = $("#year-area-view").width(),
+        height = $("#year-area-view table").height();
+    var eachYearHeight = 20;
+    // #length*height;
+    var margin = {top:5,left:0,right:5,bottom:5};
+    data = queryEachYear()
+    drawOneYear(data)
     //读取json传输的数据
-    d3.json(data_path, type, function (data) {
-        createChart(data)
-    });
+    createChart(data)
+    function drawOneYear(data) {
 
+    }
     function createChart(data) {
         var symbol = [],
             charts = [],
             maxDataPoint = 0;
         var data_length = data.length;
+
         console.log(data);
         /*
 
@@ -130,7 +163,7 @@ function CenterArea() {
             })
         ])
 
-        var svg = d3.select("#year-area-view").selectAll("svg")
+        var svg = d3.select("#year-area-view .svg-container").selectAll("svg")
             .data(symbols)
             .enter().append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -282,3 +315,7 @@ function example() {
         return d;
     }
 }
+
+getData();
+
+CenterArea();

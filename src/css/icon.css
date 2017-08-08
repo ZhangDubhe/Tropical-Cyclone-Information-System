@@ -25,7 +25,7 @@
 .icon-search{
     background-image: url("../img/icon/icon_search@2x.png");
 }
-.active .icon-search{
+.active.icon-search{
     background-image: url("../img/icon/icon_searchActive@2x.png");
 }
 .table-tools-container{
@@ -34,7 +34,7 @@
 .icon-setting{
     background-image: url("../img/icon/icon_setting@2x.png");
 }
-.active .icon-setting{
+.active.icon-setting{
     background-image: url("../img/icon/icon_settingActive@2x.png");
 }
 .icon-stop-Bottom{
@@ -46,13 +46,13 @@
 .icon-zoomOut-Bottom{
     background-image: url("../img/icon/icon_minus@2x.png");
 }
-.active .icon-stop-Bottom{
+.active.icon-stop-Bottom{
     background-image: url("../img/icon/icon_stopActive@2x.png");
 }
-.active .icon-zoomIn-Bottom{
+.active.icon-zoomIn-Bottom{
     background-image: url("../img/icon/icon_plusActive@2x.png");
 }
-.active .icon-zoomOut-Bottom{
+.active.icon-zoomOut-Bottom{
     background-image: url("../img/icon/icon_minusActive@2x.png");
 }
 .icon-play{

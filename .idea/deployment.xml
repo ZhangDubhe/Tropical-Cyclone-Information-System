@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="local" createEmptyFolders="true" traceLevel="ERRORS" persistUploadOnCheckin="false">
     <serverData>
+      <paths name="Alicloud Server">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/typhoon" local="$PROJECT_DIR$" web="/typhoon" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="iis">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="linode-ubuntu-17.05">
         <serverdata>
           <mappings>
