@@ -10,6 +10,7 @@ function getUrl(provider, assembly, method) {
 }
 
 function getData() {
+    var data ;
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
     $.getJSON("src/php/queryYear.php",{url:url,queryYear:true},
         function(result) {
@@ -17,7 +18,6 @@ function getData() {
             $rows = $("#all-bar-view").find("td")
             var length = result.totalYear
             var array = [],
-                data = [],
                 year = 1981;
             for(var i=0; i<length;i++){
 
@@ -29,10 +29,12 @@ function getData() {
             }
 
             data = array;
-            console.log('\r',data);
+            console.log(data);
             drawYearBar(data);
+            addYearBarInfo(data);
         }
     );
+
 }
 
 function drawYearBar(data) {
@@ -42,7 +44,7 @@ function drawYearBar(data) {
     // #length*height;
     var margin = {top:10,left:0,right:5,bottom:10};
     // TODO: PADDING OF EACHOTHER
-    var xScale = d3.scale.linear().range([0,(width- margin.left - margin.right)/2]);    //X轴和Y轴
+    var xScale = d3.scale.linear().range([0,(width - margin.left - margin.right)/2]);    //X轴和Y轴
     var yScale = d3.scale.ordinal().rangeRoundBands([0,height],0);   //
     var svg = d3.select("#all-bar-view .svg-container")
         .append("svg")
@@ -86,12 +88,11 @@ function drawYearBar(data) {
 function queryEachYear() {
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
     var data = [];
-    $.getJSON("src/php/queryEachYearDetails.php",{url:url,queryYear:true},
+    $.getJSON("src/php/queryEachYearDetails.php",{url:url,queryYear:true,year:1981},
         function(result) {
             $rows = $("#all-bar-view").find("td")
             var length = result.totalYear,
-                data = [],
-                year = 1981;
+                data = []
 
 
             data = array;
@@ -105,13 +106,20 @@ function CenterArea(data) {
     var eachYearHeight = 20;
     // #length*height;
     var margin = {top:5,left:0,right:5,bottom:5};
-    data = queryEachYear()
-    drawOneYear(data)
-    //读取json传输的数据
-    createChart(data)
-    function drawOneYear(data) {
-
+    var year =1981;
+    for(var i;i<=0;i++){
+        year ++;
+        drawOneYear(year);
     }
+
+    function drawOneYear(year) {
+        data = queryEachYear()
+        //读取json传输的数据
+        createChart(data,yPosition)
+    }
+
+    createChart(data,yPosition)
+
     function createChart(data) {
         var symbol = [],
             charts = [],
@@ -316,6 +324,30 @@ function example() {
     }
 }
 
-getData();
 
-CenterArea();
+function addYearBarInfo(data) {
+
+    var $yearSelector = $("#dropdownYear").siblings("ul").find(".dropdown-inner>ul");
+    $yearSelector.html("");
+    for(var i = 0;i<30  ;i++) {
+
+        $yearSelector.append("<li>" +
+            "<a href=\"#\">"+ data[i].year +"<span class=\"li-right icon-check-tick\"></span> </a>" +
+            "</li>");
+
+    }
+    $().click(function () {
+        var year = ""
+        // TODO: click year to requir details of each year .
+        requryYearDetails(year)
+    });
+
+}
+
+function requryYearDetails(year) {
+
+}
+
+
+// CenterArea();
+getData()
