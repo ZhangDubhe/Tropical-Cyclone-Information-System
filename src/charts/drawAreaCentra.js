@@ -85,20 +85,6 @@ function drawYearBar(data) {
             return d.value;
         })
 }
-function queryEachYear() {
-    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
-    var data = [];
-    $.getJSON("src/php/queryEachYearDetails.php",{url:url,queryYear:true,year:1981},
-        function(result) {
-            $rows = $("#all-bar-view").find("td")
-            var length = result.totalYear,
-                data = []
-
-
-            data = array;
-        });
-    return data;
-}
 
 function CenterArea(data) {
     var width = $("#year-area-view").width(),
@@ -113,7 +99,7 @@ function CenterArea(data) {
     }
 
     function drawOneYear(year) {
-        data = queryEachYear()
+        data = queryEachYear(year)
         //读取json传输的数据
         createChart(data,yPosition)
     }
@@ -327,7 +313,7 @@ function example() {
 
 function addYearBarInfo(data) {
 
-    var $yearSelector = $("#dropdownYear").siblings("ul").find(".dropdown-inner>ul");
+    var $yearSelector = $("#dropdownYear").siblings("ul").find(".dropdown-inner ul");
     $yearSelector.html("");
     for(var i = 0;i<30  ;i++) {
 
@@ -336,18 +322,51 @@ function addYearBarInfo(data) {
             "</li>");
 
     }
-    $().click(function () {
-        var year = ""
+    $("#dropdownYear").siblings("ul").find(".li-right").click(function () {
+        var year = $(this).parent().text()
         // TODO: click year to requir details of each year .
-        requryYearDetails(year)
+        console.log(year)
+        queryEachYear(year)
     });
 
 }
 
-function requryYearDetails(year) {
+function queryEachYear(year) {
+    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
+    var data = [];
+    $.getJSON("src/php/queryEachYear.php",{url:url,queryYear:true,year:year},
+        function(result) {
+            $rows = $("#all-bar-view").find("td")
+            var length = result.totalYear,
+                data = result;
+            addYearDetails(data)
+            console.log("add afterL:",data)
+        });
+    console.log(data)
+    return data;
+}
+function addYearDetails(data) {
+    var $nameList = $("#dropdownName").siblings("ul").find(".dropdown-inner ul");
+    $nameList.html("");
+    console.log("add before:",data)
+    var length = length(data);
+    for(var i = 0;i<length ;i++) {
+        var name = "";
+        if(data[i].name == "-"){
+            name = data[i].ename}
+        else {
+            data[i].name
+        };
+
+        $nameList.append("<li>" +
+            "<a href=\"#\">"+ name +"<span class=\"li-right icon-check-tick\"></span> </a>" +
+            "</li>");
+    }
+
+
 
 }
 
-
 // CenterArea();
 getData()
+

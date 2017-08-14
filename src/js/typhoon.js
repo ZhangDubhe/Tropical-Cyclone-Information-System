@@ -1,23 +1,8 @@
 var lastTypoonSelectArry=new Array;
 var counthide = 1;
-var map, basePath,baseLayer,labelLayer, currfeauterLayer = L.featureGroup(), $lastNav, deDalutLn = L.latLng(30, 123), popDiv = L.popup(), islandLayer;
+var basePath,baseLayer,labelLayer, currfeauterLayer = L.featureGroup(), $lastNav, deDalutLn = L.latLng(30, 123), popDiv = L.popup(), islandLayer;
 $(function() {
-    map = L.map('mapid', {
-        zoomControl: false,
-        attributionControl: false,
-    }).setView(deDalutLn, 6);
 
-    baseLayer=L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
-        subdomains: ["1", "2", "3", "4"],
-        maxZoom: 18,
-        minZoom: 4
-    }).addTo(map);
-
-    labelLayer=L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}', {
-        subdomains: ["1", "2", "3", "4"],
-        maxZoom: 18,
-        minZoom: 4
-    }).addTo(map);
 
     $.ajaxSetup({
         type: "POST",
