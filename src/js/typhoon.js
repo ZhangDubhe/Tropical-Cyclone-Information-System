@@ -11,6 +11,7 @@ $(function() {
             alert("抱歉，系统异常！");
         }
     });
+    console.log("it works")
     var ss = L.control.coordinates({
         decimals: 4,
         decimalSeperator: ",",
@@ -19,11 +20,11 @@ $(function() {
         enableUserInput: false
     }).addTo(map);
 
-    $("#bgmap").hover(function(){
+/*    $("#bgmap").hover(function(){
         $("#bgmaplist").css("display","block");
     },function(){
         $("#bgmaplist").css("display","none");
-    })
+    })*/
 
     loadTyphoon();
 })
@@ -356,23 +357,21 @@ function removeSelectTypoon(id) {
 //获取指定台风具体信息
 function getTyphoonDetail(iscurr,sno){
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyphoonDetail");
-    $.ajax({
-        url: url,
-        data: { sno: sno },
-        dataType: 'json',
-        success: function (json) {
-            showTyphoonDetail(iscurr, json[0]);
-            drawTyphoon(json[0]);
-            lastTypoonSelectArry.push({'no':sno,'type':iscurr,'info':json[0]});
-            var $con,$title;
-            if (iscurr) {
-                $con= $("#currTypoonDetail");
-            }else{
-                $con= $("#historyTypoonDetail");
-            }
-            initeSelctTr(iscurr,true,json[0],$con);
+    var typhoonId = sno;
+    $.getJSON("src/php/queryTyphoonDetail.php",{url:url,queryId:typhoonId},function (json) {
+        // TODO: query in php
+        showTyphoonDetail(iscurr, json[0]);
+        drawTyphoon(json[0]);
+        lastTypoonSelectArry.push({'no':sno,'type':iscurr,'info':json[0]});
+        var $con,$title;
+        if (iscurr) {
+            $con= $("#currTypoonDetail");
+        }else{
+            $con= $("#historyTypoonDetail");
         }
+        initeSelctTr(iscurr,true,json[0],$con);
     })
+
 }
 
 //显示指定台风信息
@@ -436,12 +435,12 @@ function switchTyphoonnav3($selector) {
 function drawTyphoon(json) {
     var jsonArray=json.points;
     var nodeIco = L.icon({
-        iconUrl: "images/rotate.gif",
+        iconUrl: "src/img/rotate.gif",
         iconSize: [32, 32],
         iconAnchor: [17, 17]
     });
     var lastMarker = L.marker([], { icon: nodeIco });
-    var style={color: '#ff0000',weight:2,fillColor: "#ff8c00"};
+    var style={color: '#333333',weight:2,fillColor: "#ff8c00"};
     var level7Circle=L.circle([], 200,style);
     var level10Circle=L.circle([], 200,style);
     var level12Circle=L.circle([], 200,style);
@@ -474,7 +473,8 @@ function drawTyphoon(json) {
                 var lanArray = new Array();
                 lanArray.push([jsonArray[count - 1].latitude, jsonArray[count - 1].longitude]);
                 lanArray.push([currArray.latitude, currArray.longitude]);
-                polyline = L.polyline(lanArray, { color: '#960105', weight: 3 }).addTo(map).bringToBack();
+                var lingWeight = ( jsonArray.length - count)/jsonArray.length * 2 + 1
+                polyline = L.polyline(lanArray, { color: '#333333', weight: lingWeight }).addTo(map).bringToBack();
                 typhoonLayer.addLayer(polyline);
                 level7Circle.setLatLng(lat).setRadius(currArray.radius7*1000);
                 level10Circle.setLatLng(lat).setRadius(currArray.radius10*1000);
@@ -628,19 +628,19 @@ function createLegendTable() {
 function GetPointColor(speed) {
     var b;
     if(speed >=10.8 && speed < 17.1)
-        b = "#00D5CB";
+        b = "#f0dade"; // b = "#00D5CB"
     else if(speed >=17.1 && speed < 24.4)
-        b="#FCFA00";
+        b="#f6bfae"; // b= "#FCFA00";
     else if(speed >=24.4 && speed < 32.6)
-        b="#FDAE0D";
+        b="#fb9f9c"; // b= "#FDAE0D";
     else if(speed >=32.6 && speed < 41.4)
-        b="#FB3B00";
+        b="#f36078"; // b= "#FB3B00";
     else if(speed >=41.5 && speed < 50.9)
-        b="#FC4d80";
+        b= "#d71058"; // b= "#FC4d80";
     else if(speed >=50.9)
-        b = "#C2218E"
+        b = "#a70943"; // b = "#C2218E"
     else
-        b = "#000000"
+        b = "#000000"; // b = "#000000"
     return b
 }
 

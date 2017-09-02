@@ -27,9 +27,8 @@ function getData() {
                 year = year + 1;
 
             }
-
             data = array;
-            console.log(data);
+            // console.log(data);
             drawYearBar(data);
             addYearBarInfo(data);
         }
@@ -349,19 +348,28 @@ function addYearDetails(data) {
     var $nameList = $("#dropdownName").siblings("ul").find(".dropdown-inner ul");
     $nameList.html("");
     console.log("add before:",data)
-    var length = length(data);
+    var length = data.length;
     for(var i = 0;i<length ;i++) {
         var name = "";
-        if(data[i].name == "-"){
-            name = data[i].ename}
+        if(data[i].name == "-" && data[i].ename == "-"){
+            name = "unnamed"}
         else {
-            data[i].name
+            if(data[i].name == "-"){
+                name = data[i].ename}
+            else{
+                name = data[i].name}
         };
 
         $nameList.append("<li>" +
-            "<a href=\"#\">"+ name +"<span class=\"li-right icon-check-tick\"></span> </a>" +
+            "<a href=\"#\">"+ name +"<span ty-id='"+ data[i].tfbh +"' class=\"li-right icon-check-tick\"></span> </a>" +
             "</li>");
     }
+    $("#dropdownName").siblings("ul").find(".li-right").click(function () {
+        var tyId = $(this).attr("ty-id")
+    //    TODO: detail and path
+        console.log(tyId)
+        getTyphoonDetail(false, tyId)
+    });
 
 
 
