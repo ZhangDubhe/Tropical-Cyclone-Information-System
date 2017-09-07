@@ -358,18 +358,22 @@ function removeSelectTypoon(id) {
 function getTyphoonDetail(iscurr,sno){
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyphoonDetail");
     var typhoonId = sno;
+    var year = sno.substr(0,4);
+    url = "../../resource/data/" + year + "/" + typhoonId + ".json";
+
     $.getJSON("src/php/queryTyphoonDetail.php",{url:url,queryId:typhoonId},function (json) {
         // TODO: query in php
         showTyphoonDetail(iscurr, json[0]);
         drawTyphoon(json[0]);
         lastTypoonSelectArry.push({'no':sno,'type':iscurr,'info':json[0]});
-        var $con,$title;
-        if (iscurr) {
-            $con= $("#currTypoonDetail");
-        }else{
-            $con= $("#historyTypoonDetail");
-        }
-        initeSelctTr(iscurr,true,json[0],$con);
+        /*
+                 var $con,$title;
+               if (iscurr) {
+                    $con= $("#currTypoonDetail");
+                }else{
+                    $con= $("#historyTypoonDetail");
+                }
+                initeSelctTr(iscurr,true,json[0],$con);*/
     })
 
 }

@@ -333,13 +333,16 @@ function addYearBarInfo(data) {
 function queryEachYear(year) {
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
     var data = [];
+
+    url = "../../resource/data/year/" + parseInt(year)  + ".json";
+
     $.getJSON("src/php/queryEachYear.php",{url:url,queryYear:true,year:year},
         function(result) {
             $rows = $("#all-bar-view").find("td")
             var length = result.totalYear,
                 data = result;
             addYearDetails(data)
-            console.log("add afterL:",data)
+            console.log("add after:",data)
         });
     console.log(data)
     return data;
