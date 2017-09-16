@@ -260,10 +260,10 @@ header{
 }
 #chart-control{
     width: 100%;
-    height:60%;
+    height:auto;
     position: absolute;
-    top:0;
-    z-index: 30;
+    bottom:4rem;
+    z-index: 100;
 }
 #all-line-view{
     width: 100%;
@@ -286,6 +286,12 @@ header{
     height:100%;
     top:0;
     z-index: 100;
+}
+.normalTyphoon{
+    fill: rgba(255, 255, 255, 0.58);
+}
+.removedTyphoon{
+    fill: rgba(255, 68, 114, 0.58);
 }
 /* 背景网格 */
 

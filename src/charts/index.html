@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://bl.ocks.org/mbostock/raw/4060954/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Streamgraph</title>
+    <style>
+
+        button {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+
+        .normalTyphoon{
+            fill: rgba(255, 255, 255, 0.58);
+        }
+        .removedTyphoon{
+            fill: rgba(255, 68, 114, 0.58);
+        }
+    </style>
+</head>
+<body>
+    <div id="svg-container">
+
+    </div>
+
+<h1 id="typhoonName">Name</h1>
+<script src="../../components/d3/d3.js"></script>
+<script src="../../components/jquery/dist/jquery.js"></script>
+<script>
+    year = 1981;
+    for(var i=0; i <= 30; i++){
+
+        $("#svg-container").append("<svg id=\"container-"+ year +"\"  width=\"800\" height=\"20\" style=\"background-color: #0a0a0a\"></svg>");
+        year = year+1;
+    }
+</script>
+<script>
+
+
+
+
+
+    year = 1981;
+
+
+
+    drawChart(1981);
+    var i =0;
+    function drawChart(year) {
+        var container = d3.select("#container-"+year),
+            width = +container.attr("width"),
+            height = +container.attr("height"),
+            eachYearHeight = 20;
+
+        var url = "../../resource/data/typhoon/chart/" + year +".csv";
+        // path and chart should
+        d3.csv(url, type, function (data) {
+            var symbols = d3.nest()
+                .key(function(d) { return d.id; })
+                .entries(data);
+            // Compute the maximum price per symbol, needed for the y-domain.
+            // maxValue to store
+            symbols.forEach(function(s) {
+                s.maxValue = d3.max(s.values, function(d) { return d.I; });
+            });
+
+            var w = +width,
+                h = eachYearHeight-eachYearHeight/10;
+
+            var x = d3.scale.linear()
+                .range([0, width]);
+
+            var y = d3.scale.linear()
+                .range([ eachYearHeight, 0]);
+
+            var area = d3.svg.area()
+                .x(function(d) { return x(d.date); })
+                .y0(function(d) { return h-y(d.I)/2; })
+                .y1(function(d) { return y(d.I)/2; })
+                .interpolate('monotone');
+
+            x.domain([
+                d3.min(symbols, function (s) {
+                    return s.values[0].date;
+                }),
+                d3.max(symbols, function (s) {
+                    return s.values[s.values.length - 1].date;
+                })
+            ]);
+
+            var svg = container.append('g')
+                .attr("class","content")
+                .attr("id","group-"+ year);
+
+            var graphics = container.selectAll('g')
+                .data(symbols)
+                .enter().append('g')
+//                .attr('transform', 'translate(0,' + (eachYearHeight * (i+1) )+ ')')
+                .attr('class',"normalTyphoon")
+                .attr('id',(function (d) {
+                    return d.key;}))
+                .append('path')
+                .attr("class", "area")
+                .attr("class", function (d) {
+                    return d.replaceName
+                })
+                .attr("d", function (d) {
+                    y.domain([0, d.maxValue]);
+                    return area(d.values);
+                })
+                .attr('title',(function (d) {
+                    return d.key;}))
+                .on("mouseover",function (d) {
+                    $("#typhoonName").html(d.key)
+                });
+
+            if(year<2010){
+                i++;
+                console.log("This is ",i)
+                drawChart(year+1)
+            }
+            else{
+                return 0;
+            }
+
+            function multiple(single) {
+                var g = d3.select(this);
+                y.domain([0, d3.max(single, function(d) {
+                    return d.size; })]);
+                g.append("path")
+                    .attr("class", "area")
+                    .attr("d", area(single));
+                console.log("add area path -svg:\r",g);
+            }
+
+            function interpolate(points) {
+                // console.log(points);
+                var x0 = points[0][0], y0 = points[0][1], x1, y1, x2,
+                    path = [x0, ",", y0],
+                    i = 0,
+                    n = points.length;
+
+                while (++i < n) {
+                    x1 = points[i][0];
+                    y1 = points[i][1];
+                    x2 = (x0 + x1) / 2;
+                    path.push("C", x2, ",", y0, " ", x2, ",", y1, " ", x1, ",", y1);
+                    x0 = x1;
+                    y0 = y1;
+                }
+                return path.join("");
+            }
+        });
+    }
+    drawChart(1982)
+
+
+
+    function type(d) {
+        d.price = +d.price;
+        d.date = parseDate(d.date);
+        return d;
+    }
+    var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
+</script>
+</body></html>

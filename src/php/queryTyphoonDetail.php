@@ -22,10 +22,9 @@ if($queryId){
     $res = file_get_contents($dir);
 
 
-    $output = json_decode($res, true);
 //        $result["res"][$year]= $res;
 
 //        $result["year"][$year]= $year;
 //    curl_close($ch);
 }
-echo json_encode($output);
+echo $res;

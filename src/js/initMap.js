@@ -79,4 +79,7 @@ map = L.map('mapid', {
             map.addLayer(customBaselayer);
         }
     })
+    $(".icon-earth").click(function () {
+        map.setView()
+    })
 }))

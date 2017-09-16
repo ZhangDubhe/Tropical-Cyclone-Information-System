@@ -1,4 +1,5 @@
-var parseDate = d3.time.format("%b %Y").parse;
+// var parseDate = d3.time.format("%b %Y").parse;
+var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 var margin = {top: 8, right: 0, bottom: 2, left: 0},
     width = 960 - margin.left - margin.right,
     height = 70 - margin.top - margin.bottom,
@@ -85,33 +86,139 @@ function drawYearBar(data) {
         })
 }
 
-function CenterArea(data) {
-    var width = $("#year-area-view").width(),
-        height = $("#year-area-view table").height();
-    var eachYearHeight = 20;
-    // #length*height;
-    var margin = {top:5,left:0,right:5,bottom:5};
-    var year =1981;
-    for(var i;i<=0;i++){
-        year ++;
-        drawOneYear(year);
-    }
+function CenterArea() {
+    var container_width = $("#year-area-view").width(),
+        container_height = $("#year-area-view table").height();
+    console.log("table area : width:",width," height:",height)
+    var eachYearHeight = $(".tiny-div").height() + 2;
 
-    function drawOneYear(year) {
-        data = queryEachYear(year)
-        //读取json传输的数据
-        createChart(data,yPosition)
-    }
+    var init_year = 1981,
+        year = 1981;
 
-    createChart(data,yPosition)
+    var $svgContainer = $("#year-area-view .svg-container")
+
+
+
+
+    drawYearArea()
+    function drawYearArea() {
+        for(var i=0;i<=2;i++){
+            year = init_year + i;
+            $svgContainer.append("<svg id=\"container-"+ year +"\"  width='"+container_width+"' height='"+ eachYearHeight +"' ></svg>");
+
+            var container = d3.select("#container-"+year),
+                width = +container.attr("width"),
+                height = +container.attr("height");
+
+            var url = "resource/data/typhoon/chart/" + year +".csv";
+
+            d3.csv(url, type, function (data) {
+
+                var symbols = d3.nest()
+                    .key(function(d) { return d.id; })
+                    .entries(data);
+                // Compute the maximum price per symbol, needed for the y-domain.
+                // maxValue to store
+                symbols.forEach(function(s) {
+                    s.maxValue = d3.max(s.values, function(d) { return d.I; });
+                });
+
+                var w = +width,
+                    h = eachYearHeight-eachYearHeight/10;
+
+                var x = d3.scale.linear()
+                    .range([0, width]);
+
+                var y = d3.scale.linear()
+                    .range([ eachYearHeight, 0]);
+
+                var area = d3.svg.area()
+                    .x(function(d) { return x(d.date); })
+                    .y0(function(d) { return h-y(d.I)/2; })
+                    .y1(function(d) { return y(d.I)/2; })
+                    .interpolate('monotone');
+
+                x.domain([
+                    d3.min(symbols, function (s) {
+                        return s.values[0].date;
+                    }),
+                    d3.max(symbols, function (s) {
+                        return s.values[s.values.length - 1].date;
+                    })
+                ]);
+
+                var svg = container.append('g')
+                    .attr("class","content")
+                    .attr("id","group-"+ year);
+
+                var graphics = container.selectAll('g')
+                    .data(symbols)
+                    .enter().append('g')
+                    //                .attr('transform', 'translate(0,' + (eachYearHeight * (i+1) )+ ')')
+                    .attr('class',"normalTyphoon")
+                    .attr('id',(function (d) {
+                        return d.key;}))
+                    .append('path')
+                    .attr("class", "area")
+                    .attr("class", function (d) {
+                        return d.replaceName
+                    })
+                    .attr("d", function (d) {
+                        y.domain([0, d.maxValue]);
+                        return area(d.values);
+                    })
+                    .attr('title',(function (d) {
+                        return d.key;}))
+                    .on("mouseover",function (d) {
+                        $("#typhoonName").html(d.key)
+                    });
+
+
+
+                function multiple(single) {
+                    var g = d3.select(this);
+                    y.domain([0, d3.max(single, function(d) {
+                        return d.size; })]);
+                    g.append("path")
+                        .attr("class", "area")
+                        .attr("d", area(single));
+                    console.log("add area path -svg:\r",g);
+                }
+
+                function interpolate(points) {
+                    // console.log(points);
+                    var x0 = points[0][0], y0 = points[0][1], x1, y1, x2,
+                        path = [x0, ",", y0],
+                        i = 0,
+                        n = points.length;
+
+                    while (++i < n) {
+                        x1 = points[i][0];
+                        y1 = points[i][1];
+                        x2 = (x0 + x1) / 2;
+                        path.push("C", x2, ",", y0, " ", x2, ",", y1, " ", x1, ",", y1);
+                        x0 = x1;
+                        y0 = y1;
+                    }
+                    return path.join("");
+                }
+            });
+        }
+    }
 
     function createChart(data) {
+        // console.log(data)
         var symbol = [],
             charts = [],
             maxDataPoint = 0;
+        var container = d3.select("#container-"+year),
+            width = +container.attr("width"),
+            height = +container.attr("height");
+
+        YEAR = data[0].date.getFullYear();
+        var init_Height = (YEAR - 1981)*eachYearHeight;
         var data_length = data.length;
 
-        console.log(data);
         /*
 
          return lots of object with:
@@ -121,31 +228,37 @@ function CenterArea(data) {
          */
         // Nest data by symbol.
         var symbols = d3.nest()
-            .key(function(d) { return d.symbol; })
+            .key(function(d) { return d.id; })
             .entries(data);
         // Compute the maximum price per symbol, needed for the y-domain.
         // maxValue to store
         symbols.forEach(function(s) {
-            s.maxValue = d3.max(s.values, function(d) { return d.price; });
+            s.maxValue = d3.max(s.values, function(d) { return d.I; });
         });
 
 
 
         var w = +width,
-            h = (+height-20 - (+padding*(data.length-1))) / data.length;
-        console.log("width:",w," height:",h);
+            h = eachYearHeight-eachYearHeight/10;
+
+        console.log("eachYearHeight",eachYearHeight,"single height:",h);
         var x = d3.time.scale()
             .range([0, width]);
 
         var y = d3.scale.linear()
-            .range([height, 0]);
+            .range([ eachYearHeight, 0]);
 
         var area = d3.svg.area()
             .x(function(d) { return x(d.date); })
             .interpolate(interpolate)
-            .y0(function(d) { return h-y(d.price)/2; })
-            .y1(function(d) { return y(d.price)/2; });
+            // .interpolate("monotone")
+            .y0(function(d) { return h-y(d.I)/2; })
+            .y1(function(d) { return y(d.I)/2; });
 
+        var xAxis  = d3.svg.axis()
+            .scale(x)
+            .orient('middle')
+            .ticks(12)
 
         x.domain([
             d3.min(symbols, function (s) {
@@ -156,29 +269,59 @@ function CenterArea(data) {
             })
         ])
 
-        var svg = d3.select("#year-area-view .svg-container").selectAll("svg")
+        var svg = container.append('g')
+            .attr("class","content")
+            .attr("id","group-"+YEAR)
+
+
+        console.log(data)
+//
+/*        svg.append('g')
+            .attr("class","x axis")
+            .call(xAxis)
+            .style("fill","white")
+            .attr('transform', 'translate(0,' + (eachYearHeight/2 - 4.5) + ')')*/
+
+        var graphics = container.selectAll('g')
             .data(symbols)
-            .enter().append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .attr("class", "svg-control")
-            .style("top",height)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .enter().append('g')
+            .attr('class',"normalTyphoon")
+            .attr('id',(function (d) {
+                return d.key;}))
+            .append('path')
+            .attr("class", "area")
+            .attr("class", function (d) {
+                return d.replaceName
+            })
+            // .attr("d",area)
+            .attr("d", function (d) {
+                y.domain([0, d.maxValue]);
+                return area(d.values);
+            })
+            .attr('title',(function (d) {
+                return d.key;}))
+            .on("mouseover",function () {
+                d3.select(this).transition().duration(500).attr("fill", "white")
+            });
 
 
-        //area
+
+        /*//area
         svg.append("path")
             .attr("class", "area")
+            .attr("class", "normalTyphoon")
+            .attr("class", function (d) {
+                return d.replaceName
+            })
             .attr("transform", function(d,i) {
-                return "translate(0," + ((h+padding)*i) + ")"
+                return "translate(0," + eachYearHeight + ")"
             })
             .attr("d", function (d) {
                 y.domain([0, d.maxValue]);
                 return area(d.values);
             }).attr('title',(function (d) {
-            return d.key;}));
-        console.log("add area path - svg：\r", svg);
+            return d.key;}));*/
+        // console.log("add area path - svg：\r", svg);
 
 
         function multiple(single) {
@@ -196,7 +339,7 @@ function CenterArea(data) {
             console.log("add line path - svg：\r", g);*/
         }
         function interpolate(points) {
-            console.log(points);
+            // console.log(points);
             var x0 = points[0][0], y0 = points[0][1], x1, y1, x2,
                 path = [x0, ",", y0],
                 i = 0,
@@ -211,8 +354,9 @@ function CenterArea(data) {
         }
     }
     function type(d) {
-        d.price = +d.price;
+        d.I = d.I;
         d.date = parseDate(d.date);
+        // console.log(d)
         return d;
     }
 }
@@ -331,26 +475,24 @@ function addYearBarInfo(data) {
 }
 
 function queryEachYear(year) {
-    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
     var data = [];
 
-    url = "../../resource/data/year/" + parseInt(year)  + ".json";
+    console.log("queryEachYear input:", year)
+    var url = "../../resource/data/year/" + parseInt(year)  + ".json";
 
     $.getJSON("src/php/queryEachYear.php",{url:url,queryYear:true,year:year},
         function(result) {
             $rows = $("#all-bar-view").find("td")
-            var length = result.totalYear,
-                data = result;
+            var length = result.totalYear;
+            data = result;
             addYearDetails(data)
-            console.log("add after:",data)
+            console.log("queryEachYear output:", data)
         });
-    console.log(data)
-    return data;
 }
 function addYearDetails(data) {
     var $nameList = $("#dropdownName").siblings("ul").find(".dropdown-inner ul");
     $nameList.html("");
-    console.log("add before:",data)
+    console.log("add Year Details into the selector")
     var length = data.length;
     for(var i = 0;i<length ;i++) {
         var name = "";
@@ -378,6 +520,6 @@ function addYearDetails(data) {
 
 }
 
-// CenterArea();
+CenterArea();
 getData()
 

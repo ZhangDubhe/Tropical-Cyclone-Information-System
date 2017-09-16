@@ -164,7 +164,7 @@ var flag = 1;
 
 }));
 var totalYear = 30;
-var singleHeight = 30;
+var singleHeight = 40;
 
 var $yearAll = $("#year-area-view");
 var $barAll = $("#all-bar-view");
@@ -196,9 +196,9 @@ function initTable() {
         var tableCol_down = "<tr>"
         var monthColBar = ""
         for(var col=0;col<12;col++){
-            tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' >"+row+","+col+"</td>"
-            tableCol_down += "<td  col='"+col+"' class='tiny-div' >"+col+"</td>";
-            monthColBar += "<div  col='"+col+"' class='tiny-div' ></div>";
+            tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' ></td>"
+            tableCol_down += "<td  col='"+col+"' class='tiny-div' ></td>";
+            monthColBar += "<div  col='" +col+"' class='tiny-div' ></div>";
         }
         tableRow += "</tr>";
         tableCol_down += "</tr>"
