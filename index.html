@@ -175,8 +175,8 @@
         <div id="chart-container" class="chart-bg ">
             <div class="chart-up chart-container" >
                 <div id="year-area-view" >
-                    <table></table>
                     <div class="svg-container"></div>
+                    <table ></table>
                 </div>
                 <div id="all-bar-view" >
                     <table></table>
@@ -249,7 +249,7 @@
         </div>
         <div class="control-group-bottom">
             <span class="icon icon-setting" ></span>
-            <span class="icon icon-stop-Bottom"></span>
+            <span class="icon icon-stop-Bottom" id="removeNameTyphoon"></span>
             <span class="icon icon-zoomOut-Bottom"></span>
             <span class="icon icon-zoomIn-Bottom"></span>
         </div>
@@ -307,8 +307,27 @@
 <script>
     $(window).resize(
         function () {
-            location.reload()
+            resizeActive()
         }
-    )
+    );
+    addHoverEvent();
+    function addHoverEvent() {
+        var $svg = $(".svg-container>svg");
+        for(var i=0; i< totalYear;i++){
+            var theNumber = i;
+            var rowSvg = $svg[theNumber];
+            $(rowSvg).mousemove(function (e) {
+//                $(".tiny-div").removeClass("hover");
+                var nowYear = $(this).attr("id").split("-")[1];
+//                hoverYear(nowYear);
+
+                var xx = e.originalEvent.layerX;
+                var theColNum = parseInt(xx/singleWidth);
+//                $(".tiny-div[col='"+theColNum+"']").addClass("hover");
+            }).mouseout(function () {
+//                $(".tiny-div").removeClass("hover");
+            })
+        }
+    }
 </script>
 </html>

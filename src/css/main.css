@@ -259,10 +259,12 @@ header{
     float: left;
 }
 #chart-control{
+    background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
-    height:auto;
+    height: auto;
     position: absolute;
-    bottom:4rem;
+    bottom:3rem;
+    padding: 4px;
     z-index: 100;
 }
 #all-line-view{
@@ -277,6 +279,7 @@ header{
 .chart-container table{
     width:100%;
     height: 100%;
+
     position: absolute;
     /* top:0; */
     z-index: 20;
@@ -284,8 +287,18 @@ header{
 .chart-container .svg-container{
     width:100%;
     height:100%;
+
+    position: absolute;
     top:0;
     z-index: 100;
+}
+.chart-container table.upper{
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    /* top:0; */
+    z-index: 120;
 }
 .normalTyphoon{
     fill: rgba(255, 255, 255, 0.58);
@@ -299,7 +312,18 @@ header{
     width: 100%;
     height: 100%;
     background-color:transparent;
-    border: 0.5px #575757 solid;
+    border-left: 0.5px #575757 solid;
+    border-right: 0.5px #575757 solid;
+    float:left;
+    pointer-events: none;
+}
+
+.upper .tiny-div{
+    width: 100%;
+    height: 100%;
+    background-color:transparent;
+    border-left: 0.5px #575757 solid;
+    border-right: 0.5px #575757 solid;
     float:left;
 }
 td.hover{
@@ -359,7 +383,7 @@ td.hover-deep{
 }
 .nav-open{
     left: 0;
-    box-shadow: 1px 1px 5px #777;
+    /*box-shadow: 1px 1px 5px #777;*/
 }
 .toggle-btn, .open-btn{
     width:40%;

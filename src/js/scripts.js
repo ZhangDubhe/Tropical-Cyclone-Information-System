@@ -15,6 +15,18 @@ var each_typhoon_timeStamp = {
 };
 
 var flag = 1;
+var totalYear = 30,
+    initYear = 1981;
+var singleHeight = 40;
+var singleWidth;
+var $yearAll = $("#year-area-view");
+var $barAll = $("#all-bar-view");
+var $lineDay = $("#all-line-view");
+var $yearScroll = $(".year-scrollbar");
+var $monthScroll = $(".month-scrollbar");
+
+
+
 
 ($(function () {
     $("#check").change(function () {
@@ -38,7 +50,7 @@ var flag = 1;
     $('.chart-container').delegate('path[class="area"]','click',function(){
         console.log("path",$(this).length);
         var text = $(this).attr("title");
-        layer.msg(text);
+        getTyphoonDetail(true, text);
     })
     $(".icon-menu").click(function () {
         var navBar = $("nav");
@@ -85,12 +97,22 @@ var flag = 1;
         $(".map-control-container").hide()
 
     })
-    $("#chart-control").find(".icon").mousedown(function () {
+    $("#chart-control").find(".icon").not("#removeNameTyphoon").mousedown(function () {
         $(this).addClass("active");
     }).mouseup(function () {
         $(this).removeClass("active");
     })
-    //地图控件
+
+    $('#removeNameTyphoon').click(function () {
+        // changeColorTip
+        if($(this).hasClass("active")){
+            $(".removedTyphoon").attr("fill","rgba(255, 68, 114, 0.58)")
+        }
+        else{
+            $(".removedTyphoon").attr("fill","rgba(255, 255, 255, 0.58)")
+        }
+    })
+
     $('.map-control-container').find(".icon").click(function () {
         console.log("if active:",$(this).parent().hasClass("active") )
         if($(this).parent().hasClass("active") ){
@@ -163,15 +185,7 @@ var flag = 1;
 
 
 }));
-var totalYear = 30;
-var singleHeight = 40;
 
-var $yearAll = $("#year-area-view");
-var $barAll = $("#all-bar-view");
-var $lineDay = $("#all-line-view");
-var $yearScroll = $(".year-scrollbar");
-var $monthScroll = $(".month-scrollbar");
-initTable()
 
 $(".tiny-div").hover(function () {
     $(this).addClass("hover-deep");
@@ -189,6 +203,7 @@ $(".tiny-div").hover(function () {
     $(".tiny-div[row='"+_row+"']").removeClass("hover");
     $(".tiny-div[col='"+_col+"']").removeClass("hover")
 })
+initTable()
 
 function initTable() {
     for(var row=0;row < totalYear;row++){
@@ -213,8 +228,8 @@ function initTable() {
 
     var divWidth = $yearAll.width(),
         divheight = $yearAll.height(),
-        singleBarHeight = divheight/totalYear,
-        singleWidth = divWidth/12 ;
+        singleBarHeight = divheight/totalYear;
+    singleWidth = divWidth/12 ;
     $("#year-area-view").find(".tiny-div").css({
         "width":singleWidth,
         "height":singleHeight
@@ -259,6 +274,7 @@ function zoomToOrigin() {
     setTimeout(layer.msg("恢复原有比例"),2000)
 }
 function clearPath() {
+
     setTimeout(layer.msg("清除路径"),2000)
 }
 function screenShot() {
@@ -269,4 +285,13 @@ function share() {
 }
 function download() {
 
+}
+
+function resizeActive() {
+    location.reload()
+
+}
+function hoverYear(nowYear) {
+    var yearIndex = nowYear - initYear;
+    $(".tiny-div[row='"+ yearIndex  +"']").addClass("hover");
 }
