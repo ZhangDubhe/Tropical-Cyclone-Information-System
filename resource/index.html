@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hide{
+            display: none!important;
+        }
+        .pagination{
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+        .pagination li{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            overflow: hidden;
+            line-height: 30px;
+            margin: 0 5px 0 0;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #00bc9b;
+            color: #00bc9b;
+            cursor: pointer;
+        }
+        .pagination li.current,
+        .pagination li:hover{
+            background: #00bc9b;
+            color: #ffffff;
+        }
+        .demo {
+            margin: 10px 0;
+            padding: 10px;
+            background: #eeeeee;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<ul class="pagination" id="jsPagination">
+    <li>首页</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li>末页</li>
+</ul>
+
+<div class="demo">
+    <div>(Demo1) total: 10，current: 4</div>
+    <ul class="pagination">
+        <li>首页</li>
+        <li>2</li>
+        <li>3</li>
+        <li class="current">4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>末页</li>
+    </ul>
+</div>
+
+<div class="demo">
+    <div>(Demo2) total: 0，current: 0</div>
+    <ul class="pagination hide">
+        <li>首页</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li>末页</li>
+    </ul>
+</div>
+
+<div class="demo">
+    <div>(Demo3) total: 3，current: 2</div>
+    <ul class="pagination">
+        <li class="hide">首页</li>
+        <li>1</li>
+        <li class="current">2</li>
+        <li>3</li>
+        <li class="hide"></li>
+        <li class="hide"></li>
+        <li class="hide">末页</li>
+    </ul>
+</div>
+
+<div class="demo">
+    <div>(Demo4) total: 10，current: 2</div>
+    <ul class="pagination">
+        <li class="hide">首页</li>
+        <li>1</li>
+        <li class="current">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>末页</li>
+    </ul>
+</div>
+
+<div class="demo">
+    <div>(Demo5) total: 10，current: 9</div>
+    <ul class="pagination">
+        <li>首页</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li class="current">9</li>
+        <li>10</li>
+        <li class="hide">末页</li>
+    </ul>
+</div>
+
+
+<script>
+    function pagination(total, current) {
+        var elem = document.getElementById("jsPagination");
+
+        if(total  = 0){
+
+            while(elem.hasChildNodes()) //当elem下还存在子节点时 循环继续
+            {
+                elem.removeChild(elem.firstChild);
+            }
+        }
+        else if(total <= 5){
+            elem.removeChild(elem.firstChild);
+            elem.removeChild(elem.lastChild);
+
+            for(var i = 1 ; i<=5; i++){
+                if(i <= total){
+                    elem[i].innerText = i;
+                }
+                else{
+                    elem.removeChild(elem[i])
+                }
+            }
+        }
+        else{
+
+        }
+
+
+    }
+    pagination(3,1)
+</script>
+</body>
+</html>

@@ -424,7 +424,48 @@ function addYearDetails(data) {
 
 
 }
+function dayFrequence(){
+    var $container = $("#all-line-view .svg-container"),
+        width = $container.width(),
+        height = $container.height(),
+        paddingTop = 10,
+        chartHeight = height - paddingTop;
 
+    $container.append("<svg id='yearFreqsChart'  width='"+ width +"' height='"+ height +"'></svg>");
+
+    var svg = d3.select("#yearFreqsChart")
+        .append("g")
+        .attr("transform","translate(0,"+paddingTop+")");
+
+
+    d3.csv("resource/data/Dfrequence.csv",function (data) {
+        console.log(data)
+
+        var x = d3.scale.linear()
+            .domain(d3.extent(data, function(d) {
+                return d.Day;
+            }))
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .domain([0,d3.max(data, function (d) {
+                return d.Freq
+            })])
+            .range([ chartHeight, 0]);
+
+        var line_generator = d3.svg.line()//d3中绘制曲线的函数
+            .x(function(d){return x(d.Day);})//曲线中x的值
+            .y(function(d){return y(d.Freq);})//曲线中y的值
+            .interpolate("cardinal")//把曲线设置光滑
+
+        svg.append("path")
+            .attr("stroke","#fff")
+            .attr("d", line_generator(data))
+
+    })
+
+}
 CenterArea();
-getData()
+getData();
+dayFrequence()
 
