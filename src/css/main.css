@@ -305,7 +305,7 @@ header{
 #all-line-view>div{
     width: 100%;
     display:block;
-    padding-left: 48px;
+    padding-left: 50px;
 }
 .white-chart{
     fill: rgba(255, 255, 255, 0.58);
@@ -328,7 +328,7 @@ header{
     pointer-events: none;
 }
 .tick>text{
-    fill:#575757;
+    fill:#d0d0d0;
 
 }
 .upper .tiny-div{

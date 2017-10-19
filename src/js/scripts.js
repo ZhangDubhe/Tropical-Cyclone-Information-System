@@ -207,11 +207,18 @@ initTable()
 
 function initTable() {
     for(var row=0;row < totalYear;row++){
+
         var tableRow = "<tr>";
         var tableCol_down = "<tr>"
         var monthColBar = ""
         for(var col=0;col<12;col++){
-            tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' ></td>"
+            if(col == 0){
+                tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' ><p style='position:relative;    left: -40px;top: 10px;color:#d0d0d0'>"+(initYear+row)+"</p></td>"
+            }
+            else{
+                tableRow += "<td row='"+row+"' col='"+col+"' class='tiny-div' ></td>"
+            }
+
             tableCol_down += "<td  col='"+col+"' class='tiny-div' ></td>";
             monthColBar += "<div  col='" +col+"' class='tiny-div' ></div>";
         }

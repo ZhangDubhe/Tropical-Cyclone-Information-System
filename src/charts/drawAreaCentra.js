@@ -126,9 +126,9 @@ function CenterArea() {
                 .entries(data);
             // Compute the maximum price per symbol, needed for the y-domain.
             // maxValue to store
-            symbols.forEach(function(s) {
+         /*   symbols.forEach(function(s) {
                 s.maxValue = d3.max(s.values, function(d) { return d.I; });
-            });
+            });*/
 
             var w = +width,
                 h = + (eachYearHeight - (padding.top + padding.bottom));
@@ -196,7 +196,7 @@ function CenterArea() {
                 .append('path')
                 .attr("class", "area")
                 .attr("d", function (d) {
-                    y.domain([0, d.maxValue]);
+                    y.domain([0, 6]);
                     return area(d.values);
                 })
                 .attr('title',(function (d) {
