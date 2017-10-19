@@ -89,7 +89,9 @@ function drawYearBar(data) {
 function CenterArea() {
     var container_width = $("#year-area-view").width(),
         container_height = $("#year-area-view table").height(),
-        eachYearHeight = $(".tiny-div").height()   ;
+        eachYearHeight = $(".tiny-div").height(),
+        paddingLeft = 50,
+        container_width = container_width - paddingLeft;
 
 
     console.log("table area : width:",container_width," height:",eachYearHeight)
@@ -200,7 +202,25 @@ function CenterArea() {
                 .attr('title',(function (d) {
                     return d.key;}))
                 .on("mouseover",function (d) {
-                    $("#typhoonName").html(d.key)
+                    $("#dropdownName").html(d.key);
+                    console.log(d,this)
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("stroke","#fff")
+                        .attr("stroke-width","3")
+                })
+                .on("mouseout",function (d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("stroke","none")
+                })
+                .on("click",function(d){
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("fill","#fff")
                 });
 
             if(year<(init_year+yearNum-1)){
@@ -426,32 +446,38 @@ function addYearDetails(data) {
 }
 function dayFrequence(){
     var $container = $("#all-line-view .svg-container"),
-        width = $container.width(),
+        width = $("#year-area-view").width(),
         height = $container.height(),
+        paddingLeft = 50,
         paddingTop = 10,
-        chartHeight = height - paddingTop;
+        paddingBottom = 10;
+        chartHeight = height - paddingTop - paddingBottom;
 
     $container.append("<svg id='yearFreqsChart'  width='"+ width +"' height='"+ height +"'></svg>");
 
     var svg = d3.select("#yearFreqsChart")
         .append("g")
-        .attr("transform","translate(0,"+paddingTop+")");
+        .attr("transform","translate("+ 0+","+paddingTop+")");
 
-
+    width = width - paddingLeft;
     d3.csv("resource/data/Dfrequence.csv",function (data) {
+        console.log(width)
         console.log(data)
 
         var x = d3.scale.linear()
-            .domain(d3.extent(data, function(d) {
-                return d.Day;
-            }))
+            .domain([0, 365])
             .range([0, width]);
-
+        console.log(d3.max(data, function (d) {  return d.Freq }))
         var y = d3.scale.linear()
-            .domain([0,d3.max(data, function (d) {
-                return d.Freq
-            })])
+            .domain([0,30])
+            //
             .range([ chartHeight, 0]);
+        // todo: 宽不够，高度默认
+
+        yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(3);
 
         var line_generator = d3.svg.line()//d3中绘制曲线的函数
             .x(function(d){return x(d.Day);})//曲线中x的值
@@ -460,9 +486,25 @@ function dayFrequence(){
 
         svg.append("path")
             .attr("stroke","#fff")
+            .attr("fill","transparent")
             .attr("d", line_generator(data))
 
+        svg.append("g")
+            .attr("class","y axis")
+            .attr("stroke","#575757")
+            .attr("fill","transparent")
+            .attr("transform", "translate("+width+","+0+")")
+            .call(yAxis)
+
+        svg.append('path')
+            .attr("class","line")
+            .attr("width", width)
+            .attr("stroke-width", 2)
+            .attr("stroke", "#575757")
+            .attr("d","M0,1V0H"+ width +"V2")
+            .attr('transform', 'translate(0,' + (chartHeight) + ')')
     })
+
 
 }
 CenterArea();

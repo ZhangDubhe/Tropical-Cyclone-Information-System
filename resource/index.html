@@ -119,7 +119,7 @@
 <script>
     function pagination(total, current) {
         var elem = document.getElementById("jsPagination");
-
+        console.log(elem)
         if(total  = 0){
 
             while(elem.hasChildNodes()) //当elem下还存在子节点时 循环继续
@@ -133,7 +133,8 @@
 
             for(var i = 1 ; i<=5; i++){
                 if(i <= total){
-                    elem[i].innerText = i;
+                    elem[i].innerHtml = i;
+                    console.log(i)
                 }
                 else{
                     elem.removeChild(elem[i])

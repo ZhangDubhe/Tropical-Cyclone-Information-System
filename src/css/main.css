@@ -300,6 +300,13 @@ header{
     /* top:0; */
     z-index: 120;
 }
+#year-area-view>table, #year-area-view>div,
+#all-line-view>table,
+#all-line-view>div{
+    width: 100%;
+    display:block;
+    padding-left: 48px;
+}
 .white-chart{
     fill: rgba(255, 255, 255, 0.58);
 }
@@ -320,7 +327,10 @@ header{
     float:left;
     pointer-events: none;
 }
+.tick>text{
+    fill:#575757;
 
+}
 .upper .tiny-div{
     width: 100%;
     height: 100%;

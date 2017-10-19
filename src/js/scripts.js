@@ -227,6 +227,8 @@ function initTable() {
     $lineDay.children("table").append(tableCol_down)
 
     var divWidth = $yearAll.width(),
+        padding_left = 50,
+        divWidth = divWidth - padding_left,
         divheight = $yearAll.height(),
         singleBarHeight = divheight/totalYear;
     singleWidth = divWidth/12 ;
