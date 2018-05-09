@@ -106,8 +106,7 @@ html,body{
 }
 
 .remove-name {
-    fill: #E73F5C;
-!important;
+    fill: #E73F5C !important;
 }
 
 .svg-control {

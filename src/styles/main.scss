@@ -1,0 +1,808 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+*{
+    font-size: 62.5%;
+}
+html {
+    color: #222;
+    font-size: 1.5rem;
+    line-height: 1.4;
+}
+body {
+    font-size: 1.5rem;
+    padding: 0;
+    background-color: lightgrey;
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+/*
+ * Remove padding and margin from bootstrap
+
+ *
+ */
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
+    background-color: transparent!important;
+    outline:none!important;
+    color:#fff!important;
+    border-bottom: 1px solid!important;
+}
+
+.container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+    padding: 0;
+    margin: 0;
+}
+ul, li{
+    list-style: none;
+}
+nav {
+    background-color: transparent;
+}
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+:root{
+    --main-color: #2B79B1;
+    --sub-color: #327CD0;
+    --head-color:#1f69b0;
+    --active-color:#29a4e8;
+    --dent: 1rem;
+}
+html,body{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    overflow: hidden;
+}
+.float-right{
+    float: right;
+}
+.float-left{
+    float: left;
+}
+.main{
+    margin-top:-2rem;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+}
+.main>div{
+    width: 100%;
+    height: 100%;
+}
+header{
+    width: 100%;
+    height: 2rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: center;
+    overflow: hidden;
+}
+/*主要布局*/
+.map-view {
+    display: block;
+    z-index: 1;
+}
+
+.table-view {
+    display: block;
+
+    z-index: 50;
+    position: relative;
+    top:-100%;
+    color: #ffffff;
+}
+
+.wrap-div-right{
+    height: 100%;
+    width:2.5rem;
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 100;
+    background-color: white;
+
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+}
+.wrap-div-down{
+    height: 1.8rem;
+    width:100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+/*地图*/
+#map{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+/*表格*/
+
+.chart-bg{
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.chart-up{
+    height: 90%;
+    width: 100%;
+    float: left;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 50;
+}
+.chart-down{
+    height: 13%;
+    width: 100%;
+    float: left;
+    z-index: 60;
+    position: relative;
+}
+#year-area-view{
+    width: 94%;
+    height: 100%;
+    float: left;
+    /*background-color: #999;*/
+}
+#all-bar-view{
+    width: 6%;
+    height: 100%;
+    float: left;
+}
+#chart-control{
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom:3rem;
+    padding: 4px;
+    z-index: 100;
+}
+#all-line-view{
+    width: 100%;
+    height: 80%;
+    top:0;
+}
+/* 背景网格和svg图的叠加问题 */
+.chart-container{
+    position: relative;
+}
+.chart-container table{
+    width:100%;
+    height: 100%;
+
+    position: absolute;
+    /* top:0; */
+    z-index: 20;
+}
+.chart-container .svg-container{
+    width:100%;
+    height:100%;
+
+    position: absolute;
+    top:0;
+    z-index: 100;
+}
+.chart-container table.upper{
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    /* top:0; */
+    z-index: 120;
+}
+#year-area-view>table, #year-area-view>div,
+#all-line-view>table,
+#all-line-view>div{
+    width: 100%;
+    display:block;
+    padding-left: 50px;
+}
+.white-chart{
+    fill: rgba(255, 255, 255, 0.58);
+}
+.normalTyphoon{
+    fill: rgba(255, 255, 255, 0.58);
+}
+.removedTyphoon{
+    fill: rgba(255, 68, 114, 0.58);
+}
+/* 背景网格 */
+
+.tiny-div{
+    width: 100%;
+    height: 100%;
+    background-color:transparent;
+    border-left: 0.5px #575757 solid;
+    border-right: 0.5px #575757 solid;
+    float:left;
+    pointer-events: none;
+}
+.tick>text{
+    fill:#d0d0d0;
+
+}
+.upper .tiny-div{
+    width: 100%;
+    height: 100%;
+    background-color:transparent;
+    border-left: 0.5px #575757 solid;
+    border-right: 0.5px #575757 solid;
+    float:left;
+}
+td.hover{
+    background-color: rgba(180, 39, 39, 0.3);
+
+}
+td.hover-deep{
+    background-color: rgba(255, 51, 51, 0.6);
+}
+
+/*兼有控件*/
+.scrollbar{
+    background-color: #929292;
+    overflow: hidden;
+    z-index: 120;
+    display: block;
+    border-radius: 0.15rem;
+}
+.scrollbar>div{
+    border: none;
+}
+.scrollbar .hover{
+    border: 1px solid #929292;
+    border-radius: 0.15rem;
+    background-color: rgb(34, 34, 34);
+}
+.scrollbar .hover-deep{
+    background-color: rgb(61, 61, 61);
+}
+.year-scrollbar{
+    height: 89%;
+    width: 0.25rem;
+    margin-left: 1.2rem;
+}
+.month-scrollbar{
+    height: 0.25rem;
+    width: 94%;
+    bottom:0;
+    margin-top:0.9rem;
+}
+/*侧边打开栏*/
+.main>nav{
+    width: 5rem;
+    height: 100vh;
+
+    z-index: 100;
+
+    background-color: white;
+    position: fixed;
+    top: 0;
+    color: #777777;
+
+    transition-duration: 0.3s;
+}
+.nav-close{
+    left: -4.5em;
+}
+.nav-open{
+    left: 0;
+    /*box-shadow: 1px 1px 5px #777;*/
+}
+.toggle-btn, .open-btn{
+    width:40%;
+    /**
+     * 居中 */
+    height: 10rem;
+    position: relative;
+    top: 50%;
+    margin-top: -5.5rem;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    float: left;
+    margin-left:10%;
+}
+.open-btn>span{
+    margin-top: 2.5rem;
+}
+.toggle-btn>li{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+
+/*地图页控件*/
+
+.map-control-container{
+    position: fixed;
+    top:2rem;
+    left: 50%;
+    margin-left: -15rem;
+    width: 32rem;
+
+    z-index: 10;
+    text-align: center;
+    line-break: normal;
+}
+.map-control-container ul{
+    display: block;
+    float: left;
+    padding:0;
+    margin-right:0.5rem;
+}
+
+.control-group li{
+    float: left;
+}
+/* 活动开窗 */
+.map-control-box{
+    display: none;
+
+    height: 5rem;
+
+    background-color:rgba(0, 0, 0, 0.8);
+
+    margin-top:2rem;
+    margin-right: 0.5rem;
+
+    padding-top:1rem;
+    padding-bottom:1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    color:white;
+    /*font-size: ;*/
+}
+.box-add-height{
+    height: 7rem;
+}
+.map-control-box div{
+    float: left;
+    text-align: left;
+    margin-left:0.5rem;
+    height: auto;
+}
+.map-control-box>div>img{
+    border:1px solid rgba(0, 0, 0, 0.16);
+    width: 3.5rem;
+    padding: 0;
+    margin-bottom: 0.2rem;
+}
+.map-control-box>div>img.active{
+    border:1px solid #ff3853;
+}
+.small{
+    font-size: 0.2rem!important;
+    line-height: 1;
+}
+.map-control-box hr{
+    width: 100%;
+    float: left;
+    margin: 0;
+}
+svg#small-player-line{
+    height: 1rem;
+}
+.month-span{
+    width: 2rem;
+    height: 1.4rem;
+    display: block;
+    float: left;
+    line-height: 1.4rem;
+    text-align: center;
+}
+.month-span:hover, .month-span.active{
+    background-color: #ff3853;
+}
+/*切换底图*/
+
+
+
+/*生命史图控件*/
+
+.chart-container::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+.chart-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.75);
+    /*rgba(0,0,0,.4)*/
+}
+.chart-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #333;
+}
+.control-group-bottom {
+    width: 8rem;
+    height: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+    background-color: #fff;
+    /* float: left; */
+    border-radius: 2rem;
+}
+.control-group-bottom span.icon {
+    float: left;
+    margin-top: -0.3rem;
+}
+.dropup{
+    margin-left: 10px;
+}
+.dropdown-menu{
+    min-width: 3.6rem;
+    border-radius: 0;
+}
+.dropdown-menu>.check-li {
+    display: block;
+    height: 1rem;
+    width: 100%;
+    line-height: 1rem;
+    padding: 0px;
+    padding-left: 10px;
+    color: #000;
+    position: relative;
+}
+.dropdown-inner{
+    width: 100%;
+    height: 7rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.dropdown-inner ul, .dropdown-inner li{
+    width:100%;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0;
+    padding-left: 5px;
+    position: relative;
+}
+.dropdown-inner li:hover{
+    background-color: #EED8DC;
+}
+.dropdown-inner a{
+    width: 100%;
+    text-decoration: none;
+    color:#666767;
+
+}
+
+.dropdown-inner::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+.dropdown-inner::-webkit-scrollbar-thumb {
+    /*border-radius: 10px;*/
+    background-color: rgba(83, 83, 83, 0.75);
+    /*rgba(0,0,0,.4)*/
+}
+.dropdown-inner::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+button.dropdown-bottomControl {
+    background-color: transparent;
+    color: white;
+    border: none;
+    height: 2rem;
+    width:3.6rem;
+    line-height: 1;
+    border-bottom: 1px solid;
+    border-radius: 0;
+}
+button.dropdown-bottomControl:hover,button.dropdown-bottomControl:focus,button:active,button:visited{
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+}
+
+span.icon-small.icon-check-circle {
+    display: inline-block;
+    position: relative;
+    left:-4px;
+    /*left:4px;*/
+}
+.active span.icon-small.icon-check-circle{
+    left:4px;
+}
+.li-right {
+    position: absolute;
+    right:10px;
+    top:0;
+    height: 1rem;
+    width: 1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* helper */
+
+
+
+
+
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+
+#chart-control>span, #chart-control form, #chart-control div {
+    float: left;
+}
+
+
+
+
+
+text.bar-text {
+    font-size: 0.54rem;
+    fill: white;
+}

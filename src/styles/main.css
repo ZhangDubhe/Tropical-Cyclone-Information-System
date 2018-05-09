@@ -30,10 +30,10 @@ body {
  */
 
 .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus{
-    background-color: transparent;!important;
-    outline:none;!important;
-    color:#fff;!important;
-    border-bottom: 1px solid;!important;
+    background-color: transparent!important;
+    outline:none!important;
+    color:#fff!important;
+    border-bottom: 1px solid!important;
 }
 
 .container {
@@ -484,7 +484,7 @@ td.hover-deep{
     border:1px solid #ff3853;
 }
 .small{
-    font-size: 0.2rem;!important;
+    font-size: 0.2rem!important;
     line-height: 1;
 }
 .map-control-box hr{
