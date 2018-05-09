@@ -439,7 +439,7 @@ function switchTyphoonnav3($selector) {
 function drawTyphoon(json) {
     var jsonArray=json.points;
     var nodeIco = L.icon({
-        iconUrl: "src/img/rotate.gif",
+        iconUrl: "src/images/rotate.gif",
         iconSize: [32, 32],
         iconAnchor: [17, 17]
     });
