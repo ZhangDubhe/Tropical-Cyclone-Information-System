@@ -1,0 +1,25 @@
+{
+	"name": "typhoon-system-demo",
+	"version": "1.0.0",
+	"devDependencies": {
+		"del": "^3.0.0",
+		"graceful-fs": "^4.1.11",
+		"gulp": "^4.0.0",
+		"gulp-autoprefixer": "^5.0.0",
+		"gulp-cache": "^1.0.2",
+		"gulp-clean-css": "^3.9.4",
+		"gulp-cli": "^2.0.1",
+		"gulp-concat": "^2.6.1",
+		"gulp-imagemin": "^4.1.0",
+		"gulp-jshint": "^2.1.0",
+		"gulp-livereload": "^3.8.1",
+		"gulp-notify": "^3.2.0",
+		"gulp-rename": "^1.2.2",
+		"gulp-ruby-sass": "^3.0.0",
+		"gulp-uglify": "^3.0.0",
+		"jshint": "^2.9.5",
+		"minimatch": "^3.0.4",
+		"tunnel-agent": "^0.6.0"
+	},
+	"dependencies": {}
+}
