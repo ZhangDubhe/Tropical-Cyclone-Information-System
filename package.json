@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"devDependencies": {
 		"del": "^3.0.0",
+		"eslint": "^4.19.1",
 		"graceful-fs": "^4.1.11",
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^5.0.0",
@@ -16,6 +17,7 @@
 		"gulp-notify": "^3.2.0",
 		"gulp-rename": "^1.2.2",
 		"gulp-ruby-sass": "^3.0.0",
+		"gulp-serve": "^1.4.0",
 		"gulp-uglify": "^3.0.0",
 		"jshint": "^2.9.5",
 		"minimatch": "^3.0.4",

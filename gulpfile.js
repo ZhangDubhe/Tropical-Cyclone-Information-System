@@ -11,11 +11,8 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     del = require('del');
+var serve = require('gulp-serve');
 
-gulp.task('default', function () {
-    // place code for your default task here
-
-});
 // 检验styles 
 gulp.task('styles', function () {
     return gulp.src('src/styles/main.scss')
@@ -27,7 +24,7 @@ gulp.task('styles', function () {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(cleancss())
+        .pipe(minifycss())
         .pipe(gulp.dest('dist/assets/css'))
         .pipe(notify({
             message: 'Styles task complete'
@@ -52,13 +49,45 @@ gulp.task('scripts', function () {
 // 压缩图片
 gulp.task('images', function () {
     return gulp.src('src/images/**/*')
-        .pipe(imagemin({
-            optimizationLevel: 3,
+        .pipe(cache(imagemin({
+            optimizationLevel: 5,
             progressive: true,
             interlaced: true
-        }))
+        })))
         .pipe(gulp.dest('dist/assets/img'))
         .pipe(notify({
             message: 'Images task complete'
         }));
 });
+// Clean
+gulp.task('clean', function (cb) {
+    del(['dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb);
+});
+// Default task
+gulp.task('default', ['clean'], function () {
+    gulp.start('styles', 'scripts', 'images');
+});
+// Watch
+gulp.task('watch', function () {
+    // Watch .scss files
+    gulp.watch('src/styles/**/*.scss', ['styles']);
+    // Watch .js files
+    gulp.watch('src/scripts/**/*.js', ['scripts']);
+    // Watch image files
+    gulp.watch('src/images/**/*', ['images']);
+    // Create LiveReload server
+    livereload.listen();
+    // Watch any files in dist/, reload on change
+    gulp.watch(['dist/**']).on('change', livereload.changed);
+});
+
+gulp.task('serve', serve('public'));
+gulp.task('serve-build', serve(['public', 'build']));
+gulp.task('serve-prod', serve({
+    root: ['public', 'build'],
+    port: 443,
+    https: true,
+    middleware: function (req, res) {
+        // custom optional middleware
+    }
+}));
