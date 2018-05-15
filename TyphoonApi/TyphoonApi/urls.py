@@ -18,8 +18,16 @@ from django.urls import include, path
 from rest_framework.schemas import get_schema_view
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from typhoon import views as ty_views
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register('users', ty_views.UserViewSet)
+router.register('groups', ty_views.GroupViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('docs/', get_schema_view()),
     path('api-auth/', include('rest_framework.urls')),

@@ -1,5 +1,7 @@
 .idea
 node_modules
 
+# Backend
 *.pyc
 TyphoonApi/TyphoonApi/settings.py
+TyphoonApi/*/migrations
