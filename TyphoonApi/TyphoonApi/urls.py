@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.schemas import get_schema_view
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', get_schema_view()),
+    path('api-auth/', include('rest_framework.urls')),
     path('tools/', include('tools.urls')),
-    path('api/', include('typhoon.urls'))
+    path('typhoon/', include('typhoon.urls'))
 ]
