@@ -30,7 +30,7 @@ class Point(models.Model):
     windspeed = models.FloatField(default=0)  # 风速 2分钟平均近中心最大风速(MSW, m/s).
     airpressure = models.FloatField(default=0)  # 风压
     ordinarywindspeed = models.FloatField(default=0)  # 2分钟平均风速(m/s), 有两种情况:
-
+    is_change = models.BooleanField(default=0) # 是否变性
     # "dtTrack": "/Date(-62135596800000+0800)/"
     class Meta:
         ordering = ('typhoonnumber', 'happenedat')
@@ -41,7 +41,7 @@ class GraphPoint(models.Model):
     happenedat = models.DateTimeField()   # "1981-04-14 14:00:00"
     typhoontime = models.TextField(default='1953061506')
     intensity = models.FloatField(default=0)  # 强度等级
-
+    is_change = models.BooleanField(default=0) # 是否变性
     class Meta:
         ordering = ('typhoonnumber', 'happenedat')
 

@@ -4,9 +4,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework.views import APIView
-from .serializers import UserSerializer, GroupSerializer
-
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from .serializers import *
+from .models import *
 import qrcode
 import json
 
@@ -25,6 +28,30 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class TyphoonList(generics.ListCreateAPIView):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Typhoon.objects.all()
+    serializer_class = TyphoonListSerializer
+
+    def get_queryset(self):
+        return self.queryset.order_by('-num')
+
+
+
+class TyphoonDetail(generics.ListCreateAPIView):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Point.objects.all()
+    serializer_class = TyphoonListSerializer
+
+    def get_queryset(self):
+        return self.queryset.order_by('-happenedat')
+
 def query_year(request, year):
     print(type(year))
     response = json.dumps({
