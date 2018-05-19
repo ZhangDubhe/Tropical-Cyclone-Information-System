@@ -1,7 +1,13 @@
 .idea
 node_modules
 
+# DataProcess
+DataProcess/*
+!DataProcess/*.py
+
 # Backend
 *.pyc
 TyphoonApi/TyphoonApi/settings.py
 TyphoonApi/*/migrations
+TyphoonApi/db.sqlite3
+
