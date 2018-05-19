@@ -1,8 +1,14 @@
+#!/usr/local/bin/env python3
+# coding:utf-8
+
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
 if django.VERSION >= (1, 7):  # 自动判断版本
     django.setup()
+
 
 def main():
     from TyphoonApi.typhoon.models import Typhoon, Point, GraphPoint
