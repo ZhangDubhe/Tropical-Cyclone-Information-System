@@ -61,7 +61,7 @@ class YearList(views.APIView):
         year_list = Typhoon.objects.values('year').annotate(Count('num'))
         return year_list
 
-class PointList(generics.ListCreateAPIView):
+class PointList(generics.ListAPIView):
     """
     API endpoint that allows groups to be viewed or edited.
     """
