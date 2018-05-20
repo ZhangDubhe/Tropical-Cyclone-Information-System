@@ -85,9 +85,9 @@ function CenterArea() {
 
 
     console.log("table area : width:",container_width," height:",eachYearHeight)
-    var init_year = 1981,
-        year = 1981,
-        yearNum =30;
+    var init_year = initYear,
+        year = initYear,
+        yearNum = totalYear;
 
     var $svgContainer = $("#year-area-view .svg-container")
 
@@ -96,11 +96,7 @@ function CenterArea() {
         $svgContainer.append("<svg id=\"container-"+ year +"\"  width='"+container_width+"' height='"+ eachYearHeight +"' ></svg>");
     }
     var i =0;
-
-    year = 1981;
-
-
-
+    year = init_year;
     drawChart(year);
     var i =0;
     function drawChart(year) {

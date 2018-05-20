@@ -15,7 +15,7 @@ var each_typhoon_timeStamp = {
 };
 
 var flag = 1;
-var totalYear = 2018 - 1949 + 1,
+var totalYear = 2015 - 1949 + 1,
     initYear = 1949;
 var singleHeight = 40;
 var singleWidth;

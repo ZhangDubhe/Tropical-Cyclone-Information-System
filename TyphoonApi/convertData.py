@@ -51,10 +51,10 @@ def readfileToPath(_file_, y):
             try:
                 typhoonSelected = Typhoon.objects.get(num=typhoonId)
             except:
-                newTyphoon = Typhoon(num=typhoonId, name='-', englishname=engName, startat=str(year) +
-                                     '-01-01 00:00:00', endat=str(year) + '-12-31 00:00:00', year=year)
-                newTyphoon.save()
-                typhoonSelected = newTyphoon
+                # newTyphoon = Typhoon(num=typhoonId, name='-', englishname=engName, startat=str(year) +
+                #                      '-01-01 00:00:00', endat=str(year) + '-12-31 00:00:00', year=year)
+                # newTyphoon.save()
+                # typhoonSelected = newTyphoon
                 print("*"*20, "NEW")
             print("Typhoon: ", typhoonSelected)
             continue
