@@ -66,6 +66,8 @@ def readfileToPath(_file_, y):
         Pressure = each[22:26].lstrip(' ')
         WND = each[31:34].lstrip(' ')
         OWD = each[36:39].lstrip(' ')
+        if OWD == '':
+            OWD = '0'
         date = YYYYMMDDHH[0:4] + "-" + YYYYMMDDHH[4:6] + "-" + \
             YYYYMMDDHH[6:8] + " " + YYYYMMDDHH[8:10] + ":00:00"
         # 判断除名
@@ -108,8 +110,8 @@ def readfileToPath(_file_, y):
         # info_row = [str(typhoonId),date, str(I)]
         nextTyphoon = Point(typhoonnumber=typhoonSelected, intensity=strong_level,
                             is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, 
-                            happenedat=date, latitude=LAT, longitude=LON, windspeed=WND, 
-                            ordinarywindspeed=OWD, airpressure=Pressure)
+                            happenedat=date, latitude=float(LAT), longitude=float(LON), windspeed=float(WND),
+                            ordinarywindspeed=float(OWD), airpressure=float(Pressure))
 
         OneList.append(nextTyphoon)
         text += ','.join(info_row)
@@ -240,7 +242,7 @@ def findall(dir):
 
 def querySpecialYear(dir):
     text = ''
-    for i in range(1949,2016):
+    for i in range(1950,2015):
         year = i
         name = "CH" + str(year) + "BST.txt"
         path = dir + name
