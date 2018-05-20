@@ -1,16 +1,16 @@
-const gulp = require('gulp');
-const del = require('del');
-const url = require('url');
-const proxy = require('proxy-middleware');
-const runSequence = require('run-sequence');
-const browserSync = require('browser-sync');
-const gulpLoadPlugins = require('gulp-load-plugins');
+var gulp = require('gulp');
+var del = require('del');
+var url = require('url');
+var proxy = require('proxy-middleware');
+var runSequence = require('run-sequence');
+var browserSync = require('browser-sync');
+var gulpLoadPlugins = require('gulp-load-plugins');
 
-const $ = gulpLoadPlugins();
+var $ = gulpLoadPlugins();
 
-const reload = browserSync.reload;
+var reload = browserSync.reload;
 
-const DST_DIR = 'dist/';
+var DST_DIR = 'dist/';
 
 gulp.task('lint', () =>
     gulp.src(['src/**/*.js', '!node_modules/**'])
@@ -110,7 +110,7 @@ gulp.task('concat', function () {
 });
 
 gulp.task('html', () => {
-    return gulp.src(['src/**/*.html', '!src/master/**', '!src/mobile/**'])
+    return gulp.src(['src/**/*.html'])
         .pipe($.useref({
             searchPath: '{.tmp, src}',
             noAssets: true
@@ -144,7 +144,7 @@ gulp.task('clean', () => del(['.tmp', DST_DIR + '*', '!' + DST_DIR + '.git', '!'
 }));
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles'], () => {
+gulp.task('serve', () => {
     browserSync({
         open: false,
         notify: false,

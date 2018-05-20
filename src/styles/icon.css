@@ -23,59 +23,59 @@
 }
 
 .icon-search{
-    background-image: url("../img/icon/icon_search@2x.png");
+    background-image: url("../images/icon/icon_search@2x.png");
 }
 .active.icon-search{
-    background-image: url("../img/icon/icon_searchActive@2x.png");
+    background-image: url("../images/icon/icon_searchActive@2x.png");
 }
 .table-tools-container{
 
 }
 .icon-setting{
-    background-image: url("../img/icon/icon_setting@2x.png");
+    background-image: url("../images/icon/icon_setting@2x.png");
 }
 .active.icon-setting{
-    background-image: url("../img/icon/icon_settingActive@2x.png");
+    background-image: url("../images/icon/icon_settingActive@2x.png");
 }
 .icon-stop-Bottom{
-    background-image: url("../img/icon/icon_stop@2x.png");
+    background-image: url("../images/icon/icon_stop@2x.png");
 }
 .icon-zoomIn-Bottom{
-    background-image: url("../img/icon/icon_plus@2x.png");
+    background-image: url("../images/icon/icon_plus@2x.png");
 }
 .icon-zoomOut-Bottom{
-    background-image: url("../img/icon/icon_minus@2x.png");
+    background-image: url("../images/icon/icon_minus@2x.png");
 }
 .active.icon-stop-Bottom{
-    background-image: url("../img/icon/icon_stopActive@2x.png");
+    background-image: url("../images/icon/icon_stopActive@2x.png");
 }
 .active.icon-zoomIn-Bottom{
-    background-image: url("../img/icon/icon_plusActive@2x.png");
+    background-image: url("../images/icon/icon_plusActive@2x.png");
 }
 .active.icon-zoomOut-Bottom{
-    background-image: url("../img/icon/icon_minusActive@2x.png");
+    background-image: url("../images/icon/icon_minusActive@2x.png");
 }
 .icon-play{
-    background-image: url("../img/icon/icon_littlePlay@2x.png");
+    background-image: url("../images/icon/icon_littlePlay@2x.png");
 }
 .icon-tips{
     /*!!!!!! not 2x*/
-    background-image: url("../img/TC/icon_tips.png");
+    background-image: url("../images/TC/icon_tips.png");
 }
 .icon-check-circle{
-    background-image: url("../img/icon/icon_check-circle.png");
+    background-image: url("../images/icon/icon_check-circle.png");
 }
 .icon-check-bg{
-    background-image: url("../img/icon/icon_check-bg.png");
+    background-image: url("../images/icon/icon_check-bg.png");
 }
 .icon-check-tick{
-    background-image: url("../img/icon/icon_check-ya.png");
+    background-image: url("../images/icon/icon_check-ya.png");
 }
 .active .icon-check-bg{
-    background-image: url("../img/icon/icon_check-bgActive.png");
+    background-image: url("../images/icon/icon_check-bgActive.png");
 }
 .active .icon-check-tick{
-    background-image: url("../img/icon/icon_check-yaActive.png");
+    background-image: url("../images/icon/icon_check-yaActive.png");
 }
 @media only screen and (min-width: 600px) {
     .control-group .icon{
@@ -83,122 +83,122 @@
         height: 1rem;
     }
     .icon-menu{
-        background-image: url("../img/icon/icon_menuOpen.png");
+        background-image: url("../images/icon/icon_menuOpen.png");
         transform: rotate(90deg);
         transition-duration: 0.3s;
     }
     .active .icon-menu{
-        background-image: url("../img/icon/icon_menuOpen.png") ;
+        background-image: url("../images/icon/icon_menuOpen.png") ;
         transform: rotate(180deg);
     }
     .icon-map{
-        background-image: url("../img/icon/icon_map.png") ;
+        background-image: url("../images/icon/icon_map.png") ;
     }
     .active .icon-map{
-        background-image: url("../img/icon/icon_mapActive.png");
+        background-image: url("../images/icon/icon_mapActive.png");
     }
     .icon-table{
-        background-image: url("../img/icon/icon_table.png") ;
+        background-image: url("../images/icon/icon_table.png") ;
     }
     .active .icon-table{
-        background-image: url("../img/icon/icon_tableActive.png");
+        background-image: url("../images/icon/icon_tableActive.png");
     }
 
 
     .icon-contactChina{
-        background-image: url("../img/icon/icon_tc_contactChina.png");
+        background-image: url("../images/icon/icon_tc_contactChina.png");
     }
     .icon-download{
-        background-image: url("../img/icon/icon_tc_download.png");
+        background-image: url("../images/icon/icon_tc_download.png");
     }
     .icon-earth{
-        background-image: url("../img/icon/icon_tc_earth.png");
+        background-image: url("../images/icon/icon_tc_earth.png");
     }
     .icon-radar{
-        background-image: url("../img/icon/icon_tc_group2-4.png");
+        background-image: url("../images/icon/icon_tc_group2-4.png");
     }
     .icon-satellite{
-        background-image: url("../img/icon/icon_tc_satellite.png");
+        background-image: url("../images/icon/icon_tc_satellite.png");
     }
     .icon-layer{
-        background-image: url("../img/icon/icon_tc_layer.png");
+        background-image: url("../images/icon/icon_tc_layer.png");
     }
     .icon-rainDrop{
-        background-image: url("../img/icon/icon_tc_rainDrop.png");
+        background-image: url("../images/icon/icon_tc_rainDrop.png");
     }
     .icon-wind{
-        background-image: url("../img/icon/icon_tc_wind.png");
+        background-image: url("../images/icon/icon_tc_wind.png");
     }
     .icon-removeName{
-        background-image: url("../img/icon/icon_tc_removeName.png");
+        background-image: url("../images/icon/icon_tc_removeName.png");
     }
     .icon-path{
-        background-image: url("../img/icon/icon_tc_path.png");
+        background-image: url("../images/icon/icon_tc_path.png");
     }
     .icon-playPath{
-        background-image: url("../img/icon/icon_tc_playPath.png");
+        background-image: url("../images/icon/icon_tc_playPath.png");
     }
     .icon-screenShot{
-        background-image: url("../img/icon/icon_tc_screenShot.png");
+        background-image: url("../images/icon/icon_tc_screenShot.png");
     }
     .icon-share{
-        background-image: url("../img/icon/icon_tc_share.png");
+        background-image: url("../images/icon/icon_tc_share.png");
     }
     .icon-zoomIn{
-        background-image: url("../img/icon/icon_tc_zoomIn.png");
+        background-image: url("../images/icon/icon_tc_zoomIn.png");
     }
 
     .icon-zoomOut{
-        background-image: url("../img/icon/icon_tc_zoomOut.png");
+        background-image: url("../images/icon/icon_tc_zoomOut.png");
     }
 
     /* active */
 
     .active .icon-contactChina{
-        background-image: url("../img/icon/icon_tc_contactChinaActive.png");
+        background-image: url("../images/icon/icon_tc_contactChinaActive.png");
     }
     .active .icon-download{
-        background-image: url("../img/icon/icon_tc_downloadActive.png");
+        background-image: url("../images/icon/icon_tc_downloadActive.png");
     }
     .active .icon-earth{
-        background-image: url("../img/icon/icon_tc_earthActive.png");
+        background-image: url("../images/icon/icon_tc_earthActive.png");
     }
     .active .icon-radar{
-        background-image: url("../img/icon/icon_tc_group2-4Active.png");
+        background-image: url("../images/icon/icon_tc_group2-4Active.png");
     }
     .active .icon-satellite{
-        background-image: url("../img/icon/icon_tc_satelliteActive.png");
+        background-image: url("../images/icon/icon_tc_satelliteActive.png");
     }
     .active .icon-layer{
-        background-image: url("../img/icon/icon_tc_layerActive.png");
+        background-image: url("../images/icon/icon_tc_layerActive.png");
     }
     .active .icon-rainDrop{
-        background-image: url("../img/icon/icon_tc_rainDropActive.png");
+        background-image: url("../images/icon/icon_tc_rainDropActive.png");
     }
     .active .icon-wind{
-        background-image: url("../img/icon/icon_tc_windActive.png");
+        background-image: url("../images/icon/icon_tc_windActive.png");
     }
     .active .icon-removeName{
-        background-image: url("../img/icon/icon_tc_removeNameActive.png");
+        background-image: url("../images/icon/icon_tc_removeNameActive.png");
     }
     .active .icon-path{
-        background-image: url("../img/icon/icon_tc_pathActive.png");
+        background-image: url("../images/icon/icon_tc_pathActive.png");
     }
     .active .icon-playPath{
-        background-image: url("../img/icon/icon_tc_playPathActive.png");
+        background-image: url("../images/icon/icon_tc_playPathActive.png");
     }
     .active .icon-screenShot{
-        background-image: url("../img/icon/icon_tc_screenShotActive.png");
+        background-image: url("../images/icon/icon_tc_screenShotActive.png");
     }
     .active .icon-share{
-        background-image: url("../img/icon/icon_tc_shareActive.png");
+        background-image: url("../images/icon/icon_tc_shareActive.png");
     }
     .icon-zoomIn{
-        background-image: url("../img/icon/icon_tc_zoomIn.png");
+        background-image: url("../images/icon/icon_tc_zoomIn.png");
     }
 
     .icon-zoomOut{
-        background-image: url("../img/icon/icon_tc_zoomOut.png");
+        background-image: url("../images/icon/icon_tc_zoomOut.png");
     }
 }
 
@@ -208,114 +208,114 @@
         height: 2rem;
     }
     .icon-menu{
-        background-image: url("../img/icon/icon_menuOpen@2x.png");
+        background-image: url("../images/icon/icon_menuOpen@2x.png");
         transform: rotate(90deg);
         transition-duration: 0.3s;
     }
     .active .icon-menu{
-        background-image: url("../img/icon/icon_menuOpen@2x.png") ;
+        background-image: url("../images/icon/icon_menuOpen@2x.png") ;
         transform: rotate(180deg);
     }
     .icon-map{
-        background-image: url("../img/icon/icon_map@2x.png") ;
+        background-image: url("../images/icon/icon_map@2x.png") ;
     }
     .active .icon-map{
-        background-image: url("../img/icon/icon_mapActive@2x.png");
+        background-image: url("../images/icon/icon_mapActive@2x.png");
     }
     .icon-table{
-        background-image: url("../img/icon/icon_table@2x.png") ;
+        background-image: url("../images/icon/icon_table@2x.png") ;
     }
     .active .icon-table{
-        background-image: url("../img/icon/icon_tableActive@2x.png");
+        background-image: url("../images/icon/icon_tableActive@2x.png");
     }
 
 
     .icon-contactChina{
-        background-image: url("../img/icon/icon_tc_contactChina@2x.png");
+        background-image: url("../images/icon/icon_tc_contactChina@2x.png");
     }
     .icon-download{
-        background-image: url("../img/icon/icon_tc_download@2x.png");
+        background-image: url("../images/icon/icon_tc_download@2x.png");
     }
     .icon-earth{
-        background-image: url("../img/icon/icon_tc_earth@2x.png");
+        background-image: url("../images/icon/icon_tc_earth@2x.png");
     }
     .icon-radar{
-        background-image: url("../img/icon/icon_tc_group2-4@2x.png");
+        background-image: url("../images/icon/icon_tc_group2-4@2x.png");
     }
     .icon-satellite{
-        background-image: url("../img/icon/icon_tc_satellite@2x.png");
+        background-image: url("../images/icon/icon_tc_satellite@2x.png");
     }
     .icon-layer{
-        background-image: url("../img/icon/icon_tc_layer@2x.png");
+        background-image: url("../images/icon/icon_tc_layer@2x.png");
     }
     .icon-rainDrop{
-        background-image: url("../img/icon/icon_tc_rainDrop@2x.png");
+        background-image: url("../images/icon/icon_tc_rainDrop@2x.png");
     }
     .icon-wind{
-        background-image: url("../img/icon/icon_tc_wind@2x.png");
+        background-image: url("../images/icon/icon_tc_wind@2x.png");
     }
     .icon-removeName{
-        background-image: url("../img/icon/icon_tc_removeName@2x.png");
+        background-image: url("../images/icon/icon_tc_removeName@2x.png");
     }
     .icon-path{
-        background-image: url("../img/icon/icon_tc_path@2x.png");
+        background-image: url("../images/icon/icon_tc_path@2x.png");
     }
     .icon-playPath{
-        background-image: url("../img/icon/icon_tc_playPath@2x.png");
+        background-image: url("../images/icon/icon_tc_playPath@2x.png");
     }
     .icon-screenShot{
-        background-image: url("../img/icon/icon_tc_screenShot@2x.png");
+        background-image: url("../images/icon/icon_tc_screenShot@2x.png");
     }
     .icon-share{
-        background-image: url("../img/icon/icon_tc_share@2x.png");
+        background-image: url("../images/icon/icon_tc_share@2x.png");
     }
     .icon-zoomIn{
-        background-image: url("../img/icon/icon_tc_zoomIn@2x.png");
+        background-image: url("../images/icon/icon_tc_zoomIn@2x.png");
     }
 
     .icon-zoomOut{
-        background-image: url("../img/icon/icon_tc_zoomOut@2x.png");
+        background-image: url("../images/icon/icon_tc_zoomOut@2x.png");
     }
 
     /* active */
 
     .active .icon-contactChina{
-        background-image: url("../img/icon/icon_tc_contactChinaActive@2x.png");
+        background-image: url("../images/icon/icon_tc_contactChinaActive@2x.png");
     }
     .active .icon-download{
-        background-image: url("../img/icon/icon_tc_downloadActive@2x.png");
+        background-image: url("../images/icon/icon_tc_downloadActive@2x.png");
     }
     .active .icon-earth{
-        background-image: url("../img/icon/icon_tc_earthActive@2x.png");
+        background-image: url("../images/icon/icon_tc_earthActive@2x.png");
     }
     .active .icon-radar{
-        background-image: url("../img/icon/icon_tc_group2-4Active@2x.png");
+        background-image: url("../images/icon/icon_tc_group2-4Active@2x.png");
     }
     .active .icon-satellite{
-        background-image: url("../img/icon/icon_tc_satelliteActive@2x.png");
+        background-image: url("../images/icon/icon_tc_satelliteActive@2x.png");
     }
     .active .icon-layer{
-        background-image: url("../img/icon/icon_tc_layerActive@2x.png");
+        background-image: url("../images/icon/icon_tc_layerActive@2x.png");
     }
     .active .icon-rainDrop{
-        background-image: url("../img/icon/icon_tc_rainDropActive@2x.png");
+        background-image: url("../images/icon/icon_tc_rainDropActive@2x.png");
     }
     .active .icon-wind{
-        background-image: url("../img/icon/icon_tc_windActive@2x.png");
+        background-image: url("../images/icon/icon_tc_windActive@2x.png");
     }
     .active .icon-removeName{
-        background-image: url("../img/icon/icon_tc_removeNameActive@2x.png");
+        background-image: url("../images/icon/icon_tc_removeNameActive@2x.png");
     }
     .active .icon-path{
-        background-image: url("../img/icon/icon_tc_pathActive@2x.png");
+        background-image: url("../images/icon/icon_tc_pathActive@2x.png");
     }
     .active .icon-playPath{
-        background-image: url("../img/icon/icon_tc_playPathActive@2x.png");
+        background-image: url("../images/icon/icon_tc_playPathActive@2x.png");
     }
     .active .icon-screenShot{
-        background-image: url("../img/icon/icon_tc_screenShotActive@2x.png");
+        background-image: url("../images/icon/icon_tc_screenShotActive@2x.png");
     }
     .active .icon-share{
-        background-image: url("../img/icon/icon_tc_shareActive@2x.png");
+        background-image: url("../images/icon/icon_tc_shareActive@2x.png");
     }
 }

@@ -11,6 +11,7 @@
    ========================================================================== */
 *{
     font-size: 62.5%;
+    box-sizing: border-box;
 }
 html {
     color: #222;
@@ -561,6 +562,9 @@ svg#small-player-line{
     height: 7rem;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.dropdown-inner a{
+    font-size: 0.4rem;
 }
 .dropdown-inner ul, .dropdown-inner li{
     width:100%;
