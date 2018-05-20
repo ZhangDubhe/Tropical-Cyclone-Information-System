@@ -266,7 +266,7 @@ header{
     background-color: rgba(0, 0, 0, 0.3);
     height: auto;
     position: absolute;
-    bottom: 3rem;
+    bottom: 2rem;
     padding: 4px;
     z-index: 100;
 }
@@ -559,7 +559,19 @@ svg#small-player-line{
 }
 /*切换底图*/
 
-
+#single-area-view {
+    width: 100%;
+    height: 40px;
+    margin-top: 25px;
+}
+#single-area-laber {
+    width: 50px;
+    height: 40px;
+    padding: 5px;
+    font-size: 0.8rem;
+    color: white;
+    background-color: #ff3853;
+}
 
 /*生命史图控件*/
 
@@ -859,4 +871,11 @@ span.icon-small.icon-check-circle {
 text.bar-text {
     font-size: 0.54rem;
     fill: white;
+}
+
+.leaflet-popup-pane {
+    font-size: 4rem !important;
+}
+.tymm{
+    font-size: 1rem !important;
 }

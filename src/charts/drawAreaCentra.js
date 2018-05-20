@@ -76,10 +76,9 @@ function CenterArea() {
         year = init_year + i;
         $svgContainer.append("<svg id=\"container-"+ year +"\"  width='"+container_width+"' height='"+ eachYearHeight +"' ></svg>");
     }
-    i =0;
+    i = 0;
     year = init_year;
     drawChart(year);
-    i =0;
     function drawChart(year) {
         var container = d3.select("#container-"+year),
             width = +container.attr("width"),
@@ -93,7 +92,7 @@ function CenterArea() {
                 .entries(data);
             // Compute the maximum price per symbol, needed for the y-domain.
             // maxValue to store
-         /*   symbols.forEach(function(s) {
+            /*   symbols.forEach(function(s) {
                 s.maxValue = d3.max(s.values, function(d) { return d.I; });
             });*/
 
@@ -131,7 +130,7 @@ function CenterArea() {
                 .attr("id","group-"+ year);
 
             // 添加坐标轴
-/*            svg.append('g')
+            /*  svg.append('g')
                 .attr("class","x axis")
                 .call(xAxis)
                 // .style("fill","white")
@@ -190,9 +189,7 @@ function CenterArea() {
                 });
 
             if(year<(init_year+yearNum-1)){
-
                 // console.log("This is ",year+1,"until ",init_year+yearNum-1)
-
                 drawChart(year+1);
             }
             else{
@@ -230,6 +227,7 @@ function CenterArea() {
             .attr("d", area(single));
         console.log("add area path -svg:\r",g);
     }
+
     function type(d) {
         d.I = d.I;
         d.date = parseDate(d.date);
@@ -238,98 +236,192 @@ function CenterArea() {
     }
 }
 
+function drawYearArea(year) {
+    $("#all-line-view .svg-container").html('');
+    var $svgContainer = $("#single-area-view");
+    var width = $("#map").width() * 0.94 - 5,
+        height = $svgContainer.height(),
+        paddingLeft = 50,
+        paddingTop = 5,
+        paddingBottom = 5;
+    
+    eachYearHeight = height - paddingTop - paddingBottom;
+    container_width = width - paddingLeft;
+    $svgContainer.html("<div id='single-area-laber'>"+ year +"</div>")
+    $svgContainer.append("<svg id='yearSingleArea' width='" + container_width + "' height='" + eachYearHeight + "' ></svg>");
 
-function example() {
-    var x = d3.time.scale()
-        .range([0, width]);
+    i = 0;
+    year = $.trim(year);
+    year = parseInt(year);
+    drawChart(year);
+    $('#single-area-view').delegate('path[class="area"]', 'click', function () {
+        console.log("path", $(this).length);
+        var text = $(this).attr("title");
+        console.log(text);
+        getTyphoonDetail(false, text);
+    });
+    function drawChart(year) {
+        var container = d3.select("#yearSingleArea");
+        console.log(container);
+        width = +container.attr("width");
+        height = +container.attr("height");
 
-    var y = d3.scale.linear()
-        .range([height, 0]);
+        var url = "dataprocess/exportdata/chart/" + year + ".csv";
+        // path and chart should
+        d3.csv(url, type, function (data) {
+            var symbols = d3.nest()
+                .key(function (d) {
+                    return d.id;
+                })
+                .entries(data);
+            // Compute the maximum price per symbol, needed for the y-domain.
+            // maxValue to store
+            /*   symbols.forEach(function(s) {
+                s.maxValue = d3.max(s.values, function(d) { return d.I; });
+            });*/
 
-    var area = d3.svg.area()
-        .x(function (d) {
-            return x(d.date);
-        })
-        .y0(height)
-        .y1(function (d) {
-            return y(d.price);
+            var w = +width,
+                h = +(eachYearHeight - (padding.top + padding.bottom));
+
+            var x = d3.scale.linear()
+                .range([0, width]);
+
+            var y = d3.scale.linear()
+                .range([h, 0]);
+
+            var area = d3.svg.area()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y0(function (d) {
+                    return h - y(d.I) / 2;
+                })
+                .y1(function (d) {
+                    return y(d.I) / 2;
+                })
+                .interpolate('monotone');
+
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .ticks(12);
+
+            x.domain([
+                d3.min(symbols, function (s) {
+                    return s.values[0].date;
+                }),
+                d3.max(symbols, function (s) {
+                    return s.values[s.values.length - 1].date;
+                })
+            ]);
+
+            var svg = container.append('g')
+                .attr("class", "content")
+                .attr("id", "group-" + year);
+
+            // 添加坐标轴
+            /*  svg.append('g')
+                .attr("class","x axis")
+                .call(xAxis)
+                // .style("fill","white")
+                .style("stroke-width","2")
+                .style("height","1")
+                .attr('transform', 'translate(0,' + (eachYearHeight/2 - padding.top) + ')')*/
+            svg.append('path')
+                .attr("class", "line")
+                .attr("width", container_width)
+                .attr("stroke-width", 2)
+                .attr("stroke", "#575757")
+                .attr("d", "M0,1V0H" + container_width + "V2")
+                .attr('transform', 'translate(0,' + (eachYearHeight / 2) + ')');
+
+            var graphics = container.selectAll('g')
+                .data(symbols)
+                .enter().append('g')
+                .attr('transform', 'translate(0,' + padding.top + ')')
+                .attr("class", function (d) {
+                    if (d.values[0].replaceName == "True") {
+                        return "removedTyphoon";
+                    } else {
+                        return "normalTyphoon";
+                    }
+                })
+                .attr('id', (function (d) {
+                    return d.key;
+                }))
+                .append('path')
+                .attr("class", "area")
+                .attr("d", function (d) {
+                    y.domain([0, 6]);
+                    return area(d.values);
+                })
+                .attr('title', (function (d) {
+                    return d.key;
+                }))
+                .on("mouseover", function (d) {
+                    $("#dropdownName").html(d.key);
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("stroke", "#fff")
+                        .attr("stroke-width", "3");
+                })
+                .on("mouseout", function (d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("stroke", "none");
+                })
+                .on("click", function (d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(50)
+                        .attr("fill", "#fff");
+                });
+
+            return 0;
         });
-
-    var line = d3.svg.line()
-        .x(function (d) {
-            return x(d.date);
-        })
-        .y(function (d) {
-            return y(d.price);
-        });
-
-//data.tsv takes a file path and a callback function
-    data_path = 'resource/data/data.tsv';
-    d3.tsv(data_path, type, simpleAreaChart);
-    function simpleAreaChart(data) {
-
-        // Nest data by symbol.
-        var symbols = d3.nest()
-            .key(function (d) {
-                return d.symbol;
-            })
-            .entries(data);
-
-        // Compute the maximum price per symbol, needed for the y-domain.
-        symbols.forEach(function (s) {
-            s.maxValue = d3.max(s.values, function (d) {
-                return d.price;
-            });
-        });
-
-        // Compute the minimum and maximum date across symbols.
-        // We assume values are sorted by date.
-        x.domain([
-            d3.min(symbols, function (s) {
-                return s.values[0].date;
-            }),
-            d3.max(symbols, function (s) {
-                return s.values[s.values.length - 1].date;
-            })
-        ]);
-
-        // Add an SVG element for each symbol, with the desired dimensions and margin.
-        var svg = d3.select("#year-area-view").selectAll("svg")
-            .data(symbols)
-            .enter().append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        // Add the area path elements. Note: the y-domain is set per element.
-        svg.append("path")
-            .attr("class", "area")
-            .attr("d", function (d) {
-                y.domain([0, d.maxValue]);
-                return area(d.values);
-            }).attr('title',(function (d) {
-            return d.key;}));
-
-
-        // Add a small label for the symbol name.
-        svg.append("text")
-            .attr("x", width - 6)
-            .attr("y", height - 6)
-            .attr("class", "chart-inner")
-            .style("text-anchor", "end")
-            .text(function (d) {
-                return d.key;
-            });
-
     }
+
+    function interpolate(points) {
+        // console.log(points);
+        var x0 = points[0][0],
+            y0 = points[0][1],
+            x1, y1, x2,
+            path = [x0, ",", y0],
+            i = 0,
+            n = points.length;
+
+        while (++i < n) {
+            x1 = points[i][0];
+            y1 = points[i][1];
+            x2 = (x0 + x1) / 2;
+            path.push("C", x2, ",", y0, " ", x2, ",", y1, " ", x1, ",", y1);
+            x0 = x1;
+            y0 = y1;
+        }
+        return path.join("");
+    }
+
+
+    function multiple(single) {
+        var g = d3.select(this);
+        y.domain([0, d3.max(single, function (d) {
+            return d.size;
+        })]);
+        g.append("path")
+            .attr("class", "area")
+            .attr("d", area(single));
+        console.log("add area path -svg:\r", g);
+    }
+
     function type(d) {
-        d.price = +d.price;
+        d.I = d.I;
         d.date = parseDate(d.date);
+        // console.log(d)
         return d;
     }
 }
-
 
 function addYearBarInfo(data) {
     var $yearSelector = $("#dropdownYear").siblings("ul").find(".dropdown-inner ul");
@@ -364,13 +456,13 @@ function addYearBarInfo(data) {
 
 function queryEachYear(year) {
     var data = [];
-
     $.getJSON(API_PATH + "typhoon/lists",{year:year},
         function(result) {
             $rows = $("#all-bar-view").find("td");
             var length = result.length;
             data = result;
             addYearDetails(data);
+            drawYearArea(year);
         });
 }
 
@@ -395,15 +487,29 @@ function addYearDetails(data) {
             "<a href=\"#\">"+ name +"<span ty-id='"+ data[i].num +"' class=\"li-right icon-check-tick\"></span> </a>" +
             "</li>");
     }
-    $("#dropdownName").siblings("ul").find(".li-right").click(function () {
+    $("#dropdownName").siblings("ul").find(".li-right.icon-check-tick").click(function () {
         var tyId = $(this).attr("ty-id");
         getTyphoonDetail(false, tyId);
+    });
+    $("#OneYearAll").click(function () {
+        var idList = [];
+        var ticklist = $("#dropdownName").siblings("ul").find(".li-right.icon-check-tick");
+        for(var i = 0; i < ticklist.length; i++){
+            idList.push($(ticklist[i]).attr("ty-id"));
+        }
+        idList.sort();
+        idList.forEach(function (each) {
+            setTimeout(() => {
+                getTyphoonDetail(false, each);
+            }, 1000);
+        });
     });
 
 
 
 }
-function dayFrequence(){
+
+function drawDayFrequence(search){
     var $container = $("#all-line-view .svg-container"),
         width = $("#year-area-view").width(),
         height = $container.height(),
@@ -412,14 +518,17 @@ function dayFrequence(){
         paddingBottom = 10;
         chartHeight = height - paddingTop - paddingBottom;
 
-    $container.append("<svg id='yearFreqsChart'  width='"+ width +"' height='"+ height +"'></svg>");
+    $container.html("<svg id='yearFreqsChart'  width='"+ width +"' height='"+ height +"'></svg>");
 
     var svg = d3.select("#yearFreqsChart")
         .append("g")
         .attr("transform","translate("+ 0+","+paddingTop+")");
 
     width = width - paddingLeft;
-    d3.csv("resource/data/Dfrequence.csv",function (data) {
+
+    if (search === 'all') url = "resource/data/Dfrequence.csv";
+    else url = "resource/data/Dfrequence.csv";
+    d3.csv(url, function (data) {
         var x = d3.scale.linear()
             .domain([0, 365])
             .range([0, width]);
@@ -463,8 +572,6 @@ function dayFrequence(){
             .attr("d","M0,1V0H"+ width +"V2")
             .attr('transform', 'translate(0,' + (chartHeight) + ')');
     });
-
-
 }
 
 

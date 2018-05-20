@@ -42,7 +42,7 @@ function getData() {
             drawYearBar(data);
             addYearBarInfo(data);
             CenterArea();
-            dayFrequence();
+            drawDayFrequence('all');
         }
     );
 }
@@ -124,13 +124,15 @@ getData();
     });
 
     $('#removeNameTyphoon').click(function () {
-        // changeColorTip
-        if($(this).hasClass("active")){
-            $(".removedTyphoon").attr("fill","rgba(255, 68, 114, 0.58)");
-        }
-        else{
-            $(".removedTyphoon").attr("fill","rgba(255, 255, 255, 0.58)");
-        }
+        // clear selection
+        // if($(this).hasClass("active")){
+        //     $(".removedTyphoon").attr("fill","rgba(255, 68, 114, 0.58)");
+        // }
+        // else{
+        //     $(".removedTyphoon").attr("fill","rgba(255, 255, 255, 0.58)");
+        // }
+        $("#single-area-view").html('');
+        drawDayFrequence('all');
     });
 
     $('.map-control-container').find(".icon").click(function () {
@@ -354,8 +356,7 @@ function download() {
 }
 
 function resizeActive() {
-    location.reload()
-
+    location.reload();
 }
 
 function hoverYear(nowYear) {

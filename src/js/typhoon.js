@@ -438,7 +438,7 @@ function drawTyphoon(json) {
     var jsonArray = json;
     var nodeIco = L.icon({
         iconUrl: "src/images/rotate.gif",
-        iconSize: [32, 32],
+        iconSize: [24, 24],
         iconAnchor: [17, 17]
     });
     var lastMarker = L.marker([], {
@@ -462,7 +462,7 @@ function drawTyphoon(json) {
         if (count < jsonArray.length) {
             var currArray = jsonArray[count],
                 polyline;
-            var lat = L.latLng(currArray.latitude, currArray.longitude)
+            var lat = L.latLng(currArray.latitude, currArray.longitude);
             lastMarker = lastMarker.setLatLng(lat).addTo(map);
             var currColor = GetPointColor(currArray.windspeed);
             var circleIco = new MyCustomMarker(lat, {
@@ -470,9 +470,9 @@ function drawTyphoon(json) {
                 weight: 1,
                 fillColor: currColor,
                 fillOpacity: 1
-            }).addTo(map);;
+            }).addTo(map);
             var pophtml = getTyphoonPoupeText(currArray);
-            circleIco.setRadius(4).bindPopup(pophtml, {
+            circleIco.setRadius(currArray.intensity+2).bindPopup(pophtml, {
                 showOnMouseOver: !0,
                 closeButton: !1,
             });
@@ -510,15 +510,16 @@ function drawTyphoon(json) {
             } else {
                 //map.setView(lat, 5);
                 //var myIcon = L.divIcon({ iconSize:[74,20],iconAnchor:[-10,8],className:'tycontitl', html:json.typhoonnumber+json.name});
-                var myIcon = L.divIcon({
-                    iconAnchor: [-16, 8],
-                    className: 'tycontitl',
-                    html: '<span class="tymm"><span class="tymmle"></span><span class="tymmri"></span>' + json.typhoonnumber + json.name + '</span>'
-                });
-                var divmark = L.marker(lat, {
-                    icon: myIcon
-                }).addTo(map);
-                typhoonLayer.addLayer(lastMarker).addLayer(divmark);
+                // var myIcon = L.divIcon({
+                //     iconAnchor: [-16, 8],
+                //     className: 'tycontitl',
+                //     html: ''
+                // });
+                // var divmark = L.marker(lat, {
+                //     icon: myIcon
+                // }).addTo(map);
+                typhoonLayer.addLayer(lastMarker);
+                // .addLayer(divmark);
                 if (jsonArray.length == 1) {
                     var ybArray = currArray.forecast;
                     showTypoonYB((jsonArray.length - count - 1), json);
@@ -539,7 +540,7 @@ function drawTyphoon(json) {
     }
     T = setInterval(function () {
         drawDynamicTyphoon()
-    }, 10);
+    }, 20);
     currfeauterLayer.addLayer(typhoonLayer);
 }
 
@@ -581,8 +582,6 @@ function drawYBTyoon(typhoonLayer, bhappenedat, setting, lastLan, array) {
     }
 }
 
-
-
 function getYBColor(source) {
     var color = "#78A9A9";
     if (source == "美国")
@@ -598,7 +597,6 @@ function getYBColor(source) {
     return color;
 }
 
-
 function getGJName(name) {
     if (name == "中国")
         return "中央气象台";
@@ -606,14 +604,53 @@ function getGJName(name) {
         return name;
 }
 
-
+/*
+0 - 弱于热带低压(TD), 或等级未知, 
+1 - 热带低压(TD, 10.8 - 17.1 m / s), 
+2 - 热带风暴(TS, 17.2 - 24.4 m / s), 
+3 - 强热带风暴(STS, 24.5 - 32.6 m / s), 
+4 - 台风(TY, 32.7 - 41.4 m / s), 
+5 - 强台风(STY, 41.5 - 50.9 m / s), 
+6 - 超强台风(SuperTY, ≥51.0 m / s), 
+9 - 变性, 第一个标记表示变性完成.
+*/
+function changeIntensity(number) {
+    var symbol;
+    switch (number) {
+        case 0:
+            symbol = "弱于热带低压(TD)";
+            break;
+        case 1:
+            symbol = "热带低压(TD)";
+            break;
+        case 2:
+            symbol = "热带风暴(TS)";
+            break;
+        case 3:
+            symbol = "强热带风暴(STS)";
+            break;
+        case 4:
+            symbol = "台风(TY)";
+            break;
+        case 5:
+            symbol = "强台风(STY)";
+            break;
+        case 6:
+            symbol = "超强台风(SuperTY)";
+            break;
+        case 9:
+            symbol = "变性";
+            break;
+    }
+    return symbol;
+}
 //获取台风实况信息
 function getTyphoonPoupeText(currArray) {
     var pophtml = "<div class='popdecon'>";
     pophtml += '<p>时间：' + currArray.happenedat.replace(/T/g, " ") + '</p>';
-    pophtml += '<p>中心位置：' + currArray.longitude + '°E|' + currArray.latitude + '°N</p>';
+    pophtml += '<p>中心位置：' + currArray.longitude + '°E| ' + currArray.latitude + '°N</p>';
     pophtml += '<p>最大风速：' + currArray.windspeed + 'm/s</p>';
-    pophtml += '<p>强度：' + (currArray.intensity ? currArray.intensity : '--') + '</p>';
+    pophtml += '<p>强度：' + (currArray.intensity ? changeIntensity(currArray.intensity) : '--') + '</p>';
     pophtml += '<p>中心气压：' + (currArray.airpressure ? currArray.airpressure : '--') + 'Pa</p>';
     pophtml += '</div>';
     return pophtml;
