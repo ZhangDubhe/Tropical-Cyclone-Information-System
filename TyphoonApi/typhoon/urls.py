@@ -5,9 +5,9 @@ from . import views
 
 from rest_framework import routers
 
+
+
 urlpatterns = [
-    path('year/<int:year>', views.query_year, name='years'),
-    path('all/', views.query_all, name='all'),
-    path('list/', views.TyphoonList.as_view()),
+    path('lists', views.TyphoonList.as_view()),
     path('detail/', views.TyphoonDetail.as_view()),
 ]

@@ -24,6 +24,7 @@ def readfile(_file_, y):
             year = y
             typhoonId = str(year) + id[2:4]
             header_row = [year, nId, id, cId, endInfo, engName]
+            print(header_row)
             # HEADERS += ",".join(header_row) + '\r'
             strong_level = ''
             j = 0
@@ -156,7 +157,7 @@ def readLandFile():
 
 def main():
     global HEADERS
-    querySpecialYear("orginalData/bst4915/")
+    querySpecialYear("originalData/bst4915/")
     # readLandFile()
     # store_all(HEADERS, "headerData")
 

@@ -19,6 +19,7 @@ class TyphoonListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Typhoon
         fields = ('num', 'name', 'englishname', 'startat', 'endat', 'year')
+        lookup_field = 'year'
 
 class TyphoonDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

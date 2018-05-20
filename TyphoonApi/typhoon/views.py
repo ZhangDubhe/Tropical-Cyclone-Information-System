@@ -3,11 +3,15 @@ from django.utils.six import BytesIO
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.pagination import LimitOffsetPagination
+
 from .serializers import *
 from .models import *
 import qrcode
@@ -18,7 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
@@ -38,7 +42,10 @@ class TyphoonList(generics.ListCreateAPIView):
     serializer_class = TyphoonListSerializer
 
     def get_queryset(self):
-        return self.queryset.order_by('-num')
+        year = self.request.query_params.get("year", None)
+        if year is not None:
+            self.queryset = self.queryset.filter(year=year)
+        return self.queryset.order_by('-startat')
 
 
 
@@ -52,17 +59,3 @@ class TyphoonDetail(generics.ListCreateAPIView):
     def get_queryset(self):
         return self.queryset.order_by('-happenedat')
 
-def query_year(request, year):
-    print(type(year))
-    response = json.dumps({
-        'year': year,
-        'msg': 'This is data'
-    })
-    return response
-
-def query_all(request):
-    response = json.dumps({
-        'year': 'all',
-        'msg': 'This is data'
-    })
-    return response
