@@ -56,7 +56,6 @@ class YearList(views.APIView):
         Return a list of all users.
         """
         year_list = Typhoon.objects.all().values('year').annotate(count=Count('year')).order_by('year')
-        print(year_list)
         return Response(year_list)
 
     def get_queryset(self):
@@ -67,9 +66,12 @@ class TyphoonDetail(generics.ListCreateAPIView):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Point.objects.all()
+    queryset = GraphPoint.objects.all()
     serializer_class = TyphoonListSerializer
 
     def get_queryset(self):
-        return self.queryset.order_by('-happenedat')
+        year = self.request.query_params.get("year", None)
+        if year is not None:
+            self.queryset = self.queryset.filter(year=year)
+        return self.queryset.order_by('-happendedat')
 

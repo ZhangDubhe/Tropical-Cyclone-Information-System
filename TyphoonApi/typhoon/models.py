@@ -15,7 +15,7 @@ class Typhoon(models.Model):
     startat = models.DateTimeField()
     endat = models.DateTimeField()
     year = models.IntegerField()
-
+    is_delate = models.BooleanField(default=False)
     class Meta:
         ordering = ('year', 'num')
 

@@ -11,7 +11,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TyphoonApi.settings")
 if django.VERSION >= (1, 7):  # 自动判断版本
     django.setup()
 
-
 def dumpData(yearpath):
     from typhoon.models import Typhoon, Point, GraphPoint
     path = "../DataProcess/originalData/json/list/" + yearpath
@@ -33,7 +32,6 @@ def dumpData(yearpath):
             end_at = pattern.sub(' ', each['end_time'])
             name = (each['name'], '-')[each['name'] == None]
             print(each['tfbh'], name, each['ename'])
-
         except:
             print('*'*30, ' Warning ', '*'*30)
             start_at = each['begin_time']
@@ -41,7 +39,9 @@ def dumpData(yearpath):
             print('id ', each['tfbh'], ' name ', each['name'], each['ename'], start_at, end_at)
             continue
         print("time: ", start_at, end_at)
-        newTyphoon = Typhoon(num=each['tfbh'], name=name, englishname=each['ename'], startat=start_at, endat=end_at, year=year)
+        englishname = each['ename'].title()
+        englishname = re.sub(' +', ' ', englishname)
+        newTyphoon = Typhoon(num=each['tfbh'], name=name, englishname=englishname, startat=start_at, endat=end_at, year=year)
         TyphoonList.append(newTyphoon)
 
     print("Length: ", len(TyphoonList))

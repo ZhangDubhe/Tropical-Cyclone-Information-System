@@ -108,7 +108,7 @@ function CenterArea() {
             width = +container.attr("width"),
             height = +container.attr("height");
 
-        var url = "resource/data/typhoon/chart/" + year +".csv";
+        var url = "dataprocess/exportdata/chart/" + year +".csv";
         // path and chart should
         d3.csv(url, type, function (data) {
             var symbols = d3.nest()
@@ -193,7 +193,6 @@ function CenterArea() {
                     return d.key;}))
                 .on("mouseover",function (d) {
                     $("#dropdownName").html(d.key);
-                    console.log(d,this)
                     d3.select(this)
                         .transition()
                         .duration(50)
