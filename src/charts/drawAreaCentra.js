@@ -10,24 +10,14 @@ function getUrl(provider, assembly, method) {
 
 function getData() {
     var data ;
-    var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyhoonByYear");
-    $.getJSON("src/php/queryYear.php",{url:url,queryYear:true},
+    $.getJSON(API_PATH + 'typhoon/total',
         function(result) {
-            console.log("query!")
-            $rows = $("#all-bar-view").find("td")
-            var length = result.totalYear
-            var array = [],
-                year = 1981;
-            for(var i=0; i<length;i++){
-
-                $($rows[i]).html("")
-                var temp = {year : year, value : result.count[year]};
-                array.push(temp)
-                year = year + 1;
-
+            var rows = $("#all-bar-view").find("td");
+            var row_length = rows.length;
+            for(var i=0; i < row_length; i++) {
+                $(rows[i]).html("");
             }
-            data = array;
-            // console.log(data);
+            data = result;
             drawYearBar(data);
             addYearBarInfo(data);
         }
@@ -51,7 +41,7 @@ function drawYearBar(data) {
 
      //对加载的数据排序
     xScale.domain([0,d3.max(data, function (d) {
-        return parseFloat(d.value);
+        return parseFloat(d.count);
     })]);
     yScale.domain(data.map(function(d){return d.year}));
     bar1 = svg.append("g")
@@ -67,7 +57,7 @@ function drawYearBar(data) {
             return yScale(d.year)+5;
         })
         .attr("width", function (d) {
-            return xScale(d.value);
+            return xScale(d.count);
         })
         .attr("height", each_height)
         .attr("fill","#fff");
@@ -75,14 +65,14 @@ function drawYearBar(data) {
     bar1.selectAll("text").data(data).enter()
         .append("text")
         .attr("x", function (d) {
-            return xScale(d.value)+5;
+            return xScale(d.count)+5;
         })
         .attr("y", function (d) {
             return yScale(d.year)+15;
         })
         .attr("class","bar-text")
         .text(function (d) {
-            return d.value;
+            return d.count;
         })
 }
 
@@ -366,16 +356,14 @@ function example() {
 
 
 function addYearBarInfo(data) {
-
     var $yearSelector = $("#dropdownYear").siblings("ul").find(".dropdown-inner ul");
     $yearSelector.html("");
-    for(var i = 0;i<30  ;i++) {
-
+    data.forEach(function (each) {
         $yearSelector.append("<li>" +
-            "<a href=\"#\">"+ data[i].year +"<span class=\"li-right icon-check-tick\"></span> </a>" +
+            "<a>"+ each.year +"<span class=\"li-right icon-check-tick\"></span> </a>" +
             "</li>");
 
-    }
+    });
     $("#dropdownYear").siblings("ul").find("a").click(function () {
         var year = $(this).text()
         // TODO: click year to requir details of each year .

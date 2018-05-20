@@ -2,10 +2,10 @@ from django.http import HttpResponse
 from django.utils.six import BytesIO
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
-
+from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework import viewsets
+from rest_framework import viewsets, views
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -36,7 +36,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class TyphoonList(generics.ListCreateAPIView):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API : get typhoon year by selected year
     """
     queryset = Typhoon.objects.all()
     serializer_class = TyphoonListSerializer
@@ -47,7 +47,21 @@ class TyphoonList(generics.ListCreateAPIView):
             self.queryset = self.queryset.filter(year=year)
         return self.queryset.order_by('-startat')
 
+class YearList(views.APIView):
+    """
+    API : get list of year totally
+    """
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        year_list = Typhoon.objects.all().values('year').annotate(count=Count('year')).order_by('year')
+        print(year_list)
+        return Response(year_list)
 
+    def get_queryset(self):
+        year_list = Typhoon.objects.values('year').annotate(Count('num'))
+        return year_list
 
 class TyphoonDetail(generics.ListCreateAPIView):
     """
