@@ -56,8 +56,6 @@ getData();
             flag = -1;
             $("#year-area-view").html("");
             CenterArea();
-
-
         }else{
             flag = 1;
             $("#year-area-view").html("");
@@ -72,8 +70,8 @@ getData();
         console.log("path",$(this).length);
         var text = $(this).attr("title");
         console.log(text);
-        getTyphoonDetail(true, text);
-    })
+        getTyphoonDetail(false, text);
+    });
     $(".icon-menu").click(function () {
         var navBar = $("nav");
         if($(navBar).hasClass("nav-close")){
@@ -84,21 +82,21 @@ getData();
             $(this).parent().removeClass("active");
             $(navBar).removeClass("nav-open").addClass("nav-close");
         }
-    })
+    });
     $(".icon").not(".icon-menu").click(function () {
         if($(this).parent().parent().hasClass("toggle-btn")){
             $(this).parent().addClass("active");
             $(this).parent().siblings().removeClass("active");
             return;
         }
-    })
+    });
     $(".dropdown-toggle").click(function () {
         if($(this).parent().hasClass("open")){
 
         }else {
 
         }
-    })
+    });
     $(".dropdown-menu").find(".li-right").click(function () {
         if($(this).parent().hasClass("active")){
             $(this).parent().removeClass("active");
@@ -107,47 +105,47 @@ getData();
         else {
             $(this).parent().addClass("active");
         }
-    })
+    });
 
     $(".icon-map").click(function () {
         $(".table-view").hide();
-        $(".map-control-container").show()
+        $(".map-control-container").show();
 
-    })
+    });
     $(".icon-table").click(function () {
         $(".table-view").show();
-        $(".map-control-container").hide()
+        $(".map-control-container").hide();
 
-    })
+    });
     $("#chart-control").find(".icon").not("#removeNameTyphoon").mousedown(function () {
         $(this).addClass("active");
     }).mouseup(function () {
         $(this).removeClass("active");
-    })
+    });
 
     $('#removeNameTyphoon').click(function () {
         // changeColorTip
         if($(this).hasClass("active")){
-            $(".removedTyphoon").attr("fill","rgba(255, 68, 114, 0.58)")
+            $(".removedTyphoon").attr("fill","rgba(255, 68, 114, 0.58)");
         }
         else{
-            $(".removedTyphoon").attr("fill","rgba(255, 255, 255, 0.58)")
+            $(".removedTyphoon").attr("fill","rgba(255, 255, 255, 0.58)");
         }
-    })
+    });
 
     $('.map-control-container').find(".icon").click(function () {
-        console.log("if active:",$(this).parent().hasClass("active") )
+        console.log("if active:",$(this).parent().hasClass("active") );
         if($(this).parent().hasClass("active") ){
             $(this).parent().removeClass("active");
-            $(".map-control-box").hide()
-            return
+            $(".map-control-box").hide();
+            return;
         }
         else{
             $('.map-control-container').find(".active").removeClass("active");
             $(this).parent().addClass("active");
         }
 
-        var toggle_class = $(this).attr("class").split('-')[1]
+        var toggle_class = $(this).attr("class").split('-')[1];
         switch (toggle_class){
             case "earth":
                 zoomToOrigin();
@@ -167,34 +165,34 @@ getData();
                 // TODO: satellite image
                 break;
             case "radar":
-                openThisBox()
+                openThisBox();
                 // TODO: radar image
                 break;
             case "path":
                 $box = openThisBox(toggle_class);
-                $box.addClass("box-add-height")
+                $box.addClass("box-add-height");
                 break;
             case "contactChina":
                 $box = openThisBox(toggle_class);
-                $box.addClass("box-add-height")
+                $box.addClass("box-add-height");
                 break;
             case "playPath":
                 openThisBox(toggle_class);
                 break;
             case "removeName":
-                clearPath()
                 // TODO: make it useful
+                removeAllTypoon();
                 break;
             case "screenShot":
-                screenShot()
+                screenShot();
                 // TODO: make it useful
                 break;
             case "share":
-                share()
+                share();
                 // TODO: make it useful
                 break;
             case "download":
-                download()
+                download();
                 // TODO: make it useful
                 break;
             default:

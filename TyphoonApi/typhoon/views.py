@@ -14,7 +14,6 @@ from rest_framework.pagination import LimitOffsetPagination
 
 from .serializers import *
 from .models import *
-import qrcode
 import json
 
 
@@ -62,16 +61,16 @@ class YearList(views.APIView):
         year_list = Typhoon.objects.values('year').annotate(Count('num'))
         return year_list
 
-class TyphoonDetail(generics.ListCreateAPIView):
+class PointList(generics.ListCreateAPIView):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = GraphPoint.objects.all()
-    serializer_class = TyphoonListSerializer
+    queryset = Point.objects.all()
+    serializer_class = PointListSerializer
 
     def get_queryset(self):
-        year = self.request.query_params.get("year", None)
-        if year is not None:
-            self.queryset = self.queryset.filter(year=year)
-        return self.queryset.order_by('-happendedat')
-
+        num = self.request.query_params.get("typhoonnumber", None)
+        typhoon = Typhoon.objects.get(num=num)
+        if num is not None:
+            self.queryset = self.queryset.filter(typhoonnumber=num)
+        return self.queryset.order_by('-happenedat')

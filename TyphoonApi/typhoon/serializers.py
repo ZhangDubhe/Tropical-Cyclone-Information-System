@@ -21,10 +21,12 @@ class TyphoonListSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('num', 'name', 'englishname', 'startat', 'endat', 'year')
         lookup_field = 'year'
 
-class TyphoonDetailSerializer(serializers.HyperlinkedModelSerializer):
+
+class PointListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Point
         fields = ('typhoonnumber', 'happenedat', 'typhoontime', 'latitude', 'longitude', 'intensity', 'windspeed', 'airpressure', 'ordinarywindspeed')
+        lookup_field = 'typhoonnumber'
 
 class TyphoonGraphDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

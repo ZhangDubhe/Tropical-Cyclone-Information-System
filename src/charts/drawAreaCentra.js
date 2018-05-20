@@ -26,7 +26,7 @@ function drawYearBar(data) {
     xScale.domain([0,d3.max(data, function (d) {
         return parseFloat(d.count);
     })]);
-    yScale.domain(data.map(function(d){return d.year}));
+    yScale.domain(data.map(function(d){return d.year;}));
     bar1 = svg.append("g")
         .attr("class","bar")
         .attr("transform","translate("+ 0 +"," + margin.top +")");
@@ -56,32 +56,30 @@ function drawYearBar(data) {
         .attr("class","bar-text")
         .text(function (d) {
             return d.count;
-        })
+        });
 }
 
 function CenterArea() {
     var container_width = $("#year-area-view").width(),
         container_height = $("#year-area-view table").height(),
         eachYearHeight = $(".tiny-div").height(),
-        paddingLeft = 50,
-        container_width = container_width - paddingLeft;
+        paddingLeft = 50;
+    container_width = container_width - paddingLeft;
 
-
-    console.log("table area : width:",container_width," height:",eachYearHeight)
     var init_year = initYear,
         year = initYear,
         yearNum = totalYear;
 
-    var $svgContainer = $("#year-area-view .svg-container")
+    var $svgContainer = $("#year-area-view .svg-container");
 
     for(var i=0; i< yearNum;i++){
         year = init_year + i;
         $svgContainer.append("<svg id=\"container-"+ year +"\"  width='"+container_width+"' height='"+ eachYearHeight +"' ></svg>");
     }
-    var i =0;
+    i =0;
     year = init_year;
     drawChart(year);
-    var i =0;
+    i =0;
     function drawChart(year) {
         var container = d3.select("#container-"+year),
             width = +container.attr("width"),
@@ -146,7 +144,7 @@ function CenterArea() {
                 .attr("stroke-width", 2)
                 .attr("stroke", "#575757")
                 .attr("d","M0,1V0H"+ container_width +"V2")
-                .attr('transform', 'translate(0,' + (eachYearHeight/2) + ')')
+                .attr('transform', 'translate(0,' + (eachYearHeight/2) + ')');
 
             var graphics = container.selectAll('g')
                 .data(symbols)
@@ -176,26 +174,26 @@ function CenterArea() {
                         .transition()
                         .duration(50)
                         .attr("stroke","#fff")
-                        .attr("stroke-width","3")
+                        .attr("stroke-width","3");
                 })
                 .on("mouseout",function (d) {
                     d3.select(this)
                         .transition()
                         .duration(50)
-                        .attr("stroke","none")
+                        .attr("stroke","none");
                 })
                 .on("click",function(d){
                     d3.select(this)
                         .transition()
                         .duration(50)
-                        .attr("fill","#fff")
+                        .attr("fill","#fff");
                 });
 
             if(year<(init_year+yearNum-1)){
 
                 // console.log("This is ",year+1,"until ",init_year+yearNum-1)
 
-                drawChart(year+1)
+                drawChart(year+1);
             }
             else{
                 return 0;
@@ -343,22 +341,22 @@ function addYearBarInfo(data) {
 
     });
     $("#dropdownYear").siblings("ul").find("a").click(function () {
-        var year = $(this).text()
+        var year = $(this).text();
         // TODO: click year to requir details of each year .
         var input = this;
-        queryEachYear(year)
-        var rowNum = year - initYear
-        $(".chart-up").scrollTop(rowNum*singleHeight)
+        queryEachYear(year);
+        var rowNum = year - initYear;
+        $(".chart-up").scrollTop(rowNum*singleHeight);
 
         if($($("#dropdownYear").siblings("ul").children("li")[1]).hasClass("active")){
-            $(input).addClass("active")
-            hoverYear(year)
+            $(input).addClass("active");
+            hoverYear(year);
         }
         else{
-            $(input).siblings().removeClass("active")
-            $(".tiny-div").removeClass("hover")
-            hoverYear(year)
-            $(input).addClass("active")
+            $(input).siblings().removeClass("active");
+            $(".tiny-div").removeClass("hover");
+            hoverYear(year);
+            $(input).addClass("active");
         }
     });
 
@@ -369,7 +367,7 @@ function queryEachYear(year) {
 
     $.getJSON(API_PATH + "typhoon/lists",{year:year},
         function(result) {
-            $rows = $("#all-bar-view").find("td")
+            $rows = $("#all-bar-view").find("td");
             var length = result.length;
             data = result;
             addYearDetails(data);
@@ -383,22 +381,23 @@ function addYearDetails(data) {
     var length = data.length;
     for(var i = 0;i<length ;i++) {
         var name = "";
-        if(data[i].name == "-" && data[i].englishname == "-"){
-            name = "unnamed"}
-        else {
-            if(data[i].name == "-"){
-                name = data[i].englishname}
-            else{
-                name = data[i].name}
-        };
+        if (data[i].name == "-" && data[i].englishname == "-") {
+            name = "unnamed";
+        } else {
+            if (data[i].name == "-") {
+                name = data[i].englishname;
+            } else {
+                name = data[i].name;
+            }
+        }
 
         $nameList.append("<li>" +
             "<a href=\"#\">"+ name +"<span ty-id='"+ data[i].num +"' class=\"li-right icon-check-tick\"></span> </a>" +
             "</li>");
     }
     $("#dropdownName").siblings("ul").find(".li-right").click(function () {
-        var tyId = $(this).attr("ty-id")
-        getTyphoonDetail(false, tyId)
+        var tyId = $(this).attr("ty-id");
+        getTyphoonDetail(false, tyId);
     });
 
 
@@ -421,13 +420,13 @@ function dayFrequence(){
 
     width = width - paddingLeft;
     d3.csv("resource/data/Dfrequence.csv",function (data) {
-        console.log(width)
-        console.log(data)
-
         var x = d3.scale.linear()
             .domain([0, 365])
             .range([0, width]);
-        console.log(d3.max(data, function (d) {  return d.Freq }))
+        console.log(d3.max(data, function (d) { 
+            // console.log(d);
+             return d.Freq;
+            }));
         var y = d3.scale.linear()
             .domain([0,30])
             //
@@ -439,22 +438,22 @@ function dayFrequence(){
             .orient("left")
             .ticks(3);
 
-        var line_generator = d3.svg.line()//d3中绘制曲线的函数
-            .x(function(d){return x(d.Day);})//曲线中x的值
-            .y(function(d){return y(d.Freq);})//曲线中y的值
-            .interpolate("cardinal")//把曲线设置光滑
+        var line_generator = d3.svg.line() // d3中绘制曲线的函数
+            .x(function(d){return x(d.Day);}) // 曲线中x的值
+            .y(function(d){return y(d.Freq);}) // 曲线中y的值
+            .interpolate("cardinal"); // 把曲线设置光滑
 
         svg.append("path")
             .attr("stroke","#fff")
             .attr("fill","transparent")
-            .attr("d", line_generator(data))
+            .attr("d", line_generator(data)); 
 
         svg.append("g")
             .attr("class","y axis")
             .attr("stroke","#575757")
             .attr("fill","transparent")
             .attr("transform", "translate("+width+","+0+")")
-            .call(yAxis)
+            .call(yAxis); 
 
         svg.append('path')
             .attr("class","line")
@@ -462,8 +461,8 @@ function dayFrequence(){
             .attr("stroke-width", 2)
             .attr("stroke", "#575757")
             .attr("d","M0,1V0H"+ width +"V2")
-            .attr('transform', 'translate(0,' + (chartHeight) + ')')
-    })
+            .attr('transform', 'translate(0,' + (chartHeight) + ')');
+    });
 
 
 }
