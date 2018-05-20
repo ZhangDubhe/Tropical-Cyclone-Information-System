@@ -73,4 +73,4 @@ class PointList(generics.ListCreateAPIView):
         typhoon = Typhoon.objects.get(num=num)
         if num is not None:
             self.queryset = self.queryset.filter(typhoonnumber=num)
-        return self.queryset.order_by('-happenedat')
+        return self.queryset.order_by('happenedat')

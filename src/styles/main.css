@@ -166,10 +166,6 @@ html,body{
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
 }
-.main>div{
-    width: 100%;
-    height: 100%;
-}
 header{
     width: 100%;
     height: 2rem;
@@ -179,43 +175,100 @@ header{
     overflow: hidden;
 }
 /*主要布局*/
-.map-view {
-    display: block;
-    z-index: 1;
+@media screen and (max-width: 2000px) {
+    .main>div {
+        width: 100%;
+        height: 100%;
+    }
+
+    .map-view {
+        display: block;
+        z-index: 1;
+    }
+
+    .table-view {
+        display: block;
+        z-index: 50;
+        position: relative;
+        top: -100%;
+        color: #ffffff;
+    }
+    .map-control-container {
+        left: 50%;
+        margin-left: -15rem;
+        width: 32rem;
+    }
+    #chart-control {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100%;
+    }
 }
 
-.table-view {
-    display: block;
+@media screen and (min-width: 2001px) {
+    .main>div {
+        width: 49.9%;
+        height: 100%;
+    }
+    .map-view {
+        display: block;
+        z-index: 1;
+        display: inline-block;
+    }
 
-    z-index: 50;
-    position: relative;
-    top:-100%;
-    color: #ffffff;
+    .table-view {
+        display: block;
+        z-index: 50;
+        color: #ffffff;
+        display: inline-block;
+    }
+
+    .map-control-container {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        left: 24%;
+        margin-left: -16rem;
+        width: 32rem;
+        z-index: 10;
+        text-align: center;
+        line-break: normal;
+    }
+    #chart-control {
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 49%;
+    }
 }
-
-.wrap-div-right{
+/* 遮罩 */
+.wrap-div-right {
     height: 100%;
-    width:2.5rem;
+    width: 2.5rem;
     position: fixed;
-    top:0;
+    top: 0;
     right: 0;
     z-index: 100;
     background-color: white;
-
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
 }
-.wrap-div-down{
+
+.wrap-div-down {
     height: 1.8rem;
-    width:100%;
+    width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 100;
     background-color: white;
-
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+}
+#chart-control {
+    background-color: rgba(0, 0, 0, 0.3);
+    height: auto;
+    position: absolute;
+    bottom: 3rem;
+    padding: 4px;
+    z-index: 100;
 }
 /*地图*/
 #map{
@@ -259,15 +312,7 @@ header{
     height: 100%;
     float: left;
 }
-#chart-control{
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 100%;
-    height: auto;
-    position: absolute;
-    bottom:3rem;
-    padding: 4px;
-    z-index: 100;
-}
+
 #all-line-view{
     width: 100%;
     height: 80%;
@@ -379,6 +424,11 @@ td.hover-deep{
     margin-top:0.9rem;
 }
 /*侧边打开栏*/
+@media screen and (min-width: 2001px) {
+    .main>nav {
+        display: none;
+    }
+}
 .main>nav{
     width: 5rem;
     height: 100vh;
@@ -392,6 +442,7 @@ td.hover-deep{
 
     transition-duration: 0.3s;
 }
+
 .nav-close{
     left: -4.5em;
 }
@@ -429,14 +480,13 @@ td.hover-deep{
 .map-control-container{
     position: fixed;
     top:2rem;
-    left: 50%;
-    margin-left: -15rem;
-    width: 32rem;
+
 
     z-index: 10;
     text-align: center;
     line-break: normal;
 }
+
 .map-control-container ul{
     display: block;
     float: left;
