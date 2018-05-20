@@ -354,6 +354,15 @@ function removeSelectTypoon(id) {
     })
 }
 
+//删除指定台风图层
+function removeAllTypoon() {
+    currfeauterLayer.eachLayer(function(layer){
+        layer.eachLayer(function (sulayer) {
+            map.removeLayer(sulayer);
+        })
+    })
+}
+
 //获取指定台风具体信息
 function getTyphoonDetail(iscurr,sno){
     var url = getUrl("Readearth.PublicSrviceGIS.BLL.TyphoonBLL", "Readearth.PublicSrviceGIS.BLL", "GetTyphoonDetail");

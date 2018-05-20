@@ -11,12 +11,11 @@ var each_typhoon_onGraph = {
 var each_typhoon_timeStamp = {
     date:"",
     grade:""
-
 };
 
 var flag = 1;
-var totalYear = 2015 - 1949 + 1,
-    initYear = 1949;
+var totalYear = 0,
+    initYear = 0;
 var singleHeight = 40;
 var singleWidth;
 var $yearAll = $("#year-area-view");
@@ -25,8 +24,30 @@ var $lineDay = $("#all-line-view");
 var $yearScroll = $(".year-scrollbar");
 var $monthScroll = $(".month-scrollbar");
 
+function getData() {
+    var data;
+    layer.msg("加载中...", {
+        icon: 16,
+        shade: 0.1,
+        time: 2000
+    });
+    $.getJSON(API_PATH + 'typhoon/total',
+        function (result) {
+            layer.close();
+            data = result;
+            totalYear = result.length;
+            initYear = result[0].year;
+            console.log(initYear, totalYear);
+            initTable();
+            drawYearBar(data);
+            addYearBarInfo(data);
+            CenterArea();
+            dayFrequence();
+        }
+    );
+}
 
-
+getData();
 
 ($(function () {
     $("#check").change(function () {
@@ -50,6 +71,7 @@ var $monthScroll = $(".month-scrollbar");
     $('.chart-container').delegate('path[class="area"]','click',function(){
         console.log("path",$(this).length);
         var text = $(this).attr("title");
+        console.log(text);
         getTyphoonDetail(true, text);
     })
     $(".icon-menu").click(function () {
@@ -125,7 +147,6 @@ var $monthScroll = $(".month-scrollbar");
             $(this).parent().addClass("active");
         }
 
-        console.log($(this).attr("class") )
         var toggle_class = $(this).attr("class").split('-')[1]
         switch (toggle_class){
             case "earth":
@@ -181,6 +202,7 @@ var $monthScroll = $(".month-scrollbar");
 
         }
 
+        
     })
 
 
@@ -203,7 +225,7 @@ $(".tiny-div").hover(function () {
     $(".tiny-div[row='"+_row+"']").removeClass("hover");
     $(".tiny-div[col='"+_col+"']").removeClass("hover")
 })
-initTable()
+
 
 function initTable() {
     for(var row=0;row < totalYear;row++){
@@ -224,7 +246,7 @@ function initTable() {
         }
         tableRow += "</tr>";
         tableCol_down += "</tr>"
-        var tableRow_right ="<tr><td row='"+row+"'  class='tiny-div' >"+row+"</td></tr>"
+        var tableRow_right ="<tr><td row='"+row+"'  class='tiny-div' ></td></tr>"
         var yearRowBar = "<div row='"+row+"' class='tiny-div'></div>"
         $yearAll.children("table").append(tableRow)
         $barAll.children("table").append(tableRow_right)
@@ -283,12 +305,31 @@ function zoomToOrigin() {
     setTimeout(layer.msg("恢复原有比例"),2000)
 }
 function clearPath() {
-
-    setTimeout(layer.msg("清除路径"),2000)
+    removeAllTypoon;
+    setTimeout(layer.msg("清除路径"),2000);
 }
 function screenShot() {
-    
+    var downloadMime = 'image/octet-stream';
+    function getDataURL(canvas, type) {
+        return canvas.toDataURL('png');
+    }
+    function saveFile(strData) {
+        document.location.href = strData;
+    }
+    function fixType(type) {
+        type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        return 'image/' + r;
+    }
+    html2canvas(document.querySelector("body")).then(canvas => {
+        document.body.appendChild(canvas);
+        var type = 'png';
+        type = fixType(type);
+        var strData = getDataURL(canvas, type);
+        saveFile(strData.replace(type, downloadMime));
+    });
 }
+
 function share() {
     
 }
@@ -300,6 +341,7 @@ function resizeActive() {
     location.reload()
 
 }
+
 function hoverYear(nowYear) {
     var yearIndex = nowYear - initYear;
     $(".tiny-div[row='"+ yearIndex  +"']").addClass("hover");

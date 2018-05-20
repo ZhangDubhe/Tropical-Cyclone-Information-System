@@ -8,23 +8,6 @@ function getUrl(provider, assembly, method) {
     return "http://www.readearth.com/publictyphoon/PatrolHandler.ashx?provider=" + provider + "&assembly=" + assembly + "&method=" + method;
 }
 
-function getData() {
-    var data ;
-    $.getJSON(API_PATH + 'typhoon/total',
-        function(result) {
-            var rows = $("#all-bar-view").find("td");
-            var row_length = rows.length;
-            for(var i=0; i < row_length; i++) {
-                $(rows[i]).html("");
-            }
-            data = result;
-            drawYearBar(data);
-            addYearBarInfo(data);
-        }
-    );
-
-}
-
 function drawYearBar(data) {
     var width = $("#all-bar-view").width();
     var each_height = 10;
@@ -365,7 +348,6 @@ function addYearBarInfo(data) {
         var input = this;
         queryEachYear(year)
         var rowNum = year - initYear
-        console.log(rowNum)
         $(".chart-up").scrollTop(rowNum*singleHeight)
 
         if($($("#dropdownYear").siblings("ul").children("li")[1]).hasClass("active")){
@@ -374,7 +356,7 @@ function addYearBarInfo(data) {
         }
         else{
             $(input).siblings().removeClass("active")
-            $(".tiny-div").removeClass("hover");
+            $(".tiny-div").removeClass("hover")
             hoverYear(year)
             $(input).addClass("active")
         }
@@ -385,42 +367,37 @@ function addYearBarInfo(data) {
 function queryEachYear(year) {
     var data = [];
 
-    console.log("queryEachYear input:", year)
-    var url = "../../resource/data/year/" + parseInt(year)  + ".json";
-
-    $.getJSON("src/php/queryEachYear.php",{url:url,queryYear:true,year:year},
+    $.getJSON(API_PATH + "typhoon/lists",{year:year},
         function(result) {
             $rows = $("#all-bar-view").find("td")
-            var length = result.totalYear;
+            var length = result.length;
             data = result;
-            addYearDetails(data)
-            console.log("queryEachYear output:", data)
+            addYearDetails(data);
         });
 }
+
+
 function addYearDetails(data) {
     var $nameList = $("#dropdownName").siblings("ul").find(".dropdown-inner ul");
     $nameList.html("");
-    console.log("add Year Details into the selector")
     var length = data.length;
     for(var i = 0;i<length ;i++) {
         var name = "";
-        if(data[i].name == "-" && data[i].ename == "-"){
+        if(data[i].name == "-" && data[i].englishname == "-"){
             name = "unnamed"}
         else {
             if(data[i].name == "-"){
-                name = data[i].ename}
+                name = data[i].englishname}
             else{
                 name = data[i].name}
         };
 
         $nameList.append("<li>" +
-            "<a href=\"#\">"+ name +"<span ty-id='"+ data[i].tfbh +"' class=\"li-right icon-check-tick\"></span> </a>" +
+            "<a href=\"#\">"+ name +"<span ty-id='"+ data[i].num +"' class=\"li-right icon-check-tick\"></span> </a>" +
             "</li>");
     }
     $("#dropdownName").siblings("ul").find(".li-right").click(function () {
         var tyId = $(this).attr("ty-id")
-    //    TODO: detail and path
-        console.log(tyId)
         getTyphoonDetail(false, tyId)
     });
 
@@ -490,7 +467,5 @@ function dayFrequence(){
 
 
 }
-CenterArea();
-getData();
-dayFrequence()
+
 
