@@ -47,13 +47,32 @@ def dumpData(yearpath):
     print("Length: ", len(TyphoonList))
     Typhoon.objects.bulk_create(TyphoonList)
 
-def main():
-    pathls = os.listdir('../DataProcess/originalData/json/list/')
-    print(pathls)
-    for eachyear in pathls:
-        dumpData(eachyear)
-        time.sleep(1)
+def changeChineseName():
+    from typhoon.models import Typhoon, Point, GraphPoint
 
+    path = "./sql/name_englishname_count.tsv"
+    table = open(path, 'r')
+
+    for each in table:
+        ls = each.split("\t")
+        name = ls[0]
+        ename = ls[1]
+        print(name," ", ename)
+        selected = Typhoon.objects.filter(englishname=ename)
+        for each in selected:
+            each.name = name
+            each.save()
+            print(each.num)
+        
+        
+def main():
+    # pathls = os.listdir('../DataProcess/originalData/json/list/')
+    # print(pathls)
+    # for eachyear in pathls:
+    #     dumpData(eachyear)
+    #     time.sleep(1)
+    changeChineseName()
+    return
 
 if __name__ == "__main__":
     main()
