@@ -912,12 +912,13 @@ text.bar-text {
      top: 10px;
      right: -10px;
 }
-#currentTyphoonIsDelete>div{
-    width: 20px;
-    height: 10px;
+#currentTyphoonIsDelete span{
+    display: inline-block !important;
+    width: 20px !important;
+    height: 10px !important;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color:rgba(255, 51, 51, 0.6);
+    background-color:rgb(255, 51, 51);
 }
 #currTypoonDetail p{
      line-height: 1;
@@ -927,7 +928,7 @@ text.bar-text {
      margin-bottom: 0;
 }
 #currentTyphoonArea{
-    height: 50px;
+    height: 100px;
     width: 100%;
     display: block;
 }

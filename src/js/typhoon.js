@@ -375,7 +375,7 @@ function getTyphoonDetail(iscurr, sno) {
         // 显示台风具体路径点信息
         showTyphoonDetail(iscurr, json);
         drawTyphoon(json);
-        drawSingleTyphoonGraph(year);
+        drawSingleTyphoonGraph(sno);
         lastTypoonSelectArry.push({
             'no': sno,
             'type': iscurr,
@@ -402,6 +402,10 @@ function showTyphoonDetail(iscurr, json) {
     $("#currentTyphoonPressure").text(json[0].airpressure);
     $("#currentTyphoonHappenedAt").text(json[0].happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " "));
     $con.find("tr:gt(0)").remove();
+    if (json[0].isdelete) {
+        $("#currentTyphoonIsDelete").show();
+        console.log("SHOW")
+    }
     $title.text(json[0].name +' / '+ json[0].ename);
     $con.append(html);
 }

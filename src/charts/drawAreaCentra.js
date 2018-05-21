@@ -573,25 +573,48 @@ function drawDayFrequence(search){
     });
 }
 
-function drawSingleTyphoonGraph(year) {
+// 基于准备好的dom，初始化echarts实例
+
+function drawSingleTyphoonGraph(num) {
+    var myChart = echarts.init(document.getElementById("currentTyphoonArea"));
     // 实际上是画一个折线图.
     // echart
-    container = document.getElementById("currentTyphoonArea");
-    var myChart = echarts.init(container);
-    var option = {
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line',
-            areaStyle: {}
-        }]
-    };
-    myChart.setOption(option);
+    myChart.showLoading();
+    $.getJSON(API_PATH + 'typhoon/graphpoints', {
+        typhoonnumber: num
+    }, function (data) {
+        var dataset_positive = [],
+            dataset_negitive = [],
+            dateset = [];
+        data.forEach(function (each) {
+            dataset_positive.push(each.intensity/2);
+            dataset_negitive.push(-each.intensity/2);
+            dateset.push(each.happenedat);
+        });
+        myChart.hideLoading();
+        var option = {
+            xAxis: {
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                data: dateset
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: dataset_positive,
+                type: 'line',
+                smooth: true,
+                areaStyle: {}
+            }, {
+                data: dataset_negitive,
+                type: 'line',
+                smooth: true,
+                areaStyle: {}
+            }]
+        };
+        myChart.setOption(option);        
+    });
 }
