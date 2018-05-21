@@ -48,6 +48,9 @@ def dumpData(yearpath):
     Typhoon.objects.bulk_create(TyphoonList)
 
 def changeChineseName():
+    """
+    更改中文名
+    """
     from typhoon.models import Typhoon, Point, GraphPoint
 
     path = "./sql/name_englishname_count.tsv"
