@@ -29,7 +29,8 @@ class PointListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Point
-        fields = ('name', 'ename', 'typhoonnumber', 'happenedat', 'typhoontime', 'latitude', 'longitude', 'intensity', 'windspeed', 'airpressure', 'ordinarywindspeed', 'isdelete')
+        fields = ('name', 'ename', 'typhoonnumber', 'happenedat', 'typhoontime', 'latitude', 'longitude',
+                  'intensity',  'windspeed', 'airpressure', 'ordinarywindspeed', "is_change", 'isdelete')
         lookup_field = 'typhoonnumber'
 
     def get_name(self, obj):
@@ -41,7 +42,23 @@ class PointListSerializer(serializers.ModelSerializer):
     def get_isdelete(self, obj):
         return obj.typhoonnumber.is_delate
 
-class TyphoonGraphDetailSerializer(serializers.HyperlinkedModelSerializer):
+
+class TyphoonGraphDetailSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    ename = serializers.SerializerMethodField()
+    isdelete = serializers.SerializerMethodField()
+
     class Meta:
         model = GraphPoint
-        fields = ('typhoonnumber', 'happenedat', 'typhoontime', 'latitude', 'longitude', 'intensity', 'windspeed', 'airpressure', 'ordinarywindspeed')
+        fields = ('name', 'ename', 'typhoonnumber', 'happenedat',
+                  'intensity', 'isdelete', "is_change")
+        lookup_field = 'typhoonnumber'
+
+    def get_name(self, obj):
+        return obj.typhoonnumber.name
+
+    def get_ename(self, obj):
+        return obj.typhoonnumber.englishname
+
+    def get_isdelete(self, obj):
+        return obj.typhoonnumber.is_delate

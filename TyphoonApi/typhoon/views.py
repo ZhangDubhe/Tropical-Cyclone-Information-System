@@ -74,3 +74,16 @@ class PointList(generics.ListAPIView):
         if num is not None:
             self.queryset = self.queryset.filter(typhoonnumber=num)
         return self.queryset.order_by('happenedat')
+
+class GraphPointList(generics.ListAPIView):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = GraphPoint.objects.all()
+    serializer_class = TyphoonGraphDetailSerializer
+
+    def get_queryset(self):
+        num = self.request.query_params.get("typhoonnumber", None)
+        if num is not None:
+            self.queryset = self.queryset.filter(typhoonnumber=num)
+        return self.queryset.order_by('happenedat')
