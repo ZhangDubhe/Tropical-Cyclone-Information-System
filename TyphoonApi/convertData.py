@@ -214,15 +214,17 @@ def readfileToGraph(_file_, y):
             LAT), str(LON), Pressure, WND, OWD, str(replaceName), str(transit_extra_tropical)]
         # print info_row
         # info_row = [str(typhoonId),date, str(I)]
-        nextTyphoon = GraphPoint(typhoonnumber=typhoonSelected, intensity=strong_level, is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, happenedat=date)
-        OneList.append(nextTyphoon)
+        # nextTyphoon = GraphPoint(typhoonnumber=typhoonSelected, intensity=strong_level, is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, happenedat=date)
+        # OneList.append(nextTyphoon)
+        typhoonSelected.is_delate = replaceName
+        typhoonSelected.save()
         text += ','.join(info_row)
         text += '\r'
         i += 1
 
     # 处理列表之后导入数据库
     print("Length: ", len(OneList))
-    GraphPoint.objects.bulk_create(OneList)
+    # GraphPoint.objects.bulk_create(OneList)
     return text
 
 
@@ -251,11 +253,12 @@ def querySpecialYear(dir):
         last_row = str(year) + "99,"+ str(year) +"-12-31 23:59:59,0,First,0,0,0,0,0,,False,False"
         text += first_row
         # text = "id,date,I"
-        text += readfileToPath(path, year)  # 从最佳数据集里读取数据
+        # text += readfileToPath(path, year)  # 从最佳数据集里读取数据
+        text += readfileToGraph(path, year)  # 从最佳数据集里读取数据
         text += last_row
         #  store path
         # store_all(text, "../dataprocess/exportData/chart/"+str(year)) # To graph
-        store_all(text, "../dataprocess/exportData/path/"+str(year)) # To path
+        # store_all(text, "../dataprocess/exportData/path/"+str(year)) # To path
         print("Finished. At ", time.asctime(time.localtime(time.time())) )
 
 def store_all(_text_, _name_):
