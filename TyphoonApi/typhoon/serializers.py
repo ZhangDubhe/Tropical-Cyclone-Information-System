@@ -22,6 +22,12 @@ class TyphoonListSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field = 'year'
 
 
+class TyphoonListViewsetSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Typhoon
+        fields = ('num', 'name', 'englishname', 'startat', 'endat', 'year')
+        lookup_field = 'year'
+
 class PointListSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     ename = serializers.SerializerMethodField()

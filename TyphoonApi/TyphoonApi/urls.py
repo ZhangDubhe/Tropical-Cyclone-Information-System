@@ -25,6 +25,7 @@ from typhoon import views as ty_views
 router = routers.DefaultRouter()
 router.register('users', ty_views.UserViewSet)
 router.register('groups', ty_views.GroupViewSet)
+router.register('typhoon/list', ty_views.TyphoonListViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

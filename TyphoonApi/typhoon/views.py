@@ -33,6 +33,20 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
+class TyphoonListViewSet(viewsets.ModelViewSet):
+    """
+    API : get typhoon year by selected year
+    """
+    queryset = Typhoon.objects.all()
+    serializer_class = TyphoonListViewsetSerializer
+
+    def get_queryset(self):
+        year = self.request.query_params.get("year", None)
+        if year is not None:
+            self.queryset = self.queryset.filter(year=year)
+        return self.queryset.order_by('-startat')
+
+
 class TyphoonList(generics.ListCreateAPIView):
     """
     API : get typhoon year by selected year
@@ -49,6 +63,7 @@ class TyphoonList(generics.ListCreateAPIView):
 class YearList(views.APIView):
     """
     API : get list of year totally
+    return: [{"year":"2017","count":"23"},...]
     """
     def get(self, request, format=None):
         """
@@ -63,7 +78,8 @@ class YearList(views.APIView):
 
 class PointList(generics.ListAPIView):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API : get point list by typhoonid 
+    params : typhoonnumber
     """
     queryset = Point.objects.all()
     serializer_class = PointListSerializer
@@ -77,7 +93,8 @@ class PointList(generics.ListAPIView):
 
 class GraphPointList(generics.ListAPIView):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API : get graph point list by typhoonid 
+    params : typhoonnumber
     """
     queryset = GraphPoint.objects.all()
     serializer_class = TyphoonGraphDetailSerializer
