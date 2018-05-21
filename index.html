@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>热带气旋生命史</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="author" content="ZhangDubhe <zht_dubhe@163.com>" />
     <link rel="stylesheet" href="components/leaflet/leaflet.css" />
     <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="src/styles/Leaflet.Coordinates-0.1.5.css"/>
@@ -50,15 +52,15 @@
                 </li>
             </ul> -->
             <ul class="control-group">
-                <li>
+                <!-- <li>
                     <a class="icon icon-path" href="#" title="路径详情"></a>
-                </li>
+                </li> -->
                 <!-- <li>
                     <a class="icon icon-contactChina" href="#" title="影响中国"></a>
                 </li> -->
-                <li>
+                <!-- <li>
                     <a class="icon icon-playPath" href="#" title="路径播放"></a>
-                </li>
+                </li> -->
                 <li>
                     <a class="icon icon-removeName" href="#" title="清除路径"></a>
                 </li>
@@ -119,7 +121,7 @@
                             <path M="line" ></path>
                         </g>
                     </svg>
-                    <p class="small" >起始点，变形点，消失点</p>
+                    <p class="small" >起始点，变性点，消失点</p>
                 </div>
                 <div>
                     <input title="remove path" type="checkbox"> 隐藏路径
@@ -150,6 +152,13 @@
                 <hr  style="background-color: #ffffff" />
                 <div class="month-span-container">
 
+                </div>
+
+            </div>
+            <div id="map-share-box" class="map-control-box" style="width: 8rem;height: 7rem;margin-top: 4rem;margin-left: 4rem;">
+                <div>
+                    <img id="sharing"  src="">
+                    <p>扫描二维码转发或直接截图分享给别人</p>
                 </div>
 
             </div>
@@ -253,6 +262,36 @@
             <span class="icon icon-menu"></span>
         </div>
     </nav>
+    <section id="currTypoonDetail" >
+        <h3 id="currentTyphoonName">名称 / 英文名称</h3>
+
+        <span class="icon icon-close" onclick='$("#currTypoonDetail ").hide();'>X</span>
+        <p id="currentTyphoonNum"></p>
+        <p id="currentTyphoonIsDelete"><div></div>已除名</p>
+        <hr>
+        <div id="currentTyphoonArea">
+
+        </div>
+        <hr>
+        <p>强度: <span id="currentTyphoonIntensity"></span></p>
+        <p>开始时间: <span id="currentTyphoonHappenedAt"></span></p>
+        <p>最大风速: <span id="currentTyphoonWindspeed"></span></p>
+        <p>最低气压: <span id="currentTyphoonPressure"></span></p>
+        <hr>
+        <div id="currTyContainer">
+            <table id="currentTyphoonTable">
+                <thead>
+                    <td>时间</td>
+                    <td>中心位置</td>
+                    <td>最大风速(m/s)</td>
+                    <td>最低风压(pa)</td>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <br>
+        <p>可拖动小窗进行浏览.</p>
+    </section>
 </div>
 <div class="wrap-div-right">
     <div class="scrollbar year-scrollbar"></div>
@@ -278,6 +317,7 @@
 <script type="text/javascript" src="components/d3-plugins/box/box.js"></script>
 <script type="text/javascript" src="components/layer/layer.js"></script>
 <script type="text/javascript" src="components/html2canvas/html2canvas.min.js"></script>
+<script type="text/javascript" src="components/echarts/echarts.self.js"></script>
 
 <script src="components/leaflet/leaflet-src.js"></script>
 <script src="src/js/Leaflet.Coordinates-0.1.5.min.js"></script>

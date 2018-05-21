@@ -38,6 +38,13 @@ function loadTyphoon() {
     });
 }
 
+function zoomToOrigin() {
+    map.setView([30, 123], 2);
+    setTimeout(function () {
+        layer.msg("恢复原有比例")
+    }, 1000);
+}
+
 function showOrHiddenLegend($selector) {
     $selector.click(function () {
         if ($(this).hasClass("oppi")) {
@@ -117,8 +124,8 @@ function hoverTr(tipbool, json, i, $selector) {
     $selector.hover(function () {
         $(this).addClass("trhover");
         if (tipbool) {
-            var length = json.points.length;
-            var currArray = json.points[length - 1 - i];
+            var length = json.length;
+            var currArray = json[length - 1 - i];
             var html = getTyphoonPoupeText(currArray);
             popDiv.setLatLng([currArray.latitude, currArray.longitude]).setContent(html).openOn(map);
         }
@@ -141,8 +148,8 @@ function initeSelctTr(iscurr, tipbool, json, $selector) {
         if (iscurr && tipbool) {
             $(this).click(function () {
                 $(this).addClass("currselectty").siblings().removeClass("currselectty");
-                showTypoonYB(i, json);
-                showDistance(i, json);
+                // showTypoonYB(i, json);
+                // showDistance(i, json);
             });
         }
     });
@@ -156,8 +163,8 @@ function initeSelctTr(iscurr, tipbool, json, $selector) {
 
 function showTypoonYB(i, json) {
     var $con = $("#currTypoonYB");
-    var length = json.points.length;
-    var currArray = json.points[length - 1 - i].forecast;
+    var length = json.length;
+    var currArray = json[length - 1 - i].forecast;
     var time = json.points[length - 1 - i].time.replace(/T/g, " ");
     $("#qbtyoonTime").text(time);
     var html = "";
@@ -290,7 +297,7 @@ function getHistoryTyphoon(jsonArray) {
         var $con = $("#historyTypoon");
         $con.append(hostorhtml);
         initTyphoonSelectCommon(false, $con);
-        initeSelctTr(false, false, undefined, $con);
+        initeSelctTr(true, false, undefined, $con);
     }
 }
 
@@ -359,18 +366,22 @@ function removeAllTypoon() {
 
 //获取指定台风具体信息
 function getTyphoonDetail(iscurr, sno) {
+    $("#currTypoonDetail").show();
     var typhoonId = sno;
     var year = sno.substr(0, 4);
     $.getJSON(API_PATH + "typhoon/points", {
         typhoonnumber: typhoonId
     }, function (json) {
+        // 显示台风具体路径点信息
         showTyphoonDetail(iscurr, json);
         drawTyphoon(json);
+        drawSingleTyphoonGraph(year);
         lastTypoonSelectArry.push({
             'no': sno,
             'type': iscurr,
             'info': json
         });
+        initeSelctTr(true, true, json, $("#currentTyphoonTable"));
     });
 
 }
@@ -383,15 +394,15 @@ function showTyphoonDetail(iscurr, json) {
         html += '<tr><td>' + jsonArray[i].happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " ") + '</td><td>' + jsonArray[i].longitude + '°E|' + jsonArray[i].latitude + '°N</td><td>' + jsonArray[i].windspeed + '</td><td>' + jsonArray[i].airpressure + '</td></tr>';
     }
     var $con, $title;
-    if (iscurr) {
-        $title = $("#currTypoonTitle");
-        $con = $("#currTypoonDetail");
-    } else {
-        $title = $("#historyTypoonTitle");
-        $con = $("#historyTypoonDetail");
-    }
+    $title = $("#currentTyphoonName");
+    $con = $("#currentTyphoonTable");
+    $("#currentTyphoonNum").text(json[0].typhoonnumber);
+    $("#currentTyphoonIntensity").text(changeIntensity(json[0].intensity));
+    $("#currentTyphoonWindspeed").text(json[0].windspeed);
+    $("#currentTyphoonPressure").text(json[0].airpressure);
+    $("#currentTyphoonHappenedAt").text(json[0].happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " "));
     $con.find("tr:gt(0)").remove();
-    $title.text(json.typhoonnumber  + "实况路径");
+    $title.text(json[0].name +' / '+ json[0].ename);
     $con.append(html);
 }
 

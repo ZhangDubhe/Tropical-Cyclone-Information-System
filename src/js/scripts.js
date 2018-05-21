@@ -137,18 +137,27 @@ getData();
 
     $('.map-control-container').find(".icon").click(function () {
         console.log("if active:",$(this).parent().hasClass("active") );
-        if($(this).parent().hasClass("active") ){
-            $(this).parent().removeClass("active");
             $(".map-control-box").hide();
+        if($(this).parent().hasClass("active") ){
+            
             return;
         }
         else{
             $('.map-control-container').find(".active").removeClass("active");
             $(this).parent().addClass("active");
+            setTimeout(() => {
+                $(this).parent().removeClass("active");
+            }, 100);
         }
 
         var toggle_class = $(this).attr("class").split('-')[1];
         switch (toggle_class){
+            case "zoomIn":
+                map.zoomIn();
+                break;
+            case "zoomOut":
+                map.zoomOut();
+                break;
             case "earth":
                 zoomToOrigin();
                 $('.map-control-container').find(".icon").removeClass("active");
@@ -191,6 +200,7 @@ getData();
                 break;
             case "share":
                 share();
+                openThisBox(toggle_class);
                 // TODO: make it useful
                 break;
             case "download":
@@ -209,7 +219,7 @@ getData();
 }));
 
 
-$(".tiny-div").hover(function () {
+$(".tiny-div").mouseover(function () {
     $(this).addClass("hover-deep");
     var _row = $(this).attr("row"),
         _col = $(this).attr("col");
@@ -301,13 +311,12 @@ function openThisBox(toggleClass) {
     $("#map-"+toggleClass+"-box").show()
     return $("#map-"+toggleClass+"-box")
 }
-function zoomToOrigin() {
-    setTimeout(layer.msg("恢复原有比例"),2000)
-}
+
 function clearPath() {
     removeAllTypoon;
     setTimeout(layer.msg("清除路径"),2000);
 }
+
 function screenShot() {
     var downloadMime = 'image/octet-stream';
     function getDataURL(canvas, type) {
@@ -349,7 +358,8 @@ function screenShot() {
 }
 
 function share() {
-    
+    var url = encodeURIComponent(location.href);
+    $("#sharing").attr("src", API_PATH + "tools/qrcode/" + url);
 }
 function download() {
 
@@ -363,3 +373,38 @@ function hoverYear(nowYear) {
     var yearIndex = nowYear - initYear;
     $(".tiny-div[row='"+ yearIndex  +"']").addClass("hover");
 }
+function download() {
+
+}
+
+function resizeActive() {
+    location.reload();
+}
+
+function hoverYear(nowYear) {
+    var yearIndex = nowYear - initYear;
+    $(".tiny-div[row='"+ yearIndex  +"']").addClass("hover");
+}
+
+var isMouseDown;
+
+currTypoonDetail.addEventListener('mousedown', function (e) {
+    isMouseDown = true;
+    document.body.classList.add('no-select');
+    initX = e.offsetX;
+    initY = e.offsetY;
+})
+
+document.addEventListener('mousemove', function (e) {
+    if (isMouseDown) {
+        var cx = e.clientX,
+            cy = e.clientY;
+        currTypoonDetail.style.left = e.clientX - initX + 'px';
+        currTypoonDetail.style.top = e.clientY - initY + 'px';
+    }
+})
+
+currTypoonDetail.addEventListener('mouseup', function () {
+    isMouseDown = false;
+    document.body.classList.remove('no-select');
+})

@@ -195,8 +195,8 @@ header{
     }
     .map-control-container {
         left: 50%;
-        margin-left: -15rem;
-        width: 32rem;
+        margin-left: -9rem;
+        width: 18rem;
     }
     #chart-control {
         background-color: rgba(0, 0, 0, 0.3);
@@ -227,8 +227,8 @@ header{
         position: absolute;
         top: 2rem;
         left: 24%;
-        margin-left: -16rem;
-        width: 32rem;
+        margin-left: -9rem;
+        width: 18rem;
         z-index: 10;
         text-align: center;
         line-break: normal;
@@ -865,7 +865,10 @@ span.icon-small.icon-check-circle {
 }
 
 
-
+currentTyphoonArea{
+    height: 50px;
+    width: 100%;
+}
 
 
 text.bar-text {
@@ -878,4 +881,73 @@ text.bar-text {
 }
 .tymm{
     font-size: 1rem !important;
+}
+.no-select {
+    user-select: none;
+}
+#currTypoonDetail {
+    display:none;
+    position: absolute;
+
+    top: 5rem;
+    left: 5rem;
+
+    width: 12rem;
+    height: auto;
+    padding: 0.7rem 1rem;
+
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+#currTypoonDetail span{
+     font-size: 0.8125rem;
+}
+#currTypoonDetail .icon-close{
+     cursor: pointer;
+     vertical-align: middle;
+     line-height: 1;
+     position: absolute;
+     top: 10px;
+     right: -10px;
+}
+#currentTyphoonIsDelete>div{
+    width: 20px;
+    height: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color:rgba(255, 51, 51, 0.6);
+}
+#currTypoonDetail p{
+     line-height: 1;
+}
+#currTypoonDetail h3{
+     margin-top: 0;
+     margin-bottom: 0;
+}
+#currentTyphoonArea{
+    height: 50px;
+    width: 100%;
+    display: block;
+}
+#currTyContainer{
+    height: 200px;
+    overflow: scroll;
+    font-size: 1rem;
+    box-shadow: inset 0px 2px 15px #00000082;
+}
+
+#currentTyphoonTable{
+    width: 100%;
+    margin-top: 5px;
+}
+#currentTyphoonTable td{
+    padding: 4px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+#currentTyphoonTable td.trhover {
+    background: rgba(255, 255, 255, 1)
 }
