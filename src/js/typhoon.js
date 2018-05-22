@@ -358,7 +358,6 @@ function removeSelectTypoon(id) {
 function removeAllTypoon() {
     currfeauterLayer.eachLayer(function (layer) {
         layer.eachLayer(function (sulayer) {
-            console.log(sulayer);
             map.removeLayer(sulayer);
         });
     });
@@ -366,13 +365,19 @@ function removeAllTypoon() {
 
 //获取指定台风具体信息
 function getTyphoonDetail(iscurr, sno) {
-    $("#currTypoonDetail").show();
+    layer.msg("正在加载台风:" + sno, {
+        icon: 16,
+        shade: 0.1,
+        time: 10000
+    });
     var typhoonId = sno;
     var year = sno.substr(0, 4);
     $.getJSON(API_PATH + "typhoon/points", {
         typhoonnumber: typhoonId
     }, function (json) {
         // 显示台风具体路径点信息
+        layer.closeAll();
+        $("#currTypoonDetail").show();
         showTyphoonDetail(iscurr, json);
         drawTyphoon(json);
         drawSingleTyphoonGraph(sno);
@@ -383,7 +388,24 @@ function getTyphoonDetail(iscurr, sno) {
         });
         initeSelctTr(true, true, json, $("#currentTyphoonTable"));
     });
-
+}
+//全年全部查询时获取指定台风具体信息
+function getTyphoonDetailYear(iscurr, sno) {
+    var typhoonId = sno;
+    var year = sno.substr(0, 4);
+    $.getJSON(API_PATH + "typhoon/points", {
+        typhoonnumber: typhoonId
+    }, function (json) {
+        // 显示台风具体路径点信息
+        showTyphoonDetail(iscurr, json);
+        drawTyphoon(json);
+        lastTypoonSelectArry.push({
+            'no': sno,
+            'type': iscurr,
+            'info': json
+        });
+        initeSelctTr(true, true, json, $("#currentTyphoonTable"));
+    });
 }
 
 //显示指定台风信息
@@ -404,7 +426,6 @@ function showTyphoonDetail(iscurr, json) {
     $con.find("tr:gt(0)").remove();
     if (json[0].isdelete) {
         $("#currentTyphoonIsDelete").show();
-        console.log("SHOW")
     }
     $title.text(json[0].name +' / '+ json[0].ename);
     $con.append(html);

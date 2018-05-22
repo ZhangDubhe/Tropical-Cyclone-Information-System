@@ -255,9 +255,7 @@ function drawYearArea(year) {
     year = parseInt(year);
     drawChart(year);
     $('#single-area-view').delegate('path[class="area"]', 'click', function () {
-        console.log("path", $(this).length);
         var text = $(this).attr("title");
-        console.log(text);
         getTyphoonDetail(false, text);
     });
     function drawChart(year) {
@@ -499,7 +497,8 @@ function addYearDetails(data) {
         idList.sort();
         idList.forEach(function (each) {
             setTimeout(() => {
-                getTyphoonDetail(false, each);
+                getTyphoonDetailYear(false, each);
+                console.log(new Date());
             }, 1000);
         });
     });

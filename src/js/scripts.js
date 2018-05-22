@@ -29,11 +29,11 @@ function getData() {
     layer.msg("加载中...", {
         icon: 16,
         shade: 0.1,
-        time: 2000
+        time: 10000
     });
     $.getJSON(API_PATH + 'typhoon/total',
         function (result) {
-            layer.close();
+            layer.closeAll();
             data = result;
             totalYear = result.length;
             initYear = result[0].year;
@@ -69,8 +69,15 @@ getData();
     $('.chart-container').delegate('path[class="area"]','click',function(){
         console.log("path",$(this).length);
         var text = $(this).attr("title");
-        console.log(text);
-        getTyphoonDetail(false, text);
+        console.log(text, $(this).attr('fill'));
+        console.log($(this));
+        if (!$(this).attr("clicked")) {
+            getTyphoonDetail(false, text);
+            $(this).attr("clicked", "true");
+        } else {
+            $(this).attr("clicked", "false");
+            removeSelectTypoon(text);
+        }
     });
     $(".icon-menu").click(function () {
         var navBar = $("nav");
