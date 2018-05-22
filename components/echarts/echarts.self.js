@@ -22884,7 +22884,7 @@ var loadingDefault = function (api, opts) {
  * @constructor
  */
 
-function Scheduler(ecInstance, api, dataProcessorHandlers, visualHandlers) {
+function Scheduler(ecInstance, api, DataProcessorHandlers, visualHandlers) {
   this.ecInstance = ecInstance;
   this.api = api;
   this.unfinished; // Fix current processors in case that in some rear cases that
@@ -22892,9 +22892,9 @@ function Scheduler(ecInstance, api, dataProcessorHandlers, visualHandlers) {
   // Register processors incrementally for a echarts instance is
   // not supported by this stream architecture.
 
-  var dataProcessorHandlers = this._dataProcessorHandlers = dataProcessorHandlers.slice();
+  var DataProcessorHandlers = this._DataProcessorHandlers = DataProcessorHandlers.slice();
   var visualHandlers = this._visualHandlers = visualHandlers.slice();
-  this._allHandlers = dataProcessorHandlers.concat(visualHandlers);
+  this._allHandlers = DataProcessorHandlers.concat(visualHandlers);
   /**
    * @private
    * @type {
@@ -23045,7 +23045,7 @@ proto.prepareView = function (view, model, ecModel, api) {
 
 proto.performDataProcessorTasks = function (ecModel, payload) {
   // If we do not use `block` here, it should be considered when to update modes.
-  performStageTasks(this, this._dataProcessorHandlers, ecModel, payload, {
+  performStageTasks(this, this._DataProcessorHandlers, ecModel, payload, {
     block: true
   });
 }; // opt
@@ -23774,12 +23774,12 @@ function ECharts(dom, theme$$1, opts) {
   }
 
   sort(visualFuncs, prioritySortFunc);
-  sort(dataProcessorFuncs, prioritySortFunc);
+  sort(DataProcessorFuncs, prioritySortFunc);
   /**
    * @type {module:echarts/stream/Scheduler}
    */
 
-  this._scheduler = new Scheduler(this, api, dataProcessorFuncs, visualFuncs);
+  this._scheduler = new Scheduler(this, api, DataProcessorFuncs, visualFuncs);
   Eventful.call(this);
   /**
    * @type {module:echarts~MessageCenter}
@@ -23828,7 +23828,7 @@ echartsProto._onframe = function () {
 
       do {
         var startTime = +new Date();
-        scheduler.performSeriesTasks(ecModel); // Currently dataProcessorFuncs do not check threshold.
+        scheduler.performSeriesTasks(ecModel); // Currently DataProcessorFuncs do not check threshold.
 
         scheduler.performDataProcessorTasks(ecModel);
         updateStreamModes(this, ecModel); // Do not update coordinate system here. Because that coord system update in
@@ -25088,7 +25088,7 @@ var eventActionMap = {};
  * @inner
  */
 
-var dataProcessorFuncs = [];
+var DataProcessorFuncs = [];
 /**
  * @type {Array.<Function>}
  * @inner
@@ -25281,7 +25281,7 @@ function registerPreprocessor(preprocessorFunc) {
  */
 
 function registerProcessor(priority, processor) {
-  normalizeRegister(dataProcessorFuncs, priority, processor, PRIORITY_PROCESSOR_FILTER);
+  normalizeRegister(DataProcessorFuncs, priority, processor, PRIORITY_PROCESSOR_FILTER);
 }
 /**
  * Register postUpdater

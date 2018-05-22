@@ -275,9 +275,9 @@ def querySpecialYear(dir, query_type, startYear, endYear):
         text += last_row
         # store path
         if query_type == 'graph':
-            store_all(text, "../dataprocess/exportData/chart/"+str(year)) # To graph
+            store_all(text, "../DataProcess/exportData/chart/"+str(year)) # To graph
         else:
-            store_all(text, "../dataprocess/exportData/path/"+str(year)) # To path
+            store_all(text, "../DataProcess/exportData/path/"+str(year)) # To path
         print("Finished <", year, "> At ", time.asctime(time.localtime(time.time())) )
 
 def store_all(_text_, _name_):
@@ -293,7 +293,7 @@ def readLandFile():
     header = ''
     year = ""
     new = ["year", "id", "cid", "name", "chinesename"]
-    for each in open("../dataprocess/originalData/台风登陆信息表.csv", 'rb'):
+    for each in open("../DataProcess/originalData/台风登陆信息表.csv", 'rb'):
         if i == 0:
             i += 1
             header = each
@@ -324,9 +324,9 @@ def readLandFile():
 
 def main():
     global HEADERS
-    querySpecialYear("../dataprocess/originalData/bst4915/",
+    querySpecialYear("../DataProcess/originalData/bst4915/",
                      'graph', 1949, 2018)
-    querySpecialYear("../dataprocess/originalData/bst4915/",
+    querySpecialYear("../DataProcess/originalData/bst4915/",
                      'path', 1949, 2018)
     # readLandFile()
     # store_all(HEADERS, "headerData")

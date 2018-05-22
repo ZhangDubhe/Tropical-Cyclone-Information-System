@@ -84,7 +84,7 @@ function CenterArea() {
             width = +container.attr("width"),
             height = +container.attr("height");
 
-        var url = "dataprocess/exportdata/chart/" + year +".csv";
+        var url = "DataProcess/exportData/chart/" + year +".csv";
         // path and chart should
         d3.csv(url, type, function (data) {
             var symbols = d3.nest()
@@ -265,7 +265,7 @@ function drawYearArea(year) {
         width = +container.attr("width");
         height = +container.attr("height");
 
-        var url = "dataprocess/exportdata/chart/" + year + ".csv";
+        var url = "DataProcess/exportData/chart/" + year + ".csv";
         // path and chart should
         d3.csv(url, type, function (data) {
             var symbols = d3.nest()

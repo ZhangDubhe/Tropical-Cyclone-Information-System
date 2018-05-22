@@ -331,7 +331,7 @@
                 }
 
                 timsort(visualFuncs, prioritySortFunc);
-                timsort(dataProcessorFuncs, prioritySortFunc);
+                timsort(DataProcessorFuncs, prioritySortFunc);
 
                 zr.animation.on('frame', this._onframe, this);
 
@@ -1302,7 +1302,7 @@
              * @private
              */
             function processData(ecModel, api) {
-                each(dataProcessorFuncs, function (process) {
+                each(DataProcessorFuncs, function (process) {
                     process.func(ecModel, api);
                 });
             }
@@ -1603,7 +1603,7 @@
              * @type {Array.<Object.<string, Function>>}
              * @inner
              */
-            var dataProcessorFuncs = [];
+            var DataProcessorFuncs = [];
 
             /**
              * @type {Array.<Function>}
@@ -1864,7 +1864,7 @@
                         throw new Error('Unkown processor priority');
                     }
                 }
-                dataProcessorFuncs.push({
+                DataProcessorFuncs.push({
                     prio: priority,
                     func: processorFunc
                 });
