@@ -25,7 +25,9 @@ Typhoon api
 |____manage.py
 |____sql
 ```
-进入 api 文件夹, 初次运行需加载所需的类库(requirement.txt), 使用`pip3 install -r /path/to/requirements.txt` 
+进入 api 文件夹, 初次运行需安装所需依赖(requirement.txt), 使用`pip3 install -r /path/to/requirements.txt` 
+
+> 自动记录所需依赖 `pip freeze > requirements.txt`
 
 使用` python3 manage.py runserver ` 启动 Django 服务,注意外部访问,需在最后加上` 0.0.0.0/0:80 `.数据库分为本地测试 sqlite3 数据库及腾讯云服务器建的 mysql 数据库. git 文件夹里存储有带数据的 sqlite3 数据库, 克隆之后可直接使用.
 

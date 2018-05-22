@@ -5,6 +5,7 @@ config.js
 # DataProcess
 DataProcess/*
 !DataProcess/*.py
+!DataProcess/exportData
 
 # Backend
 *.pyc
