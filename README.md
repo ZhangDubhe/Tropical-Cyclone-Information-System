@@ -5,9 +5,15 @@ ____
 查询热带气旋的生命演变史、路径、除名情况等，结合清晰炫酷的可视化图表及地图综合进行展现。本系统由华东师范大学地理科学学院地图研究所进行界面及功能设计，由我进行系统搭建。
 主要采用的技术栈为D3.js + leaflet 进行数据展示，jquery 进行交互。
 
+### 未完成计划
+1. 单个著名台风的 Map Story.
+2. 图例
+3. YearArea 突出显示
+
 ### 文件说明
 文件包括 前端文件夹(src,component, node_modules 等), api 文件夹(TYPHOONAPI), 数据文件夹(DataProcess).
 其各使用方法如下.
+
 #### TyphoonAPI
 服务端框架使用 Django Rest Framework 搭建, Django 版本为 2.0.4, Python 版本 3.6.
 ``` tree
@@ -66,5 +72,3 @@ jquery outerWidth/Height 包括轮廓的宽/高
 
 ### 2018/5
 API 功能增加
-
-

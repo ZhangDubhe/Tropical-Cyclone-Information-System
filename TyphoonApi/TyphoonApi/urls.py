@@ -25,12 +25,10 @@ from typhoon import views as ty_views
 router = routers.DefaultRouter()
 router.register('users', ty_views.UserViewSet)
 router.register('groups', ty_views.GroupViewSet)
-router.register('typhoon/list', ty_views.TyphoonListViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('docs/', get_schema_view()),
     path('api-auth/', include('rest_framework.urls')),
     path('tools/', include('tools.urls')),
     path('typhoon/', include('typhoon.urls'))
