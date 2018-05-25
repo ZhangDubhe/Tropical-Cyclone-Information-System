@@ -148,6 +148,13 @@ function CenterArea() {
             var graphics = container.selectAll('g')
                 .data(symbols)
                 .enter().append('g')
+                .attr("fill", function (d) {
+                    if(d.values[0].replaceName == "True"){
+                        return "rgba(255, 68, 114, 0.58)";
+                    } else {
+                        return "rgba(255, 255, 255, 0.58)";
+                    }
+                })                
                 .attr('transform', 'translate(0,' + padding.top + ')')
                 .attr("class", function (d) {
                     if(d.values[0].replaceName == "True"){
@@ -347,6 +354,13 @@ function drawYearArea(year) {
             var graphics = container.selectAll('g')
                 .data(symbols)
                 .enter().append('g')
+                .attr("fill", function (d) {
+                    if (d.values[0].replaceName == "True") {
+                        return "rgba(255, 68, 114, 0.58)";
+                    } else {
+                        return "rgba(255, 255, 255, 0.58)";
+                    }
+                })
                 .attr('transform', 'translate(0,' + padding.top + ')')
                 .attr("class", function (d) {
                     if (d.values[0].replaceName == "True") {
@@ -382,10 +396,20 @@ function drawYearArea(year) {
                         .attr("stroke", "none");
                 })
                 .on("click", function (d) {
+                    var text = $(this).attr("title");
                     d3.select(this)
                         .transition()
-                        .duration(50)
-                        .attr("fill", "#fff");
+                        .duration(50);
+                    if (!$(this).attr("clicked") || $(this).attr("clicked") === "false") {
+                        getTyphoonDetail(false, text);
+                        $(this).attr("clicked", "true");
+                        $(this).addClass('clickArea');
+                    } else {
+                        $(this).attr("clicked", "false");
+                        removeSelectTypoon(text);
+                        $(this).removeClass('clickArea');
+                        $("#currTypoonDetail").hide();
+                    }
                 });
 
             return 0;

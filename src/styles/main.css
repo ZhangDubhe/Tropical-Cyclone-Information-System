@@ -357,10 +357,10 @@ header{
     fill: rgba(255, 255, 255, 0.58);
 }
 .normalTyphoon{
-    fill: rgba(255, 255, 255, 0.58);
+    fill: rgba(255, 255, 255, 0.58) !important;
 }
 .removedTyphoon{
-    fill: rgba(255, 68, 114, 0.58);
+    fill: rgba(255, 68, 114, 0.58) !important;
 }
 .clickArea{
     fill: #fff;
