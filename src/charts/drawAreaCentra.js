@@ -574,23 +574,20 @@ function drawDayFrequence(search){
 
 // 基于准备好的dom，初始化echarts实例
 
-function drawSingleTyphoonGraph(num) {
+function drawSingleTyphoonGraph(num, json) {
     var myChart = echarts.init(document.getElementById("currentTyphoonArea"));
     // 实际上是画一个折线图.
     // echart
-    myChart.showLoading();
-    $.getJSON(API_PATH + 'typhoon/graphpoints', {
-        typhoonnumber: num
-    }, function (data) {
+    console.log(json);
+    if (json) {
         var dataset_positive = [],
             dataset_negitive = [],
             dateset = [];
-        data.forEach(function (each) {
-            dataset_positive.push(each.intensity/2);
-            dataset_negitive.push(-each.intensity/2);
+        json.forEach(function (each) {
+            dataset_positive.push(each.intensity*2);
+            dataset_negitive.push(-each.intensity*2);
             dateset.push(each.happenedat);
         });
-        myChart.hideLoading();
         var option = {
             xAxis: {
                 type: 'category',
@@ -614,6 +611,47 @@ function drawSingleTyphoonGraph(num) {
                 areaStyle: {}
             }]
         };
-        myChart.setOption(option);        
-    });
+        myChart.setOption(option);
+    } else {
+        myChart.showLoading();
+
+        $.getJSON(API_PATH + 'typhoon/graphpoints', {
+            typhoonnumber: num
+        }, function (data) {
+            var dataset_positive = [],
+                dataset_negitive = [],
+                dateset = [];
+            data.forEach(function (each) {
+                dataset_positive.push(each.intensity/2);
+                dataset_negitive.push(-each.intensity/2);
+                dateset.push(each.happenedat);
+            });
+            myChart.hideLoading();
+            var option = {
+                xAxis: {
+                    type: 'category',
+                    splitLine: {
+                        show: false
+                    },
+                    data: dateset
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: dataset_positive,
+                    type: 'line',
+                    smooth: true,
+                    areaStyle: {}
+                }, {
+                    data: dataset_negitive,
+                    type: 'line',
+                    smooth: true,
+                    areaStyle: {}
+                }]
+            };
+            myChart.setOption(option);        
+        });
+    }
+
 }

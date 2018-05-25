@@ -268,15 +268,27 @@
         <span class="icon icon-close" onclick='$("#currTypoonDetail ").hide();'>X</span>
         <p id="currentTyphoonNum"></p>
         <p id="currentTyphoonIsDelete" style="display:none"><span></span>已除名</p>
-        <hr>
+
         <div id="currentTyphoonArea">
 
         </div>
-        <hr>
-        <p>强度: <span id="currentTyphoonIntensity"></span></p>
-        <p>开始时间: <span id="currentTyphoonHappenedAt"></span></p>
-        <p>最大风速: <span id="currentTyphoonWindspeed"></span></p>
-        <p>最低气压: <span id="currentTyphoonPressure"></span></p>
+
+        <p>
+            <span class="subtitle">气旋强度:</span>
+            <span id="currentTyphoonIntensity"></span>
+        </p>
+        <p>
+            <span class="subtitle">发生时间:</span>
+            <span id="currentTyphoonHappenedAt"></span>
+        </p>
+        <p>
+            <span class="subtitle">最大风速: </span>
+            <span id="currentTyphoonWindspeed"></span>m/s
+        </p>
+        <p>
+            <span class="subtitle">最低气压:</span>
+            <span id="currentTyphoonPressure"></span>pa
+        </p>
         <hr>
         <div id="currTyContainer">
             <table id="currentTyphoonTable">

@@ -380,7 +380,7 @@ function getTyphoonDetail(iscurr, sno) {
         $("#currTypoonDetail").show();
         showTyphoonDetail(iscurr, json);
         drawTyphoon(json);
-        drawSingleTyphoonGraph(sno);
+        drawSingleTyphoonGraph(sno, json);
         lastTypoonSelectArry.push({
             'no': sno,
             'type': iscurr,

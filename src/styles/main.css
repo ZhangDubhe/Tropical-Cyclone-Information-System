@@ -899,18 +899,24 @@ text.bar-text {
     z-index: 999;
     background-color: rgba(255, 255, 255, 0.8);
     font-weight: 800;
-    font-size: 0.8rem;
 }
-#currTypoonDetail span{
-     font-size: 0.8125rem;
+#currTypoonDetail p span.subtitle{
+    font-size: 0.5rem;
+    width: 3rem;
+    display: inline-block;
+}
+#currTypoonDetail p span{
+    font-size: 0.5rem;
 }
 #currTypoonDetail .icon-close{
-     cursor: pointer;
-     vertical-align: middle;
-     line-height: 1;
-     position: absolute;
-     top: 10px;
-     right: -10px;
+    display: block;
+    cursor: pointer;
+    line-height: 2rem;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    font-size: 0.8rem;
 }
 #currentTyphoonIsDelete span{
     display: inline-block !important;
@@ -948,6 +954,8 @@ text.bar-text {
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
     text-align: center;
+    font-size: 0.475rem;
+    
 }
 
 #currentTyphoonTable tr.trhover {
