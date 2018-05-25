@@ -362,6 +362,11 @@ header{
 .removedTyphoon{
     fill: rgba(255, 68, 114, 0.58);
 }
+.clickArea{
+    fill: #fff;
+    stroke: #ff3853;
+    stroke-width: 3;
+}
 /* 背景网格 */
 
 .tiny-div{

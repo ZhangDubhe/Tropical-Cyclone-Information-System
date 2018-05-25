@@ -185,14 +185,15 @@ function CenterArea() {
                     var text = $(this).attr("title");
                     d3.select(this)
                         .transition()
-                        .duration(50)
-                        .attr("fill", "#fff");
+                        .duration(50);
                     if (!$(this).attr("clicked") || $(this).attr("clicked") === "false") {
                         getTyphoonDetail(false, text);
                         $(this).attr("clicked", "true");
+                        $(this).addClass('clickArea');
                     } else {
                         $(this).attr("clicked", "false");
                         removeSelectTypoon(text);
+                        $(this).removeClass('clickArea');                        
                         $("#currTypoonDetail").hide();
                     }
                 });
@@ -246,7 +247,9 @@ function CenterArea() {
 }
 
 function drawYearArea(year) {
-    $("#all-line-view .svg-container").html('');
+    if (document.body.clientWidth <= 1900) {
+        $("#all-line-view .svg-container").html('');
+    }
     var $svgContainer = $("#single-area-view");
     var width = $("#map").width() * 0.94 - 5,
         height = $svgContainer.height(),
