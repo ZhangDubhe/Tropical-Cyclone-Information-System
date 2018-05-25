@@ -43,7 +43,7 @@ function drawYearBar(data) {
             return xScale(d.count);
         })
         .attr("height", each_height)
-        .attr("fill","#fff");
+        .attr("fill", "#ff3853");
 
     bar1.selectAll("text").data(data).enter()
         .append("text")
@@ -182,10 +182,19 @@ function CenterArea() {
                         .attr("stroke","none");
                 })
                 .on("click",function(d){
+                    var text = $(this).attr("title");
                     d3.select(this)
                         .transition()
                         .duration(50)
-                        .attr("fill","#fff");
+                        .attr("fill", "#fff");
+                    if (!$(this).attr("clicked") || $(this).attr("clicked") === "false") {
+                        getTyphoonDetail(false, text);
+                        $(this).attr("clicked", "true");
+                    } else {
+                        $(this).attr("clicked", "false");
+                        removeSelectTypoon(text);
+                        $("#currTypoonDetail").hide();
+                    }
                 });
 
             if(year<(init_year+yearNum-1)){
@@ -498,7 +507,6 @@ function addYearDetails(data) {
         idList.forEach(function (each) {
             setTimeout(() => {
                 getTyphoonDetailYear(false, each);
-                console.log(new Date());
             }, 1000);
         });
     });
@@ -578,7 +586,6 @@ function drawSingleTyphoonGraph(num, json) {
     var myChart = echarts.init(document.getElementById("currentTyphoonArea"));
     // 实际上是画一个折线图.
     // echart
-    console.log(json);
     if (json) {
         var dataset_positive = [],
             dataset_negitive = [],

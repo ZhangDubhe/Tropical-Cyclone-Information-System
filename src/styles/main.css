@@ -175,7 +175,7 @@ header{
     overflow: hidden;
 }
 /*主要布局*/
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 1900px) {
     .main>div {
         width: 100%;
         height: 100%;
@@ -204,7 +204,7 @@ header{
     }
 }
 
-@media screen and (min-width: 2001px) {
+@media screen and (min-width: 1901px) {
     .main>div {
         width: 49.9%;
         height: 100%;
@@ -424,7 +424,7 @@ td.hover-deep{
     margin-top:0.9rem;
 }
 /*侧边打开栏*/
-@media screen and (min-width: 2001px) {
+@media screen and (min-width: 1901px) {
     .main>nav {
         display: none;
     }

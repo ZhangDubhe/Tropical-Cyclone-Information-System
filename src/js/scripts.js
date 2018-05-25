@@ -67,17 +67,8 @@ getData();
 
     //针对所有的图标
     $('.chart-container').delegate('path[class="area"]','click',function(){
-        console.log("path",$(this).length);
         var text = $(this).attr("title");
-        console.log(text, $(this).attr('fill'));
-        console.log($(this));
-        if (!$(this).attr("clicked")) {
-            getTyphoonDetail(false, text);
-            $(this).attr("clicked", "true");
-        } else {
-            $(this).attr("clicked", "false");
-            removeSelectTypoon(text);
-        }
+        console.log(text, $(this).attr('fill'), $(this).attr('clicked'));
     });
     $(".icon-menu").click(function () {
         var navBar = $("nav");
@@ -394,6 +385,8 @@ function hoverYear(nowYear) {
 }
 
 var isMouseDown;
+var height = currTypoonDetail.offsetHeight,
+    width = currTypoonDetail.offsetWidth;
 
 currTypoonDetail.addEventListener('mousedown', function (e) {
     isMouseDown = true;
@@ -404,14 +397,33 @@ currTypoonDetail.addEventListener('mousedown', function (e) {
 
 document.addEventListener('mousemove', function (e) {
     if (isMouseDown) {
-        var cx = e.clientX,
-            cy = e.clientY;
+        var cx = e.clientX - initX,
+            cy = e.clientY - initY;
+        if (cx < 0) {
+            cx = 0;
+        }
+        if (cy < 0) {
+            cy = 0;
+        }
+        if (window.innerWidth - e.clientX + e.mouseX < width) {
+            cx = window.innerWidth - width;
+        }
+        if (e.clientY > window.innerHeight - height + e.mouseY) {
+            cy = window.innerHeight - height;
+        }
         currTypoonDetail.style.left = e.clientX - initX + 'px';
         currTypoonDetail.style.top = e.clientY - initY + 'px';
     }
-})
+});
 
 currTypoonDetail.addEventListener('mouseup', function () {
     isMouseDown = false;
     document.body.classList.remove('no-select');
-})
+});
+
+document.addEventListener('mouseup', function (e) {
+    if (e.clientY > window.innerWidth || e.clientY < 0 || e.clientX < 0 || e.clientX > window.innerHeight) {
+        isMouseDown = false;
+        document.body.classList.remove('no-select');
+    }
+});

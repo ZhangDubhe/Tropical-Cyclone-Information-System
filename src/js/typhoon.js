@@ -508,7 +508,7 @@ function drawTyphoon(json) {
                 fillOpacity: 1
             }).addTo(map);
             var pophtml = getTyphoonPoupeText(currArray);
-            circleIco.setRadius(currArray.intensity+2).bindPopup(pophtml, {
+            circleIco.setRadius(currArray.intensity+1).bindPopup(pophtml, {
                 showOnMouseOver: !0,
                 closeButton: !1,
             });
@@ -542,6 +542,9 @@ function drawTyphoon(json) {
                                 drawYBTyoon(typhoonLayer, currArray.happenedat, setting, lat, ybArray[i].points);
                         }
                     }
+                }
+                if (count == jsonArray.length - 1) {
+                    lastMarker.remove();
                 }
             } else {
                 //map.setView(lat, 5);
