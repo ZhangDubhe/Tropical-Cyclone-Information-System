@@ -127,6 +127,12 @@ function hoverTr(tipbool, json, i, $selector) {
             var length = json.length;
             var currArray = json[length - 1 - i];
             var html = getTyphoonPoupeText(currArray);
+            console.log("hover:", currArray);
+            $("#currentTyphoonNum").text(currArray.typhoonnumber);
+            $("#currentTyphoonIntensity").text(changeIntensity(currArray.intensity));
+            $("#currentTyphoonWindspeed").text(currArray.windspeed);
+            $("#currentTyphoonPressure").text(currArray.airpressure);
+            $("#currentTyphoonHappenedAt").text(currArray.happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " "));
             popDiv.setLatLng([currArray.latitude, currArray.longitude]).setContent(html).openOn(map);
         }
     }, function () {

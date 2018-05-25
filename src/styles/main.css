@@ -368,7 +368,25 @@ header{
     stroke-width: 3;
 }
 /* 背景网格 */
-
+.legend-container {
+    position: fixed;
+    bottom: 13%;
+    right: 70px;
+    display: block;
+    z-index: 200;
+}
+.legend {
+    padding: 10px;
+    color: #fff;
+    display: flex;
+}
+.icon-legend{
+    width:0.5rem;
+    height:0.5rem;
+    display: inline-block;
+    margin-right: 3px;
+    margin-left: 5px;
+}
 .tiny-div{
     width: 100%;
     height: 100%;
