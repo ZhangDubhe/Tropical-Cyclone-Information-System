@@ -63,23 +63,26 @@ map = L.map('mapid', {
         if(customBaselayer){
             map.removeLayer(customBaselayer);
         }
-        if(mapid=="vecLayer"){
-            customBaselayer= vecLayer
+        if(mapid=="verLayer"){
+            customBaselayer = vecLayer;
             map.addLayer(customBaselayer);
         }else if(mapid=="imgLayer"){
-            customBaselayer= imgLayer;
+            customBaselayer = imgLayer;
             map.addLayer(customBaselayer);
         }
         else if(mapid=="terLayer"){
-            customBaselayer= terLayer;
+            customBaselayer = terLayer;
             map.addLayer(customBaselayer);
         }
         else if(mapid=="newLayer"){
             layer.msg("此功能未开通");
             map.addLayer(customBaselayer);
         }
-    })
+    });
     $(".icon-earth").click(function () {
-        map.setView()
+        map.setView([30, 123], 2);
+        setTimeout(function () {
+            layer.msg("恢复原有比例")
+        }, 1000);
     })
 }))
