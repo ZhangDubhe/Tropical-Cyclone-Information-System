@@ -373,6 +373,7 @@ header{
     left: 0.2rem;
     bottom: 20%;
     line-height: 2rem;
+    z-index: 200;
 }
 #legendContainer {
     display: none;
