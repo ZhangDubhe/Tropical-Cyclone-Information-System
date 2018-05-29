@@ -164,10 +164,10 @@ getData();
             case "zoomOut":
                 map.zoomOut();
                 break;
-            case "earth":
-                zoomToOrigin();
-                $('.map-control-container').find(".icon").removeClass("active");
-                break;
+            // case "earth":
+            //     zoomToOrigin();
+            //     $('.map-control-container').find(".icon").removeClass("active");
+            //     break;
             case "layer":
                 if (!$("#map-" + toggle_class + "-box").hasClass("active")) {
                     $("#map-" + toggle_class + "-box").addClass("active");                    
@@ -401,43 +401,47 @@ function hoverYear(nowYear) {
 var isMouseDown;
 var height = currTypoonDetail.offsetHeight,
     width = currTypoonDetail.offsetWidth;
+function moveInfoWindow() {
 
-currTypoonDetail.addEventListener('mousedown', function (e) {
-    isMouseDown = true;
-    document.body.classList.add('no-select');
-    initX = e.offsetX;
-    initY = e.offsetY;
-})
+    currentTyphoonName.addEventListener('mousedown', function (e) {
+        isMouseDown = true;
+        document.body.classList.add('no-select');
+        initX = e.offsetX;
+        initY = e.offsetY;
+    });
 
-document.addEventListener('mousemove', function (e) {
-    if (isMouseDown) {
-        var cx = e.clientX - initX,
-            cy = e.clientY - initY;
-        if (cx < 0) {
-            cx = 0;
+    document.addEventListener('mousemove', function (e) {
+        if (isMouseDown) {
+            var cx = e.clientX - initX,
+                cy = e.clientY - initY;
+            if (cx < 0) {
+                cx = 0;
+            }
+            if (cy < 0) {
+                cy = 0;
+            }
+            if (window.innerWidth - e.clientX + e.mouseX < width) {
+                cx = window.innerWidth - width;
+            }
+            if (e.clientY > window.innerHeight - height + e.mouseY) {
+                cy = window.innerHeight - height;
+            }
+            currTypoonDetail.style.left = e.clientX - initX + 'px';
+            currTypoonDetail.style.top = e.clientY - initY + 'px';
         }
-        if (cy < 0) {
-            cy = 0;
-        }
-        if (window.innerWidth - e.clientX + e.mouseX < width) {
-            cx = window.innerWidth - width;
-        }
-        if (e.clientY > window.innerHeight - height + e.mouseY) {
-            cy = window.innerHeight - height;
-        }
-        currTypoonDetail.style.left = e.clientX - initX + 'px';
-        currTypoonDetail.style.top = e.clientY - initY + 'px';
-    }
-});
+    });
 
-currTypoonDetail.addEventListener('mouseup', function () {
-    isMouseDown = false;
-    document.body.classList.remove('no-select');
-});
-
-document.addEventListener('mouseup', function (e) {
-    if (e.clientY > window.innerWidth || e.clientY < 0 || e.clientX < 0 || e.clientX > window.innerHeight) {
+    currentTyphoonName.addEventListener('mouseup', function () {
         isMouseDown = false;
         document.body.classList.remove('no-select');
-    }
-});
+    });
+
+    document.addEventListener('mouseup', function (e) {
+        if (e.clientY > window.innerWidth || e.clientY < 0 || e.clientX < 0 || e.clientX > window.innerHeight) {
+            isMouseDown = false;
+            document.body.classList.remove('no-select');
+        }
+    });
+
+}
+moveInfoWindow();

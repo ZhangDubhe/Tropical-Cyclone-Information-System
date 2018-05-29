@@ -616,13 +616,17 @@ function drawSingleTyphoonGraph(num, json) {
     if (json) {
         var dataset_positive = [],
             dataset_negitive = [],
+            dataset_change = [],
+            dataset_change_neg = [],
             dateset = [];
         json.forEach(function (each) {
-            dataset_positive.push(each.intensity*2);
-            dataset_negitive.push(-each.intensity*2);
+            dataset_positive.push(each.intensity);
+            dataset_negitive.push(-each.intensity);
             dateset.push(each.happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " "));
+            dataset_change.push(each.is_change == true? 6 : 0);
+            dataset_change_neg.push(each.is_change == true? -6 : 0);
         });
-        console.log(dateset);
+        console.log(dataset_change);
         var option = {
             toolbox: {
                 feature: {
@@ -631,6 +635,10 @@ function drawSingleTyphoonGraph(num, json) {
                     },
                     saveAsImage: {}
                 }
+            },
+            title: {
+                left: 'center',
+                text: '编号:' + num,
             },
             xAxis: {
                 type: 'category',
@@ -647,45 +655,66 @@ function drawSingleTyphoonGraph(num, json) {
                 data: dataset_positive,
                 type: 'line',
                 smooth: true,
-                    areaStyle: {},
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(255, 51, 51)'
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(255, 51, 51)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 100, 100)'
-                            }])
-                        }
+                areaStyle: {},
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(255, 51, 51)'
                     }
-                }, {
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(255, 51, 51)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 100, 100)'
+                        }])
+                    }
+                }
+            }, {
                 data: dataset_negitive,
                 type: 'line',
                 smooth: true,
-                    symbol: 'none',
-                    itemStyle: {
-                        normal: {
-                            color: 'rgb(255, 51, 51)'
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(255, 100, 100)'
-                            }, {
-                                offset: 1,
-                                color: 'rgb(255, 51, 51)'
-                            }])
-                        }
+                symbol: 'none',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(255, 51, 51)'
                     }
-            }]
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(255, 100, 100)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 51, 51)'
+                        }])
+                    }
+                }
+            }, {
+                data: dataset_change,
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(0, 0, 0)'
+                    }
+                }
+            }, {
+                data: dataset_change_neg,
+                type: 'line',
+                smooth: true,
+                symbol: 'none',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(0, 0, 0)'
+                    }
+                }
+            }
+        ]
         };
         myChart.setOption(option);
     } else {
