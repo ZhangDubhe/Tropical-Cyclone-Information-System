@@ -620,9 +620,18 @@ function drawSingleTyphoonGraph(num, json) {
         json.forEach(function (each) {
             dataset_positive.push(each.intensity*2);
             dataset_negitive.push(-each.intensity*2);
-            dateset.push(each.happenedat);
+            dateset.push(each.happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " "));
         });
+        console.log(dateset);
         var option = {
+            toolbox: {
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    saveAsImage: {}
+                }
+            },
             xAxis: {
                 type: 'category',
                 splitLine: {
@@ -631,18 +640,51 @@ function drawSingleTyphoonGraph(num, json) {
                 data: dateset
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                boundaryGap: ['0', '0']
             },
             series: [{
                 data: dataset_positive,
                 type: 'line',
                 smooth: true,
-                areaStyle: {}
-            }, {
+                    areaStyle: {},
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(255, 51, 51)'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 51, 51)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 100, 100)'
+                            }])
+                        }
+                    }
+                }, {
                 data: dataset_negitive,
                 type: 'line',
                 smooth: true,
-                areaStyle: {}
+                    symbol: 'none',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(255, 51, 51)'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 100, 100)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 51, 51)'
+                            }])
+                        }
+                    }
             }]
         };
         myChart.setOption(option);
@@ -676,12 +718,44 @@ function drawSingleTyphoonGraph(num, json) {
                     data: dataset_positive,
                     type: 'line',
                     smooth: true,
-                    areaStyle: {}
+                    areaStyle: {},
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(255, 70, 131)'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 158, 68)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 70, 131)'
+                            }])
+                        }
+                    }
                 }, {
                     data: dataset_negitive,
                     type: 'line',
                     smooth: true,
-                    areaStyle: {}
+                    symbol: 'none',
+                    itemStyle: {
+                        normal: {
+                            color: 'rgb(255, 70, 131)'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 158, 68)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 70, 131)'
+                            }])
+                        }
+                    }
                 }]
             };
             myChart.setOption(option);        
