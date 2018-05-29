@@ -206,7 +206,7 @@ header{
 
 @media screen and (min-width: 1901px) {
     .main>div {
-        width: 49.9%;
+        width: 49.1%;
         height: 100%;
     }
     .map-view {
@@ -368,12 +368,22 @@ header{
     stroke-width: 3;
 }
 /* 背景网格 */
-.legend-container {
+.icon-legends {
     position: fixed;
-    bottom: 13%;
-    right: 70px;
-    display: block;
+    left: 0.2rem;
+    bottom: 20%;
+    line-height: 2rem;
+}
+#legendContainer {
+    display: none;
+    position: fixed;
+    left: 3rem;
+    bottom: 20%;
     z-index: 200;
+    background: rgba(0, 0, 0, 0.75);
+}
+.icon-legends.active {
+    border-bottom : 1px solid #ff3853;
 }
 .legend {
     padding: 10px;
@@ -886,13 +896,6 @@ span.icon-small.icon-check-circle {
 #chart-control>span, #chart-control form, #chart-control div {
     float: left;
 }
-
-
-currentTyphoonArea{
-    height: 50px;
-    width: 100%;
-}
-
 
 text.bar-text {
     font-size: 0.54rem;

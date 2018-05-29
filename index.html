@@ -164,26 +164,6 @@
             </div>
 
         </div>
-        <div class="legend-container">
-            <div class="legend">
-                地图图例
-                <span class="icon-legend" style="background:#f0dade"></span>弱于热带低压
-                <span class="icon-legend" style="background:#f6bfae"></span>热带低压
-                <span class="icon-legend" style="background:#fb9f9c"></span>热带风暴
-                <span class="icon-legend" style="background:#f36078"></span>强热带风暴
-                <span class="icon-legend" style="background:#f36078"></span>台风
-
-                <span class="icon-legend" style="background:#d71058"></span>强台风
-                <span class="icon-legend" style="background:#a70943"></span>超强台风
-                <span class="icon-legend" style="background:#000000"></span>变性之后
-            </div>
-            <div class="legend">
-                生命史图图例
-                <span class="icon-legend" style="background:#d71058"></span>除名气旋
-                <span class="icon-legend" style="background:#fff"></span>正常气旋
-                <span class="icon-legend" style="background:#fff;border:1px solid #d71058;"></span>被选择气旋
-            </div>
-        </div>
     </div>
 
     <div class="table-view">
@@ -227,16 +207,11 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownYear">
                 <li class="check-li">全选 <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
-                <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
+                <!-- <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li> -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-inner">
                     <ul>
-                        <li><a href="#">1996<span class="li-right icon-check-tick"></span> </a></li>
-                        <li><a href="#">1997<span class="li-right  icon-check-tick"></span> </a></li>
-                        <li><a href="#">1998<span class="li-right  icon-check-tick"></span> </a></li>
-                        <li><a href="#">1999<span class="li-right  icon-check-tick"></span> </a></li>
-                        <li><a href="#">1999<span class="li-right  icon-check-tick"></span> </a></li>
-
+                        <li><a href="#">未加载成功</a></li>
                     </ul>
                 </li>
             </ul>
@@ -248,10 +223,14 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownName">
                 <li id="OneYearAll" class="check-li">全选 <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
-                <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
+                <!-- <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li> {% endcomment %} -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-inner">
                     <ul>
+                        <li>
+                            <a href="#">请先选择年份</a>
+                        </li>
+                        
                     </ul>
                 </li>
             </ul>
@@ -283,6 +262,28 @@
             <span class="icon icon-menu"></span>
         </div>
     </nav>
+    <span class="icon icon-legends" style="text-align:center;font-size:0.7rem;margin-top:230px;">图例</span>
+
+    <section class="legend-container" id="legendContainer">
+        <div class="legend">
+            地图图例
+            <span class="icon-legend" style="background:#f0dade"></span>弱于热带低压
+            <span class="icon-legend" style="background:#f6bfae"></span>热带低压
+            <span class="icon-legend" style="background:#fb9f9c"></span>热带风暴
+            <span class="icon-legend" style="background:#f36078"></span>强热带风暴
+            <span class="icon-legend" style="background:#f36078"></span>台风
+    
+            <span class="icon-legend" style="background:#d71058"></span>强台风
+            <span class="icon-legend" style="background:#a70943"></span>超强台风
+            <span class="icon-legend" style="background:#000000"></span>变性之后
+        </div>
+        <div class="legend">
+            生命史图图例
+            <span class="icon-legend" style="background:#d71058"></span>除名气旋
+            <span class="icon-legend" style="background:#fff"></span>正常气旋
+            <span class="icon-legend" style="background:#fff;border:1px solid #d71058;"></span>被选择气旋
+        </div>
+    </section>
     <section id="currTypoonDetail" >
         <h3 id="currentTyphoonName">名称 / 英文名称</h3>
 

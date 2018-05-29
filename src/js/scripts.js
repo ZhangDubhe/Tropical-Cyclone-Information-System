@@ -133,9 +133,17 @@ getData();
         drawDayFrequence('all');
     });
 
+    $(".icon-legends").click(function () {
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+            $("#legendContainer").show();
+        } else {
+            $(this).removeClass("active");
+            $("#legendContainer").hide();
+        }
+    });
+
     $('.map-control-container').find(".icon").click(function () {
-        console.log("if active:",$(this).parent().hasClass("active") );
-            $(".map-control-box").hide();
         if($(this).parent().hasClass("active") ){
             
             return;
@@ -161,7 +169,13 @@ getData();
                 $('.map-control-container').find(".icon").removeClass("active");
                 break;
             case "layer":
-                openThisBox(toggle_class);
+                if (!$("#map-" + toggle_class + "-box").hasClass("active")) {
+                    $("#map-" + toggle_class + "-box").addClass("active");                    
+                    $("#map-" + toggle_class + "-box").show();
+                } else {
+                    $("#map-" + toggle_class + "-box").hide();
+                    $("#map-" + toggle_class + "-box").removeClass("active");
+                }
                 break;
             case "rainDrop":
                 openThisBox(toggle_class);
@@ -304,10 +318,10 @@ function initMonthSpan(){
 }
 
 function openThisBox(toggleClass) {
-    $(".map-control-box").hide()
-    if(toggleClass === null){return}
-    $("#map-"+toggleClass+"-box").show()
-    return $("#map-"+toggleClass+"-box")
+    $(".map-control-box").hide();
+    if(toggleClass === null){return;}
+    $("#map-"+toggleClass+"-box").show();
+    return $("#map-"+toggleClass+"-box");
 }
 
 function clearPath() {
