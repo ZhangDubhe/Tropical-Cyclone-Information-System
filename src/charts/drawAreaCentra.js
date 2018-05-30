@@ -626,7 +626,6 @@ function drawSingleTyphoonGraph(num, json) {
             dataset_change.push(each.is_change == true? 6 : 0);
             dataset_change_neg.push(each.is_change == true? -6 : 0);
         });
-        console.log(dataset_change);
         var option = {
             toolbox: {
                 feature: {
