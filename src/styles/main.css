@@ -375,6 +375,13 @@ header{
     line-height: 2rem;
     z-index: 200;
 }
+.icon-api {
+    position: fixed;
+    left: 0.1rem;
+    bottom: 10px;
+    line-height: 2rem;
+    z-index: 200;
+}
 #legendContainer {
     display: none;
     position: fixed;
