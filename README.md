@@ -39,36 +39,43 @@ Typhoon api
 
 其中 getData.py, convertData.py, dumpData.py 为获取整理数据的程序. 运行 getData.py 
 
+#### 接口文档
+[博客版](https://blog.dubheee.com/201805/typhoon-api-%E5%9F%BA%E4%BA%8E-api-dubheee-cn-%E7%9A%84-api-%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/)
+[github 版](https://github.com/ZhangDubhe/Tropical-Cyclone-Information-System/tree/master/TyphoonApi)
+
 ### 前期进展
 研究D3的绘制对称面积图及leaflet绘制台风路径。
 
-### 2017/9/7 
+-   2017/9/7 
 数据本地化
 
-### 2017/9/16 
+-    2017/9/16 
 各年新增svg容器
 
-### 2017/09/24
+-   2017/09/24
 jquery outerWidth/Height 包括轮廓的宽/高
 使用for循环绑定下层的事件
 
-### 2017/9/27 
+-   2017/9/27 
 多选 bug修复;表格层和曲线图层的交互
 
 
-### 2017/9/27 
+-   2017/9/27 
 添加日频数曲线
 
-### 2017/9/29 
+-   2017/9/29 
 补充上传其他数据文件
 
 
-### 2017/10/10
+-   2017/10/10
 宽屏显示(>2000)
 ![宽屏状态](./src/images/preview-wide.png)
 
-### 2018/4
+-   2018/4
 数据库重建, 后台重建
 
-### 2018/5
+-   2018/5
 API 功能增加
+
+-   2018/5/30
+答辩结束! 后期更改内容: 按时间选择
