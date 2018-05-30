@@ -18,10 +18,110 @@
     6-	超强台风(SuperTY, ≥51.0 m/s),
     9- 变性,第一个标记表示变性完成.
 
-#### 按年份查询台风数据
+### 台风数据
+#### 台风年频数据
+> typhoon/ total
+> method : GET
+ 请求所有台风的年数据列表, 返回 `[{"year":"2017","count":"23"},...]`
 
+#### 台风年数据
+> typhoon/ lists
+> method : GET
+> params: year
 
-#### 所有年份数据
+ 参数 year ,可根据年份查询该年所有台风列表,无参数时返回所有年份,以下为`year=2017`返回部分样例:
+ ```json
+[
+    {
+        "num": 201730,
+        "name": "天秤",
+        "englishname": "Tembin",
+        "startat": "2017-12-20T00:00:00",
+        "endat": "2017-12-26T06:00:00",
+        "year": 2017
+    },
+    {
+        "num": 201729,
+        "name": "启德",
+        "englishname": "Kai-Tak",
+        "startat": "2017-12-13T00:00:00",
+        "endat": "2017-12-22T18:00:00",
+        "year": 2017
+    }
+]
+ ```
+#### 台风路径点数据
 
-#### 
+> typhoon/ points
+> method: GET
+> params: typhoonnumber
+参数为台风编号 `typhoonnumber`, 请求单个台风的路径信息
+例如`points?typhoonnumber=199901`返回如下:
+```json
+[{
+    "name": "-",
+    "ename": "Iris",
+    "typhoonnumber": 199901,
+    "happenedat": "1999-02-16T06:00:00",
+    "typhoontime": "1999021606",
+    "latitude": 11.5,
+    "longitude": 132.9,
+    "intensity": 1.0,
+    "windspeed": 15.0,
+    "airpressure": 1002.0,
+    "ordinarywindspeed": 0.0,
+    "is_change": false,
+    "isdelete": false
+},
+{
+    "name": "-",
+    "ename": "Iris",
+    "typhoonnumber": 199901,
+    "happenedat": "1999-02-16T12:00:00",
+    "typhoontime": "1999021612",
+    "latitude": 11.5,
+    "longitude": 132.2,
+    "intensity": 1.0,
+    "windspeed": 15.0,
+    "airpressure": 1002.0,
+    "ordinarywindspeed": 0.0,
+    "is_change": false,
+    "isdelete": false
+}]
+```
+#### 台风生命史图点数据
+> typhoon/graphpoints
+> method: GET
+> params: typhoonnumber
+参数为台风编号 `typhoonnumber`, 请求单个台风的路径信息
+例如`points?typhoonnumber=199901`返回如下:
+```json
+[
+    {
+        "name": "-",
+        "ename": "Iris",
+        "typhoonnumber": 199901,
+        "happenedat": "1999-02-16T06:00:00",
+        "intensity": 1.0,
+        "isdelete": false,
+        "is_change": false
+    },
+    {
+        "name": "-",
+        "ename": "Iris",
+        "typhoonnumber": 199901,
+        "happenedat": "1999-02-18T12:00:00",
+        "intensity": 0.0,
+        "isdelete": false,
+        "is_change": false
+    }
+]
+```
 ### TOOLS
+####  URLtoQRCODE
+> tools/qrcode/<path:url>
+> method: GET
+> params: url
+参数为需要转换的地址, 地址需作 uricomponent 转码, 返回该地址的二维码
+例如`tools/qrcode/http%3A%2F%2Ftyphoon.dubheee.cn%2F%23`返回如下:
+[二维码返回情况](http://api.dubheee.cn/tools/qrcode/http%3A%2F%2Ftyphoon.dubheee.cn%2F%23)
