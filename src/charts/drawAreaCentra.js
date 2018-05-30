@@ -640,6 +640,20 @@ function drawSingleTyphoonGraph(num, json) {
                 left: 'center',
                 text: '编号:' + num,
             },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    animation: false,
+                    label: {
+                        backgroundColor: '#505765'
+                    }
+                }
+            },
+            legend: {
+                data: ['强度', '', '变性期间',''],
+                left: 0
+            },
             xAxis: {
                 type: 'category',
                 splitLine: {
