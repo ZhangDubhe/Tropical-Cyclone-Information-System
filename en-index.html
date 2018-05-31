@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>热带气旋生命史</title>
+    <title>Online Lifespan of Tropical Cyclones</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="本系统由华东师范大学地图研究所编制, 旨在实现热带气旋气候图集的生命史图在线交互展示, 为大众提供新的探索台风的方式." />
     <meta name="author" content="ZhangDubhe <zht_dubhe@163.com>" />
@@ -26,7 +26,7 @@
 </head>
 <body class="container">
 <header class="header">
-    西北太平洋热带气旋生命史 <a href="en-index.html"> English Type </a>
+ Online Lifespan of Tropical Cyclones <a href="index.html"> Chinese Type </a>
 </header>
 
 <div class="main row">
@@ -35,16 +35,16 @@
         <div id="map-control-container" hidden class="map-control-container">
             <ul class="control-group">
                 <li>
-                    <a class="icon icon-zoomOut" href="#" title="地图缩小"></a>
+                    <a class="icon icon-zoomOut" href="#" title="zoom out"></a>
                 </li>
                 <li>
-                    <a class="icon icon-zoomIn" href="#" title="地图放大"></a>
+                    <a class="icon icon-zoomIn" href="#" title="zoom in"></a>
                 </li>
                 <li>
-                    <a class="icon icon-earth" href="#" title="原始视角"></a>
+                    <a class="icon icon-earth" href="#" title="origin view"></a>
                 </li>
                 <li>
-                    <a class="icon icon-layer" href="#" title="选择底图"></a>
+                    <a class="icon icon-layer" href="#" title="select baselayer"></a>
                 </li>
             </ul>
             <!-- <ul class="control-group">
@@ -72,15 +72,15 @@
                     <a class="icon icon-playPath" href="#" title="路径播放"></a>
                 </li> -->
                 <li>
-                    <a class="icon icon-removeName" href="#" title="清除路径"></a>
+                    <a class="icon icon-removeName" href="#" title="delete all path"></a>
                 </li>
             </ul>
             <ul class="control-group">
                 <li>
-                    <a class="icon icon-screenShot" href="#" title="截图"></a>
+                    <a class="icon icon-screenShot" href="#" title="print path"></a>
                 </li>
                 <li>
-                    <a class="icon icon-share" href="#" title="分享"></a>
+                    <a class="icon icon-share" href="#" title="share QRcode"></a>
                 </li>
                 <!-- <li>
                     <a class="icon icon-download" href="#" title="下载"></a>
@@ -89,13 +89,13 @@
             <div id="map-layer-box" class="map-control-box">
                 <div>
                     <img id="verLayer" class="active mapLayer" src="src/images/TC/verLayer.png">
-                    <p role="laber" for="verLayer">行政区划</p></div>
+                    <p role="laber" for="verLayer">Administrative division</p></div>
                 <div>
                     <img id="imgLayer" class="mapLayer" src="src/images/TC/imgLayer.png">
-                    <p role="laber" for="imgLayer">影像</p></div>
+                    <p role="laber" for="imgLayer">Satellite</p></div>
                 <div>
                     <img id="terLayer" class="mapLayer" src="src/images/TC/terLayer.png">
-                    <p role="laber" for="terLayer">地形</p></div>
+                    <p role="laber" for="terLayer">Landshape</p></div>
                 <!-- <div>
                     <img id="newLayer" class="mapLayer" src="src/images/TC/newLayer.png">
                 </div> -->
@@ -168,7 +168,7 @@
             <div id="map-share-box" class="map-control-box" style="width: 8rem;height: 7rem;margin-top: 4rem;margin-left: 4rem;">
                 <div>
                     <img id="sharing"  src="">
-                    <p>扫描二维码转发或直接截图分享给别人</p>
+                    <p>Scan it!</p>
                 </div>
 
             </div>
@@ -212,33 +212,33 @@
         <span class="icon icon-search"> </span>
         <div class="dropup">
             <button class="btn btn-default dropdown-toggle dropdown-bottomControl" type="button" id="dropdownYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                年份
+                Year
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownYear">
-                <li class="check-li">全选 <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
+                <li class="check-li">All <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
                 <!-- <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li> -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-inner">
                     <ul>
-                        <li><a href="#">未加载成功</a></li>
+                        <li><a href="#">Load fail</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="dropup">
             <button class="btn btn-default dropdown-toggle dropdown-bottomControl" type="button" id="dropdownName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                名字
+                Name
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownName">
-                <li id="OneYearAll" class="check-li">全选 <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
+                <li id="OneYearAll" class="check-li">All <span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li>
                 <!-- <li class="check-li">多选<span class="li-right icon-check-bg"><span class=" icon-small icon-check-circle"></span></span></li> {% endcomment %} -->
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-inner">
                     <ul>
                         <li>
-                            <a href="#">请先选择年份或月份</a>
+                            <a href="#">Year first</a>
                         </li>
                         
                     </ul>
@@ -260,82 +260,81 @@
         <ul class="toggle-btn ">
             <li>
                 <a class="icon icon-map" href="#"></a>
-                <b>地图视图</b>
+                <b>Map View</b>
             </li>
 
             <li class="active">
                 <a class="icon icon-table" href="#"></a>
-                <b>图表视图</b>
+                <b>Graph View</b>
             </li>
         </ul>
         <div class="open-btn ">
             <span class="icon icon-menu"></span>
         </div>
     </nav>
-<span class="icon icon-legends" style="text-align:center;font-size:0.7rem;">图例</span>
-
-
+    <span class="icon icon-legends" style="text-align:center;font-size:0.7rem;">Legends</span>
 
     <section class="legend-container" id="legendContainer">
         <div class="legend">
-            地图图例
-            <span class="icon-legend" style="background:#f0dade"></span>弱于热带低压
-            <span class="icon-legend" style="background:#f6bfae"></span>热带低压
-            <span class="icon-legend" style="background:#fb9f9c"></span>热带风暴
-            <span class="icon-legend" style="background:#f36078"></span>强热带风暴
-            <span class="icon-legend" style="background:#f36078"></span>台风
+            On Map
+<span class="icon-legend" style="background:#f0dade"></span>TD
+            <span class="icon-legend" style="background:#f6bfae"></span>TD
+            <span class="icon-legend" style="background:#fb9f9c"></span>TS
+            <span class="icon-legend" style="background:#f36078"></span>STS
+            <span class="icon-legend" style="background:#f36078"></span>TY
     
-            <span class="icon-legend" style="background:#d71058"></span>强台风
-            <span class="icon-legend" style="background:#a70943"></span>超强台风
-            <span class="icon-legend" style="background:#000000"></span>变性之后
+            <span class="icon-legend" style="background:#d71058"></span>STY
+            <span class="icon-legend" style="background:#a70943"></span>SuperTY
+            <span class="icon-legend" style="background:#000000"></span>Extratropical transitions
         </div>
         <div class="legend">
-            生命史图图例
-            <span class="icon-legend" style="background:#d71058"></span>除名气旋
-            <span class="icon-legend" style="background:#fff"></span>正常气旋
-            <span class="icon-legend" style="background:#fff;border:1px solid #d71058;"></span>被选择气旋
+            On Graph
+<span class="icon-legend" style="background:#d71058"></span>Names retired
+            <span class="icon-legend" style="background:#fff"></span>Normal
+            <span class="icon-legend" style="background:#fff;border:1px solid #d71058;"></span>Selected
         </div>
     </section>
     <section id="currTypoonDetail" >
-        <h3 id="currentTyphoonName">名称 / 英文名称</h3>
+        <h3 id="currentTyphoonName">Chinese Name / English Name</h3>
 
         <span class="icon icon-close" onclick='$("#currTypoonDetail ").hide();'>X</span>
-        <p id="currentTyphoonIsDelete" style="display:none"><span></span>已除名</p>
+<p id="currentTyphoonIsDelete" style="display:none">
+    <span></span>names retired</p>
 
         <div id="currentTyphoonArea">
 
         </div>
 
         <p>
-            <span class="subtitle">气旋强度:</span>
+            <span class="subtitle">Intensity:</span>
             <span id="currentTyphoonIntensity"></span>
         </p>
         <p>
-            <span class="subtitle">发生时间:</span>
+            <span class="subtitle">Happened:</span>
             <span id="currentTyphoonHappenedAt"></span>
         </p>
         <p>
-            <span class="subtitle">最大风速: </span>
+            <span class="subtitle">Most Wind Speed: </span>
             <span id="currentTyphoonWindspeed"></span>m/s
         </p>
         <p>
-            <span class="subtitle">最低气压:</span>
+            <span class="subtitle">Lowest Air Pressure:</span>
             <span id="currentTyphoonPressure"></span>pa
         </p>
         <hr>
         <div id="currTyContainer">
             <table id="currentTyphoonTable">
                 <thead>
-                    <td>时间</td>
-                    <td>中心位置</td>
-                    <td>最大风速(m/s)</td>
-                    <td>最低风压(pa)</td>
+                    <td>Time</td>
+                    <td>Center</td>
+                    <td>Most WindSpeed(m/s)</td>
+                    <td>Lowest Pressure(pa)</td>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
         <br>
-        <p>点击气旋标题, 可拖动小窗进行浏览.</p>
+        <p>Click the title and drag it.</p>
     </section>
 </div>
 <div class="wrap-div-right">
@@ -343,12 +342,14 @@
 </div>
 <div class="wrap-div-down">
     <!-- <div class="scrollbar month-scrollbar"></div> -->
-    <p>本网站数据来源于<a style="font-size:1em;" href="http://tcdata.typhoon.org.cn/zjljsjj_zlhq.html"> 中国气象局热带气旋资料中心</a>, 由后台处理后发布为数据接口并在此网页使用, 点击此<a style="font-size:1em" href="https://blog.dubheee.com/201805/typhoon-api-%E5%9F%BA%E4%BA%8E-api-dubheee-cn-%E7%9A%84-api-%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">API说明文档</a>.</p>
-    <p>西北太平洋热带气旋在线检索系统 © 华东师范大学 地图研究所 设计者: 
-    <a style="font-size:1em;" href="mailto:frsun@geo.ecnu.edu.cn">孙斐然</a>
-    开发者: 
-    <a style="font-size:1em;" href="mailto:haotian2@ualberta.ca">张昊天</a>
-    </p>
+    <p>Data came from
+        <a style="font-size:1em;" href="http://tcdata.typhoon.org.cn/zjljsjj_zlhq.html"> CMA Tropical Cyclone Database</a>, with processing and servered in api, here is
+        <a style="font-size:1em" href="https://blog.dubheee.com/201805/typhoon-api-%E5%9F%BA%E4%BA%8E-api-dubheee-cn-%E7%9A%84-api-%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">API Document</a>.</p>
+<p>Online Lifespan of Tropical Cyclones
+ © East China Normal University Map Institute Designed:
+<a style="font-size:1em;" href="mailto:frsun@geo.ecnu.edu.cn">Feiran Sun</a> Developer:
+<a style="font-size:1em;" href="mailto:haotian2@ualberta.ca">Haotian Zhang</a>
+</p>
 </div>
 </body>
 <!--map--><!--
@@ -388,7 +389,7 @@
     addHoverEvent();
     function addHoverEvent() {
         var $svg = $(".svg-container>svg");
-        for(var i=0; i < totalYear;i++){
+        for(var i=0; i< totalYear;i++){
             var theNumber = i;
             var rowSvg = $svg[theNumber];
             $(rowSvg).mousemove(function (e) {

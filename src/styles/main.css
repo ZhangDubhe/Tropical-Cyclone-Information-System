@@ -262,6 +262,10 @@ header{
     padding-left: 2.5rem;
     padding-right: 2.5rem;
 }
+.wrap-div-down p{
+    margin: 0 !important;
+    text-align: center
+}
 #chart-control {
     background-color: rgba(0, 0, 0, 0.3);
     height: auto;
