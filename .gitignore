@@ -1,7 +1,7 @@
 .idea
 node_modules
 config.js
-
+.DS_Store
 # DataProcess
 DataProcess/*
 !DataProcess/*.py
