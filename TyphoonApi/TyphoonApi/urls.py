@@ -16,20 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.schemas import get_schema_view
-from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from typhoon import views as ty_views
-
+from base import views as base_views
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register('users', ty_views.UserViewSet)
-router.register('groups', ty_views.GroupViewSet)
+router.register('users', base_views.UserViewSet)
+router.register('groups', base_views.GroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('tools/', include('tools.urls')),
-    path('typhoon/', include('typhoon.urls'))
+    path('typhoon/', include('typhoon.urls')),
+    path('base/',  include('base.urls'))
 ]
