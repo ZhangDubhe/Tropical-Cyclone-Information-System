@@ -39,15 +39,15 @@ class User(AbstractUser):
             'unique': "A user with that username already exists.",
         },
     )
-    first_name = models.CharField('first name', max_length=30, null=True, blank=True)
-    last_name = models.CharField('last name', max_length=30, null=True, blank=True)
-    mina_openid = models.CharField(max_length=32, null=True, db_index=True)
-    mp_openid = models.CharField(max_length=32, null=True, db_index=True)
-    union_id = models.CharField(max_length=32, null=True, db_index=True)
-    nick_name = models.CharField(max_length=128, null=True)
-    phone_number = models.CharField(max_length=20, null=True, db_index=True)
+    first_name = models.CharField('first name', max_length=30, null=True, blank=True, default=None)
+    last_name = models.CharField('last name', max_length=30, null=True, blank=True, default=None)
+    mina_openid = models.CharField(max_length=32, null=True, db_index=True, default=None)
+    mp_openid = models.CharField(max_length=32, null=True, db_index=True, default=None)
+    union_id = models.CharField(max_length=32, null=True, db_index=True, default=None)
+    nick_name = models.CharField(max_length=128, null=True, default=None)
+    phone_number = models.CharField(max_length=20, null=True, db_index=True, default=None)
     state = models.PositiveSmallIntegerField(default=0)
-    avatar_url = models.URLField(null=True)
+    avatar_url = models.URLField(null=True, default=None)
     is_subscribed = models.BooleanField(default=True)
     class Meta:
         db_table = 'auth_user'

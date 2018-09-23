@@ -10,6 +10,5 @@ DataProcess/*
 # Backend
 *.pyc
 TyphoonApi/TyphoonApi/settings.py
-TyphoonApi/*/migrations
 TyphoonApi/db.sqlite3
 
