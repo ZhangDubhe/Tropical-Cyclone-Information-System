@@ -69,11 +69,11 @@ def changeChineseName():
         
         
 def main():
-    # pathls = os.listdir('../DataProcess/originalData/json/list/')
-    # print(pathls)
-    # for eachyear in pathls:
-    #     dumpData(eachyear)
-    #     time.sleep(1)
+    pathls = os.listdir('../DataProcess/originalData/json/list/')
+    print(pathls)
+    for eachyear in pathls:
+        dumpData(eachyear)
+        time.sleep(1)
     changeChineseName()
     return
 
