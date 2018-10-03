@@ -11,7 +11,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated
 
+from .authentication import ExpiringTokenAuthentication
 from .serializers import *
 from .models import *
 import json
@@ -39,11 +41,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
+    authentication_classes = (ExpiringTokenAuthentication)
+    permission_classes = (IsAuthenticated,)
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
 
 class UserSelfDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = (ExpiringTokenAuthentication)
+    permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.filter(is_active=True).order_by('-id')
     # def get_extra_actions():

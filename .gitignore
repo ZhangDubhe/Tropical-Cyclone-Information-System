@@ -8,7 +8,7 @@ DataProcess/*
 !DataProcess/exportData
 
 # Backend
-*.pyc
+# *.pyc
 TyphoonApi/TyphoonApi/settings.py
 TyphoonApi/db.sqlite3
 
