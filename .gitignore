@@ -11,4 +11,6 @@ DataProcess/*
 *.pyc
 TyphoonApi/TyphoonApi/settings.py
 TyphoonApi/db.sqlite3
+TyphoonApi/*.pyc
+TyphoonApi/*/*.pyc
 
