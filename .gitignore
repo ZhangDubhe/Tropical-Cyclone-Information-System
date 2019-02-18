@@ -14,3 +14,5 @@ TyphoonApi/db.sqlite3
 TyphoonApi/*.pyc
 TyphoonApi/*/*.pyc
 
+# DATABASE
+*.sqlite3
