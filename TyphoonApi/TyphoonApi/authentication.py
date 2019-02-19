@@ -10,9 +10,9 @@ EXPIRE_DAYS = getattr(settings, 'REST_FRAMEWORK_TOKEN_EXPIRE_DAYS', 1)
 class ExpiringTokenAuthentication(TokenAuthentication):
 
     def authenticate_credentials(self, key):
-        cache_user = cache.get('token_' + key)
-        if cache_user:
-            return (cache_user, key)
+        # cache_user = cache.get('token_' + key)
+        # if cache_user:
+        #     return (cache_user, key)
         
         model = self.get_model()
         try:

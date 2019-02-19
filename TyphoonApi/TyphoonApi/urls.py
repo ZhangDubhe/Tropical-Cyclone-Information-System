@@ -25,15 +25,13 @@ User = get_user_model()
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register('users', base_views.UserViewSet)
-router.register('groups', base_views.GroupViewSet)
 
 # router.register('articles', sun_views.ArticleView)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('tools/', include('tools.urls')),
     path('typhoon/', include('typhoon.urls')),
     path('base/',  include('base.urls')),

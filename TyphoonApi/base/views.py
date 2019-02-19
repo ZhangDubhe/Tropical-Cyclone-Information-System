@@ -1,3 +1,7 @@
+import os
+import json
+import datetime
+
 from django.http import HttpResponse
 from django.utils.six import BytesIO
 from django.shortcuts import render
@@ -7,11 +11,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets, views
 from rest_framework import generics
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import APIException
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 
 from TyphoonApi.authentication import ExpiringTokenAuthentication
 from .serializers import *
@@ -33,9 +41,9 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    permission_classes = (permissions.AllowAny,)
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-
+    serializer_class = AdminUSerSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -47,16 +55,50 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
+class UserTokenViewSet(ObtainAuthToken):
+    """
+    给用户添加认证 token
+    """
+    def post(self, request, *args, **kwargs):
+        if request.data.__contains__('username') and request.data.__contains__('password'):
+            data = {
+                'username': request.data['username'],
+                'password': request.data['password']
+            }
+        else:
+            raise APIException('ParamsError', -1)
+
+        serializer = self.serializer_class(data=data)
+
+        if serializer.is_valid():
+            # user = token.user
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
+            time_now = datetime.datetime.now()
+
+            if not created:
+                # update the created time of the token to keep it valid
+                token.created = time_now
+                token.save()
+
+            return Response({
+                    "username": user.username,
+                    "token": token.key,
+                    "id": user.id,
+                })
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class UserListView(generics.ListAPIView):
-    # authentication_classes = (ExpiringTokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = (ExpiringTokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.filter(is_active=True).order_by('-id')
 
 
 class UserSelfDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyAPIView):
-    # authentication_classes = (ExpiringTokenAuthentication,)
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = (ExpiringTokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.filter(is_active=True).order_by('-id')
     # def get_extra_actions():
