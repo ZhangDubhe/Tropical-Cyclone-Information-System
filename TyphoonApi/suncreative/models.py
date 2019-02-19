@@ -31,7 +31,7 @@ class PostRecord(TimeStampedModel):
     header_image = models.URLField(null=True)  # 头图
     content = models.TextField()  # 内容
     sort_index = models.IntegerField(auto_created=True)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    creator = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
+    category = models.CharField(max_length=30, default="Default")
     class Meta:
         db_table = 'sun_article_info'
