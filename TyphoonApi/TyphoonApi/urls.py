@@ -19,6 +19,7 @@ from rest_framework.schemas import get_schema_view
 from rest_framework import routers, serializers, viewsets
 from typhoon import views as ty_views
 from base import views as base_views
+from suncreative import views as sun_views
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -27,11 +28,14 @@ router = routers.DefaultRouter()
 router.register('users', base_views.UserViewSet)
 router.register('groups', base_views.GroupViewSet)
 
+# router.register('articles', sun_views.ArticleView)
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('tools/', include('tools.urls')),
     path('typhoon/', include('typhoon.urls')),
-    path('base/',  include('base.urls'))
+    path('base/',  include('base.urls')),
+    path('sun-create/',  include('suncreative.urls'))
 ]

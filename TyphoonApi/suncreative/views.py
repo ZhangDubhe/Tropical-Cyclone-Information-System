@@ -26,26 +26,11 @@ class ArticleView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
     LimitOffsetPagination.default_limit = 20
     serializer_class = ArticleSerializer
-
-    def list(self, request, *args, **kwargs):
-        try:
-            seminar_student = PostRecord.objects.get(uuid=self.kwargs.get('uuid').replace('-', ''))
-        except:
-            raise ObjectDoesNotExist('SeminarStudent')
-
-        # if self.request.user:
-        #     raise PermissionDenied()
-
-        queryset = PostRecord.objects
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+    queryset = PostRecord.objects.all()
 
 
 class AdminArtcileView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = ArticleSerializer
+    queryset = PostRecord.objects.all()
+

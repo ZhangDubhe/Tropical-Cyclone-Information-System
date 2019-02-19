@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 
-from .authentication import ExpiringTokenAuthentication
+from TyphoonApi.authentication import ExpiringTokenAuthentication
 from .serializers import *
 from .models import *
 import json
@@ -47,13 +47,19 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
+class UserListView(generics.ListAPIView):
+    # authentication_classes = (ExpiringTokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+    serializer_class = UserSerializer
+    queryset = User.objects.filter(is_active=True).order_by('-id')
+
+
 class UserSelfDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyAPIView):
-    authentication_classes = (ExpiringTokenAuthentication)
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (ExpiringTokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.filter(is_active=True).order_by('-id')
     # def get_extra_actions():
-
 
     def get_object(self):
         return User.objects.get(id=self.request.user.id)

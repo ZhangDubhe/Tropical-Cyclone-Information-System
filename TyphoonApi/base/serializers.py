@@ -8,10 +8,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('uuid','username','nick_name', 'avatar_url', 'is_subscribed', 'groups')
+        fields = ('uuid', 'username', 'nick_name', 'avatar_url', 'is_subscribed', 'groups')
 
 
 class UserInfoSerializer(serializers.HyperlinkedModelSerializer):

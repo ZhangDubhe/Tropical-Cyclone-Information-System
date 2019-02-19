@@ -6,6 +6,6 @@ from . import views
 from rest_framework import routers
 
 urlpatterns = [
-    path('article', views.ArticleView.as_view()),
-    path('article-admin', views.AdminArtcileView.as_view()),
+    path('article/', views.ArticleView.as_view()),
+    path('article-admin/', views.AdminArtcileView.as_view()),
 ]
