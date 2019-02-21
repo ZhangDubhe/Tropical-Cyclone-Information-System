@@ -30,7 +30,7 @@ class ArticleView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
     LimitOffsetPagination.default_limit = 20
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.all()
+    queryset = PostRecord.objects.filter(is_active=True)
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content')
@@ -42,15 +42,15 @@ class AdminArtcileView(generics.ListCreateAPIView):
     """
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.all()
+    queryset = PostRecord.objects.filter(is_active=True)
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content')
 
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        data.creator = self.request.user
-        serializer = self.get_serializer(data=data)
+    def create(self, request, *args, **kwargs):
+        if type(request.data) != dict: request.data._mutable = True
+        request.data['creator'] = self.request.user.id
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
