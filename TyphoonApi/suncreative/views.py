@@ -36,6 +36,15 @@ class ArticleView(generics.ListAPIView):
     search_fields = ('title', 'explanation', 'content')
 
 
+class ArticleDetailView(generics.RetrieveUpdateAPIView):
+    """
+    API : Get Article Detail
+    """
+    serializer_class = ArticleDetailSerializer
+    queryset = PostRecord.objects.all()
+    lookup_field = 'uuid'
+
+
 class AdminArtcileView(generics.ListCreateAPIView):
     """
     API : Admin Manage Article
@@ -61,6 +70,8 @@ class AdminArtcileDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyA
     """
     API : 修改删除 Article
     """
+    permission_classes = (permissions.IsAdminUser,)
+
     serializer_class = ArticleDetailSerializer
     queryset = PostRecord.objects.all()
     lookup_field = 'uuid'
