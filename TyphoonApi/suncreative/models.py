@@ -33,5 +33,6 @@ class PostRecord(TimeStampedModel):
     sort_index = models.IntegerField(auto_created=True)
     creator = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
     category = models.CharField(max_length=30, default="Default")
+    theme_color = models.CharField(max_length=30, default="#ffffff")
     class Meta:
         db_table = 'sun_article_info'

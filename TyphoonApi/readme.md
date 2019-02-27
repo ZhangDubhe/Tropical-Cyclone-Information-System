@@ -125,3 +125,104 @@
 参数为需要转换的地址, 地址需作 uricomponent 转码, 返回该地址的二维码
 例如`tools/qrcode/http%3A%2F%2Ftyphoon.dubheee.cn%2F%23`返回如下:
 [二维码返回情况](http://api.dubheee.cn/tools/qrcode/http%3A%2F%2Ftyphoon.dubheee.cn%2F%23)
+
+
+
+
+# Api Server 配置 8000 转端口配域名
+1. 全局配置
+```bash
+server
+	{
+        listen 80; 
+        listen [::]:80;
+        server_name api.dubheee.com;  #域名
+        server_name_in_redirect off;  
+        location / {
+            tcp_nodelay     on;  
+            proxy_set_header Host            $host;  
+            proxy_set_header X-Real-IP       $remote_addr;  
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  
+            proxy_pass http://127.0.0.1:8080;  #转接链接
+            #root /...;  #或者目录
+        }
+    }
+server
+	{
+        listen 80; 
+        listen [::]:80;
+        server_name api.dubheee.cn;  #域名
+        server_name_in_redirect off;
+        location / {
+            tcp_nodelay     on;  
+            proxy_set_header Host            $host;  
+            proxy_set_header X-Real-IP       $remote_addr;  
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  
+            proxy_pass http://127.0.0.1:8080;  #转接链接
+            #root /...;  #或者目录
+        }
+    }
+```
+
+2. 单域名配置
+```bash
+server
+{
+    listen 80;
+    server_name api.dubheee.cn api.dubheee.com;
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /home/ubuntu/typhoon;
+    
+    #SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则
+    #error_page 404/404.html;
+    #SSL-END
+    
+    #ERROR-PAGE-START  错误页配置，可以注释、删除或修改
+    error_page 404 /404.html;
+    error_page 502 /502.html;
+    #ERROR-PAGE-END
+    
+    #PHP-INFO-START  PHP引用配置，可以注释或修改
+    include enable-php-00.conf;
+    #PHP-INFO-END
+    
+    #REWRITE-START URL重写规则引用,修改后将导致面板设置的伪静态规则失效
+    include /www/server/panel/vhost/rewrite/api.dubheee.cn.conf;
+    #REWRITE-END
+    
+    #禁止访问的文件或目录
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md)
+    {
+        return 404;
+    }
+    
+    #一键申请SSL证书验证目录相关设置
+    location ~ \.well-known{
+        allow all;
+    }
+    
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+    {
+        expires      30d;
+        error_log off;
+        access_log off;
+    }
+    
+    location ~ .*\.(js|css)?$
+    {
+        expires      12h;
+        error_log off;
+        access_log off; 
+    }
+    location / {
+        tcp_nodelay     on;  
+        proxy_set_header Host            $host;  
+        proxy_set_header X-Real-IP       $remote_addr;  
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  
+        proxy_pass http://127.0.0.1:8080;  #转接链接
+        #root /...;  #或者目录
+    }
+    access_log  /www/wwwlogs/api.dubheee.cn.log;
+    error_log  /www/wwwlogs/api.dubheee.cn.error.log;
+}
+```
