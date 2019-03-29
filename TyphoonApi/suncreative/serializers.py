@@ -8,8 +8,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostRecord
-        fields = ('uuid', 'title', 'explanation', 'header_image', 'content',
-                  'created_at', 'sort_index', 'creator', 'category', 'thumbnail', 'theme_color')
+        fields = ('uuid', 'title', 'explanation', 'header_image',
+                  'created_at', 'sort_index', 'category', 'thumbnail', 'theme_color')
         # exclude = ('id', )
 
 
