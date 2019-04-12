@@ -16,3 +16,12 @@ TyphoonApi/*/*.pyc
 
 # DATABASE
 *.sqlite3
+
+
+# web serve
+404.html
+.htaccess
+.user.ini
+.well-known/*
+404.html
+TyphoonApi/nohup.out
