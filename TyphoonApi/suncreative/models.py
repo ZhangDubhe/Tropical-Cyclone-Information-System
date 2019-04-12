@@ -26,6 +26,7 @@ class PostRecord(TimeStampedModel):
     文章历史
     """
     title = models.CharField(max_length=100, null=True)
+    url_params = models.CharField(max_length=200, null=True, default='hello-world', db_index=True)
     explanation = models.CharField(max_length=5000, null=True)
     thumbnail = models.URLField(null=True)  # 缩略图
     header_image = models.URLField(null=True)  # 头图

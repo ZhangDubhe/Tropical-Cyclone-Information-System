@@ -19,6 +19,18 @@ from base.views import UnActiveModelMixin
 from .models import *
 from .serializers import *
 
+from django.utils.safestring import mark_safe
+from unidecode import unidecode
+import time
+import traceback
+import re
+import unicodedata
+
+def formatUnidecode(str):
+  value = unidecode(str)
+  value = re.sub('[^\w\s-]', '', value).strip().lower()
+  value = mark_safe(re.sub('[-\s]+', '-', value))
+  return value.lower()
 
 # Create your views here.
 
@@ -30,10 +42,11 @@ class ArticleView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
     LimitOffsetPagination.default_limit = 20
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.filter(is_active=True)
+    queryset = PostRecord.objects.filter(is_active=True).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content')
+    ordering_fields = ('sort_index', 'name')
 
 
 class ArticleDetailView(generics.RetrieveUpdateAPIView):
@@ -42,7 +55,7 @@ class ArticleDetailView(generics.RetrieveUpdateAPIView):
     """
     serializer_class = ArticleDetailSerializer
     queryset = PostRecord.objects.all()
-    lookup_field = 'uuid'
+    lookup_field = 'url_params'
 
 
 class AdminArtcileView(generics.ListCreateAPIView):
@@ -51,14 +64,24 @@ class AdminArtcileView(generics.ListCreateAPIView):
     """
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.filter(is_active=True)
+    queryset = PostRecord.objects.filter(is_active=True).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
-    search_fields = ('title', 'explanation', 'content')
+    search_fields = ('title', 'explanation', 'content', 'url_params')
+    ordering_fields = ('sort_index',)
 
     def create(self, request, *args, **kwargs):
         if type(request.data) != dict: request.data._mutable = True
         request.data['creator'] = self.request.user.id
+
+        request.data['url_params'] = time.time()
+        string = formatUnidecode(self.request.data.get('title'))
+        try:
+            if string:
+                request.data['url_params'] = string if len(PostRecord.objects.filter(url_params=string)) == 1 else string + '-' + (len(PostRecord.objects.filter(url_params=string)) + 1)
+        except:
+            traceback.print_exc()
+
         serializer = ArticleDetailSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
