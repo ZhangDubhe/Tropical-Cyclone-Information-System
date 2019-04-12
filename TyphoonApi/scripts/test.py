@@ -43,7 +43,7 @@ django.setup()
 
 from suncreative.models import PostRecord
 
-articles = PostRecord.objects.filter(url_params='zheng-shi-ce-shi')
+articles = PostRecord.objects.filter(url_params='hello-world')
 articles_len = len(articles)
 article_index = 1
 for article in articles:
