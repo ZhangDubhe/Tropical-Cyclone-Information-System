@@ -78,7 +78,7 @@ class AdminArtcileView(generics.ListCreateAPIView):
         string = formatUnidecode(self.request.data.get('title'))
         try:
             if string:
-                request.data['url_params'] = string if len(PostRecord.objects.filter(url_params=string)) == 1 else string + '-' + (len(PostRecord.objects.filter(url_params=string)) + 1)
+                request.data['url_params'] = string if len(PostRecord.objects.filter(url_params=string)) == 1 else string + '-' + str(len(PostRecord.objects.filter(url_params=string)) + 1)
         except:
             traceback.print_exc()
 
