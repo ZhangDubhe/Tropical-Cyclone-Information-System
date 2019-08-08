@@ -4,16 +4,18 @@ import os
 import time
 import re
 import django
-
+import datetime
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TyphoonApi.settings")
 
 django.setup()
 
 def queryYearData():
+    """请求每年的台风数据, 保存在 `originalData/json/list/` 中 """
+
     url = "http://www.readearth.com/publictyphoon/PatrolHandler.ashx?provider=Readearth.PublicSrviceGIS.BLL.TyphoonBLL&assembly=Readearth.PublicSrviceGIS.BLL&method=GetTyhoonByYear&queryYear=true&year="
-    initYear = 2013
+    initYear = INIT_YEAR
     from typhoon.models import Typhoon
-    for i in range(0, 70):
+    for i in range(0, datetime.datetime.now().year - initYear + 1):
         year = initYear + i
         newUrl = url + str(year)
         res = requests.get(newUrl, timeout=10000)
@@ -54,8 +56,9 @@ def queryYearData():
 
 
 def queryTyphoonId():
-    initYear = 1949
-    for i in range(0, 70):
+    """按台风 id 请求的台风数据, 保存在 `originalData/json/detail/` 中 """
+    initYear = INIT_YEAR
+    for i in range(0, datetime.datetime.now().year - initYear + 1):
         year = initYear + i
         print("[list] year:", year)
         path = "../DataProcess/originalData/json/list/" + str(year) + ".json"
@@ -103,7 +106,9 @@ def main():
     # 1. 先爬取每年的数据列表
     # 2. queryTyphoonId
     queryYearData()
-    # queryTyphoonId()
+    queryTyphoonId()
+
+INIT_YEAR = 1949
 
 if __name__ == '__main__':
     main()

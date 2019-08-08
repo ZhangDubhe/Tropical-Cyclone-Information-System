@@ -418,9 +418,14 @@ function getTyphoonDetailYear(iscurr, sno) {
 function showTyphoonDetail(iscurr, json) {
     var jsonArray = json;
     var html = "";
-    for (var i = jsonArray.length - 1; i >= 0; i--) {
-        html += '<tr><td>' + jsonArray[i].happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " ") + '</td><td>' + jsonArray[i].longitude + '°E|' + jsonArray[i].latitude + '°N</td><td>' + jsonArray[i].windspeed + '</td><td>' + jsonArray[i].airpressure + '</td></tr>';
+    try {
+        for (var i = jsonArray.length - 1; i >= 0; i--) {
+            html += '<tr><td>' + jsonArray[i].happenedat.replace(/T/g, " ").replace(/:00$/g, "").replace(/^\d+-/g, " ") + '</td><td>' + jsonArray[i].longitude + '°E|' + jsonArray[i].latitude + '°N</td><td>' + jsonArray[i].windspeed + '</td><td>' + jsonArray[i].airpressure + '</td></tr>';
+        }
+    } catch (error) {
+        console.log('Error', error);
     }
+
     var $con, $title;
     $title = $("#currentTyphoonName");
     $con = $("#currentTyphoonTable");

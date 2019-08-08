@@ -12,6 +12,9 @@ if django.VERSION >= (1, 7):  # 自动判断版本
     django.setup()
 
 def dumpData(yearpath):
+    """
+    将整理好的 `json` 数据导入数据库里, 合并绘图的 json 数据, 导出每个台风的年份\起止时间等数据至 typhoon 表里
+    """
     from typhoon.models import Typhoon, Point, GraphPoint
     path = "../DataProcess/originalData/json/list/" + yearpath
     year = yearpath.split('.')[0]
@@ -27,6 +30,10 @@ def dumpData(yearpath):
         # "begin_time": "2018-03-25T14:00:00",
         # "end_time": "2018-04-01T08:00:00",
         # "is_current": 0
+        already_exist = Typhoon.objects.filter(num=each['tfbh'])
+        if len(already_exist) > 0:
+            print('> '+ each['tfbh'] + '已存在')
+            continue
         try:
             start_at = pattern.sub(' ', each['begin_time'])
             end_at = pattern.sub(' ', each['end_time'])
@@ -70,6 +77,9 @@ def changeChineseName():
         
 def main():
     pathls = os.listdir('../DataProcess/originalData/json/list/')
+    print('> 正在导入数据:')
+    pathls.remove('2019.json')
+    pathls.sort()
     print(pathls)
     for eachyear in pathls:
         dumpData(eachyear)

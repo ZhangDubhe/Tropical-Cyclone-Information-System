@@ -5,7 +5,7 @@ import os
 import django
 import json
 import re
-import time
+import datetime
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TyphoonApi.settings")
 
 if django.VERSION >= (1, 7):  # 自动判断版本
@@ -112,7 +112,7 @@ def readfileToPath(_file_, y):
         info_row = [str(typhoonId), date, str(strong_level), engName.rstrip(), str(j),  str(
             LAT), str(LON), Pressure, WND, OWD, str(replaceName), str(transit_extra_tropical)]
         print(info_row)
-        nextTyphoon = Point(typhoonnumber=typhoonSelected, intensity=strong_level,
+        nextTyphoon = Point.objects.get_or_create(typhoonnumber=typhoonSelected, intensity=strong_level,
                             is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, 
                             happenedat=date, latitude=float(LAT), longitude=float(LON), windspeed=float(WND),
                             ordinarywindspeed=float(OWD), airpressure=float(Pressure))
@@ -124,7 +124,7 @@ def readfileToPath(_file_, y):
 
     # 处理列表之后导入数据库
     print("Length: ", len(OneList))
-    Point.objects.bulk_create(OneList)
+    # Point.objects.bulk_create(OneList)
     return text
 
 
@@ -228,7 +228,7 @@ def readfileToGraph(_file_, y):
         info_row = [str(typhoonId), date, str(strong_level), engName.rstrip(), str(j),  str(
             LAT), str(LON), Pressure, WND, OWD, str(replaceName), str(transit_extra_tropical)]
         # 添加单个台风图表点数据.
-        nextTyphoon = GraphPoint(typhoonnumber=typhoonSelected, intensity=strong_level, is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, happenedat=date)
+        nextTyphoon = GraphPoint.objects.get_or_create(typhoonnumber=typhoonSelected, intensity=strong_level, is_change=transit_extra_tropical, typhoontime=YYYYMMDDHH, happenedat=date)
         OneList.append(nextTyphoon)
 
         text += ','.join(info_row)
@@ -237,7 +237,7 @@ def readfileToGraph(_file_, y):
 
     # 处理列表之后导入数据库
     print("Length: ", len(OneList))
-    GraphPoint.objects.bulk_create(OneList)
+    # GraphPoint.objects.bulk_create(OneList)
     return text
 
 
@@ -322,12 +322,14 @@ def readLandFile():
     fo.write(text)
 
 
+INIT_YEAR = 1949
 def main():
     global HEADERS
+    
     querySpecialYear("../DataProcess/originalData/bst4915/",
-                     'graph', 1949, 2018)
+                     'graph', INIT_YEAR, datetime.datetime.now().year)
     querySpecialYear("../DataProcess/originalData/bst4915/",
-                     'path', 1949, 2018)
+                     'path', INIT_YEAR, datetime.datetime.now().year)
     # readLandFile()
     # store_all(HEADERS, "headerData")
 
