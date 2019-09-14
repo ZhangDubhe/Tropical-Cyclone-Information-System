@@ -26,6 +26,8 @@ import traceback
 import re
 import unicodedata
 
+CATEGORY_LIST = ['commercial', 'research', 'art']
+
 def formatUnidecode(str):
   value = unidecode(str)
   value = re.sub('[^\w\s-]', '', value).strip().lower()
@@ -42,7 +44,7 @@ class ArticleView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
     LimitOffsetPagination.default_limit = 20
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.filter(is_active=True).order_by('-sort_index')
+    queryset = PostRecord.objects.filter(is_active=True, category__in=CATEGORY_LIST).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content')
@@ -64,7 +66,9 @@ class AdminArtcileView(generics.ListCreateAPIView):
     """
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.filter(is_active=True).order_by('-sort_index')
+    admin_category_list = CATEGORY_LIST
+    admin_category_list.append('invisible')
+    queryset = PostRecord.objects.filter(is_active=True, category__in=admin_category_list).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content', 'url_params')
