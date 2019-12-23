@@ -77,7 +77,7 @@
 		"lodash.template": "^4.0.1",
 		"log-symbols": "^1.0.2",
 		"make-dir": "^1.0.0",
-		"mem": "^1.1.0",
+		"mem": "^6.0.1",
 		"plur": "^2.0.0",
 		"protocolify": "^2.0.0",
 		"screenshot-stream": "^4.1.0",
