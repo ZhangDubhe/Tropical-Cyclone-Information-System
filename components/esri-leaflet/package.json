@@ -18,7 +18,7 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-gh-pages": "^0.8.1",
+    "grunt-gh-pages": "^3.1.0",
     "grunt-karma": "^0.8.3",
     "grunt-newer": "^0.7.0",
     "grunt-releaseable": "0.0.16",
