@@ -4,22 +4,6 @@ circle .typhoon{
     fillColor: #ff8c00
 }
 
-/*
-    if(speed >=10.8 && speed < 17.1)
-        b = "#f0dade";
-    else if(speed >=17.1 && speed < 24.4)
-        b="#f6bfae";
-    else if(speed >=24.4 && speed < 32.6)
-        b="#fb9f9c";
-    else if(speed >=32.6 && speed < 41.4)
-        b="#f36078";
-    else if(speed >=41.5 && speed < 50.9)
-        b= "#d71058";
-    else if(speed >=50.9)
-        b = "#a70943"
-    else
-        b = "#000000"
-*/
 .speed-1{
     fill:#00D5CB;
     fill:#FCFA00;

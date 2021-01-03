@@ -12,18 +12,6 @@ $(function () {
             alert("抱歉，系统异常！");
         }
     });
-    /*  var ss = L.control.coordinates({
-            decimals: 4,
-            decimalSeperator: ",",
-            labelTemplateLat: "纬度: {y}",
-            labelTemplateLng: "经度: {x}",
-            enableUserInput: false
-        }).addTo(map);
-        $("#bgmap").hover(function(){
-                $("#bgmaplist").css("display","block");
-            },function(){
-                $("#bgmaplist").css("display","none");
-            })*/
     loadTyphoon();
 });
 
