@@ -2,7 +2,7 @@ import uuid
 from django.db import models
 from base.models import User
 # Create your models here.
-## assets
+# assets
 
 
 class TimeStampedModel(models.Model):
@@ -35,5 +35,31 @@ class PostRecord(TimeStampedModel):
     creator = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
     category = models.CharField(max_length=30, default="Default")
     theme_color = models.CharField(max_length=30, default="#ffffff")
+
     class Meta:
         db_table = 'sun_article_info'
+
+
+class Categorys(models.Model):
+    """
+    docstring
+    """
+    name = models.TextField(_("标签名"))
+
+    class Meta:
+        db_table = 'sun_categorys'
+
+
+class PostCategory(models.Model):
+    post = models.OneToOneField("suncreative.PostRecord", verbose_name=_("post_record"), on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("PostCategory")
+        verbose_name_plural = _("PostCategorys")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("PostCategory_detail", kwargs={"pk": self.pk})
+
