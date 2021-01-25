@@ -65,3 +65,9 @@ class Media(TimeStampedModel):
     oss_path = models.CharField(max_length=100)  # 保存路径
     creator = models.ForeignKey(
         User, default=None, null=True, on_delete=models.CASCADE)
+
+
+class ArticleMediaUse(TimeStampedModel):
+    article = models.ForeignKey(
+        PostRecord, on_delete=models.CASCADE)
+    media = models.ForeignKey(Media, on_delete=models.CASCADE)

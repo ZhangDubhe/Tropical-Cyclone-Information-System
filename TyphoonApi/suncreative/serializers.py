@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Group
-from .models import PostRecord
+from .models import PostRecord, Media
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -18,3 +18,11 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
     class Meta():
         model = PostRecord
         exclude = ('id', )
+
+
+class MediaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Media
+        exclude = ('id', )
+

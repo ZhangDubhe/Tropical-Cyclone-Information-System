@@ -18,6 +18,7 @@ from rest_framework.filters import SearchFilter
 from base.views import UnActiveModelMixin
 from .models import *
 from .serializers import *
+from tools.views import BaseUploadFileView
 
 from django.utils.safestring import mark_safe
 from unidecode import unidecode
@@ -102,3 +103,14 @@ class AdminArtcileDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyA
     serializer_class = ArticleDetailSerializer
     queryset = PostRecord.objects.all()
     lookup_field = 'uuid'
+
+
+class AdminMediaListView(generics.ListCreateAPIView):
+    # permission_classes = (permissions.IsAdminUser,)
+    serializer_class = MediaSerializer
+    queryset = Media.objects.filter(is_active=True, )
+
+    async def post(self, request, *args, **kwargs):
+        upload_res = await BaseUploadFileView.post(self, request, args, kwargs)
+        print(upload_res)
+        media_serializer = MediaSerializer(data=request.data)
