@@ -29,11 +29,12 @@ import unicodedata
 
 CATEGORY_LIST = ['commercial', 'research', 'art']
 
+
 def formatUnidecode(str):
-  value = unidecode(str)
-  value = re.sub('[^\w\s-]', '', value).strip().lower()
-  value = mark_safe(re.sub('[-\s]+', '-', value))
-  return value.lower()
+    value = unidecode(str)
+    value = re.sub('[^\w\s-]', '', value).strip().lower()
+    value = mark_safe(re.sub('[-\s]+', '-', value))
+    return value.lower()
 
 # Create your views here.
 
@@ -45,7 +46,8 @@ class ArticleView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
     LimitOffsetPagination.default_limit = 20
     serializer_class = ArticleSerializer
-    queryset = PostRecord.objects.filter(is_active=True, category__in=CATEGORY_LIST).order_by('-sort_index')
+    queryset = PostRecord.objects.filter(
+        is_active=True, category__in=CATEGORY_LIST).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content')
@@ -69,21 +71,24 @@ class AdminArtcileView(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
     admin_category_list = CATEGORY_LIST
     admin_category_list.append('invisible')
-    queryset = PostRecord.objects.filter(is_active=True, category__in=admin_category_list).order_by('-sort_index')
+    queryset = PostRecord.objects.filter(
+        is_active=True, category__in=admin_category_list).order_by('-sort_index')
     filter_fields = ('category',)
     filter_backends = (SearchFilter,)
     search_fields = ('title', 'explanation', 'content', 'url_params')
     ordering_fields = ('sort_index',)
 
     def create(self, request, *args, **kwargs):
-        if type(request.data) != dict: request.data._mutable = True
+        if type(request.data) != dict:
+            request.data._mutable = True
         request.data['creator'] = self.request.user.id
 
         request.data['url_params'] = time.time()
         string = formatUnidecode(self.request.data.get('title'))
         try:
             if string:
-                request.data['url_params'] = string if len(PostRecord.objects.filter(url_params=string)) < 1 else string + '-' + str(len(PostRecord.objects.filter(url_params=string)) + 1)
+                request.data['url_params'] = string if len(PostRecord.objects.filter(
+                    url_params=string)) < 1 else string + '-' + str(len(PostRecord.objects.filter(url_params=string)) + 1)
         except:
             traceback.print_exc()
 
@@ -106,11 +111,25 @@ class AdminArtcileDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyA
 
 
 class AdminMediaListView(generics.ListCreateAPIView):
-    # permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAdminUser,)
     serializer_class = MediaSerializer
     queryset = Media.objects.filter(is_active=True, )
 
-    async def post(self, request, *args, **kwargs):
-        upload_res = await BaseUploadFileView.post(self, request, args, kwargs)
-        print(upload_res)
-        media_serializer = MediaSerializer(data=request.data)
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        upload_res = BaseUploadFileView.post(self, request, args, kwargs)
+        if type(upload_res) is Exception or upload_res.status_code != 201:
+            print('exception')
+            return upload_res
+        print(upload_res, type(upload_res), upload_res.status_code != 201)
+        req_data = request.data
+        ser_data = {
+            'name': req_data.get('identifier'),
+            'type': req_data.get('file_type')
+        }
+        media_serializer = MediaSerializer(data=ser_data)
+        media_serializer.is_valid(raise_exception=True)
+        print(media_serializer.data)
+        self.perform_create(media_serializer)
+        headers = self.get_success_headers()
+        return Response(media_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
