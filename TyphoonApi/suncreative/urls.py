@@ -9,5 +9,6 @@ urlpatterns = [
     path('article/', views.ArticleView.as_view()),
     path('article-admin/', views.AdminArtcileView.as_view()),
     path('article/<url_params>/', views.ArticleDetailView.as_view(), name='articleDetail'),
-    path('article-admin/<uuid>/', views.AdminArtcileDetailView.as_view(), name='adminArticleDetail')
+    path('article-admin/<uuid>/', views.AdminArtcileDetailView.as_view(), name='adminArticleDetail'),
+    path('medias/', views.AdminMediaListView.as_view())
 ]
