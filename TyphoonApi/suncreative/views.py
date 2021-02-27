@@ -8,6 +8,8 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django_filters.rest_framework import DjangoFilterBackend
+from pagination import BasePageNumberPagination
 
 from rest_framework import status, generics, permissions, views
 from rest_framework.exceptions import APIException, PermissionDenied
@@ -114,22 +116,39 @@ class AdminMediaListView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = MediaSerializer
     queryset = Media.objects.filter(is_active=True, )
+    filter_backends = (SearchFilter, DjangoFilterBackend)
+    filter_fields = ('name', 'oss_path',)
+    search_fields = ('$name', '$oss_path',)
+    pagination_class = BasePageNumberPagination
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
-        upload_res = BaseUploadFileView.post(self, request, args, kwargs)
+        formatted_data = request
+        file_type = request.data.get('file_type')
+        oss_path = request.data.get('file_folder')
+        name = request.data.get('identifier')
+        suffix = request.FILES['file'].name.split('.')[1]
+
+        formatted_data.data['file_type'] = '{}/{}'.format(file_type, oss_path)
+        formatted_data.data['identifier'] = '{}.{}'.format(name, suffix)
+        # 检测是否存在同名
+        query_set = Media.objects.filter(is_active=True, name=name, oss_path=oss_path)
+        if len(query_set):
+            # raise Exception('Already had name and folder')
+            return Response(data="命名和文件夹已存在，请更换", status=status.HTTP_409_CONFLICT)
+
+        upload_res = BaseUploadFileView.post(self, formatted_data, args, kwargs)
         if type(upload_res) is Exception or upload_res.status_code != 201:
-            print('exception')
             return upload_res
-        print(upload_res, type(upload_res), upload_res.status_code != 201)
-        req_data = request.data
+        res_url = upload_res.data
         ser_data = {
-            'name': req_data.get('identifier'),
-            'type': req_data.get('file_type')
+            'name': name,
+            'oss_path': oss_path,
+            'type': request.data.get('type'),
+            'url': res_url
         }
         media_serializer = MediaSerializer(data=ser_data)
         media_serializer.is_valid(raise_exception=True)
-        print(media_serializer.data)
-        self.perform_create(media_serializer)
-        headers = self.get_success_headers()
+        media_serializer.save(creator=self.request.user)
+        # self.perform_create(media_serializer)
+        headers = self.get_success_headers(media_serializer.data)
         return Response(media_serializer.data, status=status.HTTP_201_CREATED, headers=headers)

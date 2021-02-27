@@ -10,5 +10,5 @@ urlpatterns = [
     path('article-admin/', views.AdminArtcileView.as_view()),
     path('article/<url_params>/', views.ArticleDetailView.as_view(), name='articleDetail'),
     path('article-admin/<uuid>/', views.AdminArtcileDetailView.as_view(), name='adminArticleDetail'),
-    path('media/', views.AdminMediaListView.as_view())
+    path('medias/', views.AdminMediaListView.as_view())
 ]

@@ -9,13 +9,13 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostRecord
         fields = ('uuid', 'title', 'explanation', 'header_image', 'url_params',
-                  'created_at', 'sort_index', 'category', 'thumbnail', 'theme_color')
+                  'created_at', 'sort_index', 'category', 'thumbnail', 'theme_color', 'state')
         # exclude = ('id', )
 
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
 
-    class Meta():
+    class Meta:
         model = PostRecord
         exclude = ('id', )
 

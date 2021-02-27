@@ -88,6 +88,7 @@ class BaseUploadFileView(views.APIView):
 
         file_type = request.data.get('file_type')
         identifier = request.data.get('identifier')
+
         if not identifier:
             identifier = request.FILES['file'].name
 
@@ -99,8 +100,8 @@ class BaseUploadFileView(views.APIView):
         auth = oss2.Auth(OSS_CONFIG['ACCESS_KEY_ID'], OSS_CONFIG['ACCESS_KEY_SECRET'])
         bucket = oss2.Bucket(auth, OSS_CONFIG['ENDPOINT'], OSS_CONFIG['BUCKET_STATIC'])
         try:
-            bucket.put_object(file_type + '-file/' + identifier, cache_file)
-            url = 'https://{}/{}-file/{}'.format(OSS_CONFIG['STATIC_URL'], file_type, identifier)
+            bucket.put_object(file_type + '/' + identifier, cache_file)
+            url = 'https://{}/{}/{}'.format(OSS_CONFIG['STATIC_URL'], file_type, identifier)
         except:
             return Response('Bucket IO Error', status=status.HTTP_400_BAD_REQUEST)
 

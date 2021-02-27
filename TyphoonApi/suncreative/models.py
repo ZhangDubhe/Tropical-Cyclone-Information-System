@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from base.models import User
+from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 # assets
 
@@ -36,6 +37,7 @@ class PostRecord(TimeStampedModel):
     creator = models.ForeignKey(
         User, default=None, null=True, on_delete=models.CASCADE)
     category = models.CharField(max_length=30, default="Default")
+    state = models.IntegerField(default=1)  # enum 1:草稿夹 2:回收站 3:展示板 4:黑历史
     theme_color = models.CharField(max_length=30, default="#ffffff")
 
     class Meta:
