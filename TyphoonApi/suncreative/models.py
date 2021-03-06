@@ -60,11 +60,18 @@ class PostCategory(models.Model):
     category = models.ForeignKey(Categorys, on_delete=models.CASCADE)
 
 
+class MediaFolder(models.Model):
+    name = models.CharField(max_length=100, null=False, unique=True)
+    parent = models.IntegerField(null=True, default=None)
+    is_active = models.BooleanField(default=True)
+
+
 class Media(TimeStampedModel):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=20)  # picture, video, audio
     url = models.CharField(max_length=300)
     oss_path = models.CharField(max_length=100)  # 保存路径
+    folder = models.ForeignKey(MediaFolder, default=None, null=True, on_delete=models.CASCADE, related_name='文件夹')
     creator = models.ForeignKey(
         User, default=None, null=True, on_delete=models.CASCADE)
 

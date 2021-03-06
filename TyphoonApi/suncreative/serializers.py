@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Group
-from .models import PostRecord, Media
+from .models import PostRecord, Media, MediaFolder
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -20,7 +20,30 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
         exclude = ('id', )
 
 
+class MediaFoldersSerializer(serializers.ModelSerializer):
+    medias = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MediaFolder
+        exclude = ()
+
+    def get_medias(self, obj):
+        return len(Media.objects.filter(folder=obj))
+
+
+class MediaFolderDetailSerializer(serializers.ModelSerializer):
+    medias = serializers.SerializerMethodField()
+
+    class Meta:
+        model = MediaFolder
+        exclude = ()
+
+    def get_medias(self, obj):
+        return len(Media.objects.filter(folder=obj))
+
+
 class MediaSerializer(serializers.ModelSerializer):
+    folder = MediaFolderDetailSerializer(read_only=True)
 
     class Meta:
         model = Media

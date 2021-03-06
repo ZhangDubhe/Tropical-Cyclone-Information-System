@@ -112,23 +112,64 @@ class AdminArtcileDetailView(UnActiveModelMixin, generics.RetrieveUpdateDestroyA
     lookup_field = 'uuid'
 
 
+class AdminMediaFoldersView(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAdminUser,)
+    serializer_class = MediaFoldersSerializer
+    queryset = MediaFolder.objects.filter(is_active=True, )
+    filter_backends = (DjangoFilterBackend,)
+
+    def post(self, request, *args, **kwargs):
+        if len(MediaFolder.objects.filter(name=request.data.get('name'), is_active=False)) > 0:
+            ins = MediaFolder.objects.get(name=request.data.get('name'))
+            ins.is_active = True
+            ins.save()
+            serializer = MediaFoldersSerializer(ins)
+            return Response(data=serializer.data)
+        else:
+            return self.create(request, *args, **kwargs)
+
+
+class AdminMediaFolderDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API : 修改删除 MediaFolder
+    """
+    permission_classes = (permissions.IsAdminUser,)
+    serializer_class = MediaFoldersSerializer
+    queryset = MediaFolder.objects.filter(is_active=True, )
+    lookup_field = 'name'
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        mentions = Media.objects.filter(folder=instance)
+        print(mentions)
+        for each in mentions:
+            each.folder = None
+            each.save()
+        instance.is_active = False
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class AdminMediaListView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAdminUser,)
     serializer_class = MediaSerializer
     queryset = Media.objects.filter(is_active=True, )
     filter_backends = (SearchFilter, DjangoFilterBackend)
-    filter_fields = ('name', 'oss_path',)
-    search_fields = ('$name', '$oss_path',)
+    filter_fields = ('name', 'oss_path', 'folder')
+    search_fields = ('$name', '$oss_path', '$folder__name')
     pagination_class = BasePageNumberPagination
 
     def post(self, request, *args, **kwargs):
         formatted_data = request
-        file_type = request.data.get('file_type')
-        oss_path = request.data.get('file_folder')
+        file_folder_id = request.data.get('folder_id')
+        oss_path = request.data.get('folder_name')
         name = request.data.get('identifier')
         suffix = request.FILES['file'].name.split('.')[1]
 
-        formatted_data.data['file_type'] = '{}/{}'.format(file_type, oss_path)
+        if oss_path and oss_path[0] == '/':
+            return Response(data="文件夹不能以斜杠开头", status=status.HTTP_400_BAD_REQUEST)
+
+        formatted_data.data['file_type'] = '{}/{}'.format('sun/medias', oss_path)
         formatted_data.data['identifier'] = '{}.{}'.format(name, suffix)
         # 检测是否存在同名
         query_set = Media.objects.filter(is_active=True, name=name, oss_path=oss_path)
@@ -141,14 +182,17 @@ class AdminMediaListView(generics.ListCreateAPIView):
             return upload_res
         res_url = upload_res.data
         ser_data = {
-            'name': name,
             'oss_path': oss_path,
+            'name': name,
             'type': request.data.get('type'),
             'url': res_url
         }
+        folder_ins = None
+        if file_folder_id and file_folder_id is not None:
+            folder_ins = MediaFolder.objects.get(id=int(file_folder_id))
         media_serializer = MediaSerializer(data=ser_data)
         media_serializer.is_valid(raise_exception=True)
-        media_serializer.save(creator=self.request.user)
+        media_serializer.save(creator=self.request.user, folder=folder_ins)
         # self.perform_create(media_serializer)
         headers = self.get_success_headers(media_serializer.data)
         return Response(media_serializer.data, status=status.HTTP_201_CREATED, headers=headers)

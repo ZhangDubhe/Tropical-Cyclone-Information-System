@@ -17,6 +17,8 @@ from rest_framework import status, generics, permissions, views, viewsets
 from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 
+from oss.utils import upload_file
+
 
 def urlencode(str):
   return urllib.parse.quote_plus(str)
@@ -82,7 +84,7 @@ class BaseUploadFileView(views.APIView):
 
     def post(self, request, *args, **kwargs):
         try:
-            cache_file = request.data['file']
+            cache_file = request.data.get('file')
         except:
             return Response('IO Error', status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,18 +93,11 @@ class BaseUploadFileView(views.APIView):
 
         if not identifier:
             identifier = request.FILES['file'].name
-
         if not cache_file or not identifier:
             return Response('Params Error', status=status.HTTP_400_BAD_REQUEST)
 
-        url = None
-        OSS_CONFIG = getattr(settings, 'OSS_CONFIG', 1)
-        auth = oss2.Auth(OSS_CONFIG['ACCESS_KEY_ID'], OSS_CONFIG['ACCESS_KEY_SECRET'])
-        bucket = oss2.Bucket(auth, OSS_CONFIG['ENDPOINT'], OSS_CONFIG['BUCKET_STATIC'])
         try:
-            bucket.put_object(file_type + '/' + identifier, cache_file)
-            url = 'https://{}/{}/{}'.format(OSS_CONFIG['STATIC_URL'], file_type, identifier)
+            url = upload_file(cache_file, file_type, identifier)
         except:
             return Response('Bucket IO Error', status=status.HTTP_400_BAD_REQUEST)
-
         return Response(url, status.HTTP_201_CREATED)
