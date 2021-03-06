@@ -196,3 +196,13 @@ class AdminMediaListView(generics.ListCreateAPIView):
         # self.perform_create(media_serializer)
         headers = self.get_success_headers(media_serializer.data)
         return Response(media_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class AdminMediaDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API : 修改删除 media
+    """
+    permission_classes = (permissions.IsAdminUser,)
+    serializer_class = MediaDetailSerializer
+    queryset = Media.objects.filter(is_active=True, )
+    lookup_field = 'uuid'

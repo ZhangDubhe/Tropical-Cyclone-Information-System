@@ -12,5 +12,6 @@ urlpatterns = [
     path('article-admin/<uuid>/', views.AdminArtcileDetailView.as_view(), name='adminArticleDetail'),
     path('media-folders/', views.AdminMediaFoldersView.as_view(), name="mediaFolders"),
     path('media-folder/<name>/', views.AdminMediaFolderDetailView.as_view(), name="mediaFolderDetail"),
-    path('medias/', views.AdminMediaListView.as_view())
+    path('medias/', views.AdminMediaListView.as_view()),
+    path('media/<uuid>/', views.AdminMediaDetailView.as_view())
 ]

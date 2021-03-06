@@ -49,3 +49,9 @@ class MediaSerializer(serializers.ModelSerializer):
         model = Media
         exclude = ('id', )
 
+
+class MediaDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Media
+        exclude = ('id', )
+
